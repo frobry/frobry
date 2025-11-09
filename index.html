@@ -1,1279 +1,1899 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17543583656"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frobry AI Hub - Special Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@400;700&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
     
-      gtag('config', 'AW-17543583656');
-    </script>
-    <link rel="prefetch" href="index.html" as="document">
-    <link rel="prefetch" href="brainpaper.html" as="document">
-    <link rel="prefetch" href="community.html" as="document">
-    <link rel="prefetch" href="contact.html" as="document">
-    <link rel="prefetch" href="donations.html" as="document">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0a0a">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="msapplication-navbutton-color" content="#0a0a0a">
-    <title>$FROBRY - The AI Memecoin Revolution</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        @media (min-width: 769px) {
-            * {
-                cursor: none !important;
-            }
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            overflow-x: hidden;
-        }
-        
-        html {
-            overflow-x: hidden;
-        }
-        
-        .orbitron {
-            font-family: 'Orbitron', monospace;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .glow-effect {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.2), 0 0 60px rgba(0, 255, 255, 0.1);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #0099cc, #00d4ff);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
-        }
-        
-        .btn-secondary {
-            border: 2px solid #00d4ff;
-            color: #00d4ff;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: #00d4ff;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: var(--y, 50%);
-            left: var(--x, 50%);
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
-            transition: width 0.3s ease, height 0.3s ease;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        
-        .feature-card:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 255, 255, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.2);
-        }
-        
-        .floating-orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        .floating-orb:nth-child(1) { width: 100px; height: 100px; top: 10%; left: 10%; animation-delay: 0s; }
-        .floating-orb:nth-child(2) { width: 150px; height: 150px; top: 60%; right: 10%; animation-delay: 2s; }
-        .floating-orb:nth-child(3) { width: 80px; height: 80px; bottom: 20%; left: 20%; animation-delay: 4s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-        
-        .connection-line {
-            position: absolute;
-            width: 2px;
-            background: linear-gradient(to bottom, rgba(0, 255, 255, 0.5), transparent);
-            pointer-events: none;
-        }
-        
-        .connection-line:nth-child(1) { height: 200px; top: 15%; left: 15%; transform: rotate(45deg); }
-        .connection-line:nth-child(2) { height: 150px; top: 40%; right: 20%; transform: rotate(-30deg); }
-        .connection-line:nth-child(3) { height: 180px; bottom: 25%; left: 30%; transform: rotate(60deg); }
-        
-        .matrix-char {
-            position: absolute;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            animation: matrix-fall linear infinite;
-            opacity: 0.7;
-            pointer-events: none;
-        }
-        
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100vh); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background: #00d4ff;
-            animation: blink 1s infinite;
-            margin-left: 2px;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        /* Mobile Navigation Styles */
-        #nav-container {
-            margin-left: auto;
-            position: relative;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        #nav-toggle {
-            display: block;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            transform: rotate(0deg);
-            z-index: 1001;
-        }
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
 
-        #nav-toggle span {
-            background-color: white;
-            width: 100%;
-            height: 4px;
-            border-radius: 1px;
-            display: block;
-            position: absolute;
-            left: 0;
-            transition: .5s ease-in-out;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000000;
+      color: #ffffff;
+      position: relative;
+      cursor: default;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-        #nav-toggle span:nth-child(1) {
-            top: 4px;
-            transform-origin: left center;
-        }
+    body.loaded {
+      opacity: 1;
+    }
 
-        #nav-toggle span:nth-child(2) {
-            top: 14px;
-            transform-origin: left center;
-        }
+    /* Special Menu Styles */
+    :root {
+      --menu-background-light: rgb(0, 139, 141);
+      --menu-background-dark: rgb(0, 0, 0);
+      
+      --menu-gradient-color-1: rgb(0, 100, 0);
+      --menu-gradient-color-2: rgb(0, 139, 141);
+      --menu-gradient-color-3: rgb(0, 80, 80);
+      --menu-gradient-color-4: rgb(0, 40, 40);
+    }
 
-        #nav-toggle span:nth-child(3) {
-            top: 24px;
-            transform-origin: left center;
-        }
+    @keyframes arc-rotation {
+      from {
+        transform: translate3d(-50%, -50%, 0px) rotate(0deg);
+      }
+      
+      to {
+        transform: translate3d(-50%, -50%, 0px) rotate(360deg);
+      }
+    }
 
-        #nav-toggle.open span:nth-child(1) {
-            transform: rotate(45deg);
-            top: 3px;
-            left: 4px;
-        }
+    body.menu-toggled > #special-menu {
+      pointer-events: all; 
+    }
 
-        #nav-toggle.open span:nth-child(2) {
-            width: 0%;
-            opacity: 0;
-        }
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:first-of-type {
+      transform: translate3d(0px, 9px, 0px) rotate(45deg);
+    }
 
-        #nav-toggle.open span:nth-child(3) {
-            transform: rotate(-45deg);
-            top: 25px;
-            left: 4px;
-        }
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:nth-of-type(2) {
+      opacity: 0;
+      transform: translate3d(-5px, 0px, 0px);
+    }
 
-        #nav-overlay {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            z-index: -1;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            border-radius: 50%;
-            transition: 1s;
-            transform: scale3d(0, 0, 0);
-        }
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:nth-of-type(3) {
+      transform: translate3d(0px, -9px, 0px) rotate(-45deg);
+    }
 
-        #nav-overlay.open {
-            transform: scale3d(1, 1, 1);
-        }
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word {
+      opacity: 0;
+      transform: translate3d(-30%, 0px, 0px) skew(20deg) scaleX(1.2);  
+      transition: opacity 250ms cubic-bezier(.71, .19, .87, .33), 
+        transform 250ms cubic-bezier(.71, .19, .87, .33);
+    }
 
-        #nav-fullscreen {
-            width: 100%;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            transition: ease-in-out 0.25s;
-            transition-delay: 0s;
-            visibility: hidden;
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-        }
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word:nth-of-type(2) {
+      transition-delay: 100ms;
+    }
 
-        #nav-fullscreen.open {
-            visibility: visible;
-            opacity: 1;
-            transition: ease-in-out 0.5s;
-            transition-delay: 0.25s;
-        }
+    body.menu-toggled > #special-menu > #menu-gradient {
+      height: 200vmax;
+      opacity: 1;
+      transform: translate3d(-50%, -50%, 0px);
+      transition: height 600ms cubic-bezier(.58, .2, .62, .93), 
+        width 600ms cubic-bezier(.58, .2, .62, .93), 
+        transform 600ms cubic-bezier(.58, .2, .62, .93), 
+        opacity 400ms;
+      width: 200vmax;
+    }
 
-        #nav-fullscreen ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-            max-width: 400px;
-            width: 100%;
-        }
+    body.menu-toggled > #special-menu > #menu-gradient-blur {
+      opacity: 1; 
+    }
 
-        #nav-fullscreen li {
-            margin: 2rem 0;
-            transition: all 0.3s ease;
-        }
+    body.menu-toggled > #special-menu > #menu-arcs-wrapper {
+      opacity: 1;
+      transform: scale(1);
+      transition: transform 600ms cubic-bezier(.16, .68, .25, .83), 
+        opacity 600ms cubic-bezier(.87, .12, .92, .39); 
+    }
 
-        #nav-fullscreen li:hover {
-            transform: translateX(10px);
-        }
+    body.menu-toggled > #special-menu > #menu-items {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate3d(0px, 0px, 0px);
+      transition: opacity 600ms 200ms, transform 600ms 200ms;
+    }
 
-        #nav-fullscreen a {
-            color: white;
-            text-decoration: none;
-            font-size: 3rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            padding-left: 10px;
-        }
+    body.menu-toggled > #special-menu > #menu-items > .menu-item {
+      opacity: 1;
+      transform: translate3d(0px, 0px, 0px);
+    }
 
-        #nav-fullscreen a:hover {
-            color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-        }
+    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(1) {
+      transition: opacity 600ms 300ms, transform 600ms 300ms;
+    }
 
-        #nav-fullscreen a::after {
-            content: '';
-            width: 20px;
-            height: 20px;
-            position: relative;
-            display: inline-block;
-            opacity: 1;
-            transform: translateX(0);
-            transition: all 0.3s ease;
-        }
+    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(2) {
+      transition: opacity 600ms 350ms, transform 600ms 350ms;
+    }
 
-        #nav-fullscreen a::after {
-            content: '';
-            width: 22px;
-            height: 22px;
-            border-right: 2px solid #666666;
-            border-bottom: 2px solid #666666;
-            transform: rotate(-45deg) translateX(-10px);
-            display: inline-block;
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
+    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(3) {
+      transition: opacity 600ms 400ms, transform 600ms 400ms;
+    }
 
-        #nav-fullscreen a:hover::after {
-            border-right-color: #00d4ff;
-            border-bottom-color: #00d4ff;
-            transform: rotate(-45deg) translateX(-7px);
-        }
-        
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: rgba(0, 255, 255, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.1s ease;
-            mix-blend-mode: difference;
-        }
-        
-        .custom-cursor.clickable {
-            background: rgba(255, 0, 255, 0.8);
-        }
-        
-        .custom-cursor.selecting {
-            background: rgba(255, 255, 0, 0.8);
-            transform: translate(-50%, -50%) scale(0.5);
-        }
-        
-        .cursor-trail {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-        }
-        
-        @media (max-width: 768px) {
-            .custom-cursor, .cursor-trail {
-                display: none !important;
-            }
-        }
-        
-        .ripple {
-            position: fixed;
-            border: 2px solid rgba(0, 255, 255, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9997;
-            transform: translate(-50%, -50%);
-            animation: ripple-animation 0.6s ease-out;
-        }
-        
-        @keyframes ripple-animation {
-            0% {
-                width: 20px;
-                height: 20px;
-                opacity: 1;
-            }
-            100% {
-                width: 100px;
-                height: 100px;
-                opacity: 0;
-            }
-        }
-        
-        .hover-glow:hover {
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
-        }
-        
-        @media (max-width: 768px) {
-            .floating-orb, .connection-line {
-                display: none;
-            }
-        }
-        #pageTransition {
-            background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Efecto de pulso en el texto */
-        #pageTransition h1 {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-    </style>
-</head>
-<body class="text-white">
-    <!-- Transición entre páginas -->
-    <div id="pageTransition" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-500 opacity-0 pointer-events-none">
-        <div class="text-center">
-            <div class="mb-6 mx-auto">
-                <svg class="w-24 h-24 md:w-32 md:h-32 mx-auto" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#0a0a0a" />
-                    <text x="50" y="62" font-family="Orbitron" font-size="32" font-weight="900" fill="#00d4ff" text-anchor="middle">F</text>
-                </svg>
-            </div>
-            <h1 class="text-6xl md:text-8xl font-black orbitron text-cyan-400 mb-4 tracking-tighter">
-                $FROBRY
-            </h1>
-        </div>
+    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(4) {
+      transition: opacity 600ms 450ms, transform 600ms 450ms;
+    }
+
+    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(5) {
+      transition: opacity 600ms 500ms, transform 600ms 500ms;
+    }
+
+    #special-menu {
+      height: 100%;
+      left: 0;
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10000;
+    }
+
+    #menu-toggle {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: 15px;
+      right: 20px;
+      pointer-events: all;
+      position: fixed;
+      top: 20px;
+      z-index: 10001;
+    }
+
+    #menu-toggle-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 30px;
+    }
+
+    #menu-toggle > #menu-toggle-icon > span {
+      background-color: #00ced1;
+      border-radius: 2px;
+      display: block;
+      height: 3px;
+      transition: background-color 600ms, opacity 250ms, transform 250ms;
+      width: 100%;
+      box-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+    }
+
+    #menu-toggle > #menu-toggle-icon > span:nth-of-type(2) {
+      transition: background-color 600ms, opacity 250ms 100ms, transform 250ms 100ms;
+    }
+
+    #menu-toggle > #menu-toggle-icon > span:nth-of-type(3) {
+      transition: background-color 600ms, opacity 250ms 200ms, transform 250ms 200ms;
+    }
+
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span {
+      background-color: var(--menu-background-light);
+      box-shadow: none;
+    }
+
+    #menu-toggle-label {
+      display: flex;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    #menu-toggle-label > .word {
+      color: #00ced1;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Orbitron', monospace;
+      transition: color 600ms, opacity 250ms 200ms, transform 250ms 200ms;
+      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+    }
+
+    #menu-toggle-label > .word:nth-of-type(2) {
+      transition: color 600ms, opacity 250ms 300ms, transform 250ms 300ms;
+    }
+
+    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word {
+      color: var(--menu-background-light);
+      text-shadow: none;
+    }
+
+    #menu-gradient {
+      background: radial-gradient(
+        circle at center,
+        var(--menu-gradient-color-1) 0%,
+        var(--menu-gradient-color-2) 25%,
+        var(--menu-gradient-color-3) 50%,
+        var(--menu-gradient-color-4) 100%
+      );
+      border-radius: 50%;
+      height: 0vmax;
+      left: 50%;
+      opacity: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0px) scale(0.8);
+      transition: height 600ms cubic-bezier(.58, .2, .62, .93), 
+        width 600ms cubic-bezier(.58, .2, .62, .93), 
+        transform 600ms cubic-bezier(.58, .2, .62, .93), 
+        opacity 400ms 200ms;
+      width: 0vmax;
+      z-index: 1;
+    }
+
+    #menu-gradient-blur {
+      backdrop-filter: blur(100px);
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity 600ms;
+      width: 100%;
+      z-index: 2;
+    }
+
+    #menu-arcs-wrapper {
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transform: scale(0.9);
+      transition: transform 600ms cubic-bezier(.16, .68, .25, .83) 200ms, 
+        opacity 600ms cubic-bezier(.87, .12, .92, .39) 200ms;
+      width: 100%;
+      z-index: 3;
+    }
+
+    .menu-arc {
+      animation: arc-rotation 10s linear infinite;
+      border: 2px solid rgba(236, 229, 220, 0.15);
+      border-radius: 50%;
+      height: 80%;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      width: 80%;
+    }
+
+    .menu-arc:nth-of-type(2) {
+      animation-duration: 15s;
+      animation-direction: reverse;
+      height: 60%;
+      width: 60%;
+      border-color: rgba(236, 229, 220, 0.1);
+    }
+
+    .menu-arc:nth-of-type(3) {
+      animation-duration: 20s;
+      height: 40%;
+      width: 40%;
+      border-color: rgba(236, 229, 220, 0.08);
+    }
+
+    #menu-items {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+      justify-content: center;
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transform: translate3d(0px, -30px, 0px);
+      transition: opacity 400ms, transform 400ms;
+      width: 100%;
+      z-index: 4;
+    }
+
+    .menu-item {
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 56px;
+      font-weight: 900;
+      font-family: 'Orbitron', monospace;
+      opacity: 0;
+      position: relative;
+      text-decoration: none;
+      transform: translate3d(0px, -20px, 0px);
+      transition: color 300ms, opacity 400ms, transform 400ms;
+      text-shadow: 0 0 20px rgba(0, 206, 209, 0.5);
+    }
+
+    .menu-item::before {
+      background-color: var(--menu-background-light);
+      bottom: -5px;
+      content: '';
+      height: 4px;
+      left: 0;
+      position: absolute;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 300ms;
+      width: 100%;
+      box-shadow: 0 0 10px var(--menu-background-light);
+    }
+
+    .menu-item:hover {
+      color: #00ced1;
+      text-shadow: 0 0 30px rgba(0, 206, 209, 0.8);
+    }
+
+    .menu-item:hover::before {
+      transform: scaleX(1);
+      background-color: #00ced1;
+    }
+
+    /* Main Content */
+    main {
+      position: relative;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Spacer to push content below hero */
+    .hero-spacer {
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      margin: 0;
+      width: 100%;
+      z-index: 1;
+      background: #000000;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      pointer-events: auto;
+    }
+
+    .hero-content h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 72px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #00ced1, #00ff00, #00ced1, #00ff00);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      text-shadow: none;
+      animation: gradientShift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .hero-content h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 32px;
+      font-weight: 700;
+      color: #00ced1;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll Down Arrow */
+    .scroll-down-arrow {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-down-arrow.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-down-arrow button {
+      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+      border: 2px solid #00ced1;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 
+        5px 5px 15px rgba(0, 0, 0, 0.4),
+        -5px -5px 15px rgba(255, 255, 255, 0.05),
+        0 0 20px rgba(0, 206, 209, 0.3);
+    }
+
+    .scroll-down-arrow button:hover {
+      transform: scale(1.1);
+      box-shadow: 
+        7px 7px 20px rgba(0, 0, 0, 0.5),
+        -7px -7px 20px rgba(255, 255, 255, 0.06),
+        0 0 30px rgba(0, 206, 209, 0.5);
+      border-color: #00ced1;
+    }
+
+    .scroll-down-arrow button:active {
+      transform: scale(0.95);
+      box-shadow: 
+        inset 3px 3px 8px rgba(0, 0, 0, 0.4),
+        inset -3px -3px 8px rgba(255, 255, 255, 0.05);
+    }
+
+    .scroll-down-arrow svg {
+      width: 24px;
+      height: 24px;
+      fill: #00ced1;
+      filter: drop-shadow(0 0 5px rgba(0, 206, 209, 0.5));
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    .btn {
+      padding: 18px 40px;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+      color: #00ced1;
+      box-shadow: 
+        5px 5px 10px rgba(0, 0, 0, 0.3),
+        -5px -5px 10px rgba(255, 255, 255, 0.05),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+      border: none;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      box-shadow: 
+        7px 7px 14px rgba(0, 0, 0, 0.4),
+        -7px -7px 14px rgba(255, 255, 255, 0.06),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active {
+      box-shadow: 
+        inset 3px 3px 6px rgba(0, 0, 0, 0.4),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+      margin-top: 100%;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 48px;
+      font-weight: 900;
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 300;
+      text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.5),
+        -2px -2px 4px rgba(255, 255, 255, 0.1),
+        0 0 25px rgba(0, 206, 209, 0.2);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .feature-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        8px 8px 16px rgba(0, 0, 0, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .feature-card:hover {
+      box-shadow:
+        12px 12px 24px rgba(0, 0, 0, 0.5),
+        -12px -12px 24px rgba(255, 255, 255, 0.06),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
+      background: #0a0a0a;
+    }
+
+    .feature-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: #00ced1;
+      margin-bottom: 20px;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* About Section */
+    .about {
+      padding: 100px 0;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 300;
+    }
+
+    .about-text h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 42px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 300;
+      text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.5),
+        -2px -2px 4px rgba(255, 255, 255, 0.1),
+        0 0 25px rgba(0, 206, 209, 0.2);
+    }
+
+    .about-text p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .mission-box {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        8px 8px 16px rgba(0, 0, 0, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mission-box h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px;
+      color: #00ced1;
+      margin-bottom: 15px;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Services Section */
+    .services {
+      padding: 100px 0;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .services::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .services-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 300;
+    }
+
+    .service-card {
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        8px 8px 16px rgba(0, 0, 0, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      width: 350px;
+      max-width: 100%;
+    }
+
+    .service-card.featured {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        8px 8px 16px rgba(0, 0, 0, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .service-card:hover {
+      box-shadow:
+        12px 12px 24px rgba(0, 0, 0, 0.5),
+        -12px -12px 24px rgba(255, 255, 255, 0.06),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
+      background: #0a0a0a;
+    }
+
+    .service-header {
+      margin-bottom: 20px;
+    }
+
+    .service-header h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: #00ced1;
+      margin-bottom: 10px;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .service-header h3.green-service {
+      color: #00ff00;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(0, 255, 0, 0.4);
+    }
+
+    .service-header h3.yellow-service {
+      color: #ffff00;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(255, 255, 0, 0.4);
+    }
+
+    .service-header h3.red-service {
+      color: #ff0000;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(255, 0, 0, 0.4);
+    }
+
+    .service-price {
+      font-size: 36px;
+      font-weight: 900;
+      color: #ffffff;
+      font-family: 'Orbitron', monospace;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .service-description {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+    }
+
+    .service-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .service-features li {
+      padding: 10px 0;
+      color: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .service-features li:before {
+      content: '✓ ';
+      color: #00ced1;
+      font-weight: bold;
+      margin-right: 10px;
+      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+    }
+
+    .service-card .btn {
+      margin-top: auto;
+      margin-bottom: 0;
+      margin-left: 0;
+      margin-right: auto;
+      width: fit-content;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 100px 0;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .how-it-works::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 40px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        8px 8px 16px rgba(0, 0, 0, 0.4),
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .step-card:hover {
+      box-shadow:
+        12px 12px 24px rgba(0, 0, 0, 0.5),
+        -12px -12px 24px rgba(255, 255, 255, 0.06),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
+      background: #0a0a0a;
+    }
+
+    .step-number {
+      font-family: 'Orbitron', monospace;
+      font-size: 72px;
+      font-weight: 900;
+      color: #00ced1;
+      margin-bottom: 20px;
+      text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.5),
+        -2px -2px 4px rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(0, 206, 209, 0.3);
+    }
+
+    .step-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 24px;
+      color: #00ced1;
+      margin-bottom: 15px;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .step-card p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+    }
+
+    /* Why Choose Section */
+    .why-choose {
+      padding: 100px 0;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .why-choose::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .benefit-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 30px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        6px 6px 12px rgba(0, 0, 0, 0.4),
+        -6px -6px 12px rgba(255, 255, 255, 0.05),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .benefit-card:hover {
+      box-shadow:
+        10px 10px 20px rgba(0, 0, 0, 0.5),
+        -10px -10px 20px rgba(255, 255, 255, 0.06),
+        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
+      background: #0a0a0a;
+    }
+
+    .benefit-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 10px rgba(0, 206, 209, 0.3));
+    }
+
+    .benefit-content h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 20px;
+      color: #00ced1;
+      margin-bottom: 10px;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.4),
+        -1px -1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .benefit-content p {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.6;
+    }
+
+    /* Call to Action Section */
+    .cta-section {
+      padding: 100px 0;
+      background: #000000;
+      position: relative;
+      z-index: 200;
+      pointer-events: auto;
+    }
+    
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .cta-box {
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 80px 60px;
+      text-align: center;
+      position: relative;
+      z-index: 300;
+      overflow: hidden;
+      box-shadow:
+        12px 12px 24px rgba(0, 0, 0, 0.5),
+        -12px -12px 24px rgba(255, 255, 255, 0.05),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cta-box::before {
+      display: none;
+    }
+
+    .cta-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 48px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 300;
+      text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.5),
+        -2px -2px 4px rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(0, 206, 209, 0.2);
+    }
+
+    .cta-description {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .cta-buttons-large {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 300;
+    }
+
+    .cta-buttons-large .btn {
+      font-size: 20px;
+      padding: 20px 45px;
+    }
+
+    /* Footer */
+    footer {
+      background: #000000;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 60px 0 30px;
+      position: relative;
+      z-index: 200;
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 200;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: #00ced1;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 300;
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        -1px -1px 2px rgba(255, 255, 255, 0.1),
+        0 0 20px rgba(0, 206, 209, 0.3);
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-contact p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-end;
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    .footer-links a:hover {
+      color: #00ced1;
+      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+      box-shadow: 
+        inset 2px 2px 5px rgba(0, 0, 0, 0.3),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+    }
+
+    .footer-disclaimer {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 300;
+      box-shadow:
+        inset 3px 3px 6px rgba(0, 0, 0, 0.4),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-disclaimer p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      position: relative;
+      z-index: 300;
+    }
+
+    .footer-copyright p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      position: relative;
+      z-index: 300;
+    }
+
+    /* Header Link Hover */
+    header nav a:hover {
+      color: #00ced1 !important;
+      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      header nav {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #menu-toggle {
+        right: 20px;
+        top: 20px;
+      }
+
+      #menu-toggle-label {
+        display: none;
+      }
+
+      .menu-item {
+        font-size: 36px;
+      }
+
+      .hero-content h1 {
+        font-size: 42px;
+      }
+
+      .hero-content h2 {
+        font-size: 24px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+
+      .features-grid,
+      .services-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .cta-box {
+        padding: 50px 30px;
+      }
+
+      .cta-title {
+        font-size: 32px;
+      }
+
+      .cta-description {
+        font-size: 16px;
+      }
+
+      .cta-buttons-large {
+        flex-direction: column;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-links {
+        align-items: flex-start;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Special Animated Menu -->
+  <div id="special-menu">
+   <div id="menu-toggle">
+    <div id="menu-toggle-icon"><span></span> <span></span> <span></span>
     </div>
-    
-    <script>
-        // AL HACER CLIC EN LINK: Fade Out + redirección
-        document.addEventListener('DOMContentLoaded', function() {
-            const internalLinks = document.querySelectorAll('a[href]:not([target="_blank"]):not([href^="#"]):not([href^="mailto:"]):not([href^="javascript:"])');
-            const transition = document.getElementById('pageTransition');
-            
-            internalLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Solo procesar links internos (que no son externos)
-                    if (this.origin !== window.location.origin) return;
-                    
-                    e.preventDefault();
-                    const targetUrl = this.href;
-                    
-                    // 1. FADE OUT: Mostrar la transición
-                    transition.style.opacity = '1';
-                    transition.style.pointerEvents = 'all';
-                    
-                    // 2. Esperar 600ms (que se complete el fade out) y cambiar de página
-                    setTimeout(() => {
-                        window.location.href = targetUrl;
-                    }, 600);
-                });
-            });
-        });
-    
-        // AL CARGAR LA PÁGINA: Fade In (ocultar la transición)
-        window.addEventListener('load', function() {
-            const transition = document.getElementById('pageTransition');
-            
-            // Esperar 100ms para asegurar que todo está cargado
-            setTimeout(() => {
-                transition.style.opacity = '0';
-                transition.style.pointerEvents = 'none';
-            }, 100);
-        });
-    
-        // Si la página tarda en cargar, hacer fade in después de 3 segundos máximo
-        setTimeout(() => {
-            const transition = document.getElementById('pageTransition');
-            if (transition.style.opacity !== '0') {
-                transition.style.opacity = '0';
-                transition.style.pointerEvents = 'none';
-            }
-        }, 3000);
-    </script>
-    
-    <!-- Loader de Inicio -->
-    <div id="frobryLoader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-crema transition-opacity duration-1000">
-        <div class="text-center">
-            <!-- Logo/Símbolo (opcional) -->
-            <div class="mb-6 mx-auto">
-                <svg class="w-20 h-20 md:w-28 md:h-28 mx-auto" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="45" fill="#0a0a0a" />
-                    <text x="50" y="62" font-family="Orbitron" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">F</text>
-                </svg>
-            </div>
-            
-            <!-- Texto $FROBRY -->
-            <h1 class="text-5xl md:text-7xl font-black orbitron text-negro mb-4 tracking-tighter">
-                $FROBRY
-            </h1>
-            
-            <!-- Subtítulo opcional -->
-            <p class="text-lg md:text-xl text-gris oscuro orbitron opacity-0 animate-fadeIn delay-1000">
-                The AI Memelord
-            </p>
-            
-            <!-- Barra de progreso minimalista -->
-            <div class="w-48 md:w-64 h-1 bg-gris claro rounded-full mx-auto mt-8 overflow-hidden">
-                <div class="h-full bg-cyan-400 rounded-full loader-progress"></div>
-            </div>
-        </div>
+    <div id="menu-toggle-label"><span class="word">Open</span> <span class="word">Menu</span>
     </div>
-    
-    <style>
-        /* Colores personalizados */
-        .bg-crema {
-            background-color: #f5f5f0; /* Blanco crema elegante */
-        }
-        .text-negro {
-            color: #0a0a0a; /* Negro puro */
-        }
-        .bg-gris.claro {
-            background-color: #d9d9d9;
-        }
-        .text-gris.oscuro {
-            color: #666666;
-        }
-    
-        /* Animación de la barra de progreso */
-        .loader-progress {
-            width: 0%;
-            animation: loadProgress 2s ease-in-out forwards;
-        }
-    
-        @keyframes loadProgress {
-            0% { width: 0%; }
-            50% { width: 60%; }
-            100% { width: 100%; }
-        }
-    
-        /* Animación de fade in para el subtítulo */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-    
-        .delay-1000 {
-            animation-delay: 1s;
-        }
-    </style>
-    
-    <script>
-        // Verificar última visita
-        const lastVisit = localStorage.getItem('frobryLastVisit');
-        const now = Date.now();
-        const thirtyMinutes = 30 * 60 * 1000; // 30 minutos en milisegundos
-    
-        if (!lastVisit || (now - lastVisit) > thirtyMinutes) {
-            // MOSTRAR EL LOADER (primera vez o pasaron +30min)
-            document.addEventListener('DOMContentLoaded', function() {
-                const loader = document.getElementById('frobryLoader');
-                loader.style.display = 'flex';
-                
-                // Esperar 2 segundos y desvanecer
-                setTimeout(function() {
-                    loader.style.opacity = '0';
-                    
-                    // Esperar a que termine la transición y ocultar completamente
-                    setTimeout(function() {
-                        loader.style.display = 'none';
-                        // Guardar la hora actual de la visita
-                        localStorage.setItem('frobryLastVisit', now);
-                    }, 1000);
-                    
-                }, 2000);
-            });
-        } else {
-            // NO MOSTRAR EL LOADER
-            document.addEventListener('DOMContentLoaded', function() {
-                const loader = document.getElementById('frobryLoader');
-                loader.style.display = 'none';
-            });
-        }
-    </script>
-    <!-- Custom Cursor -->
-    <div id="customCursor" class="custom-cursor"></div>
-    <div id="cursorTrail" class="cursor-trail"></div>
-    
-    <!-- Matrix Rain Background -->
-    <div id="matrixRain" class="fixed inset-0 pointer-events-none z-0"></div>
-    
-    <!-- Floating Elements -->
-    <div class="floating-orb"></div>
-    <div class="floating-orb"></div>
-    <div class="floating-orb"></div>
-    <div class="connection-line"></div>
-    <div class="connection-line"></div>
-    <div class="connection-line"></div>
-    
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center glow-effect overflow-hidden">
-                        <img src="logo.png" alt="$FROBRY Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="w-full h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center" style="display: none;">
-                            <span class="text-black font-bold orbitron">F</span>
-                        </div>
-                    </div>
-                    <span href="home.html" class="text-2xl font-bold orbitron hover-glow">$FROBRY</span>
-                </div>
-                
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="hover:text-cyan-400 transition-colors hover-glow">Home</a>
-                    <a href="brainpaper.html" class="hover:text-cyan-400 transition-colors hover-glow">Brainpaper</a>
-                    <a href="https://pump.fun/coin/9ARYK4gCTLKdw2ionxunMGCrUJB7ovksMwGzHoEUpump" target="_blank" class="hover:text-cyan-400 transition-colors hover-glow">Buy</a>
-                    <a href="community.html" class="hover:text-cyan-400 transition-colors hover-glow">Community</a>
-                    <a href="contact.html" class="hover:text-cyan-400 transition-colors hover-glow">Contact</a>
-                </div>
-                
-                <!-- Mobile Menu Toggle -->
-                <div id="nav-container" class="md:hidden">
-                    <div id="nav-overlay"></div>
-                    <nav id="nav-fullscreen">
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="brainpaper.html">Brainpaper</a></li>
-                            <li><a href="https://pump.fun/coin/9ARYK4gCTLKdw2ionxunMGCrUJB7ovksMwGzHoEUpump" target="_blank">Buy</a></li>
-                            <li><a href="community.html">Community</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                    <a id="nav-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-        </div>
+   </div>
+   <div id="menu-gradient"></div>
+   <div id="menu-gradient-blur"></div>
+   <div id="menu-arcs-wrapper">
+    <div class="menu-arc"></div>
+    <div class="menu-arc"></div>
+    <div class="menu-arc"></div>
+   </div>
+   <nav id="menu-items"><a href="#home" class="menu-item">Home</a> <a href="#features" class="menu-item">Features</a> <a href="#services" class="menu-item">Services</a> <a href="#about" class="menu-item">About</a> <a href="#contact" class="menu-item">Contact</a>
+   </nav>
+  </div><!-- Scroll Down Arrow -->
+  <div class="scroll-down-arrow" id="scrollArrow"><button onclick="handleArrowClick()" aria-label="Scroll to features">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" transform="rotate(90 12 12)" />
+    </svg></button>
+  </div><!-- Header -->
+  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 206, 209, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); padding: 20px 20px; height: 64px; box-sizing: border-box;">
+   <div style="display: flex; justify-content: space-between; align-items: center; max-width: 100%; margin: 0; padding: 0; height: 100%;">
+    <div style="font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 900; background: linear-gradient(90deg, #00ced1, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 24px;">
+     Frobry AI Hub
+    </div>
+    <nav style="display: none; gap: 30px; align-items: center;"><a href="#home" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Home</a> <a href="#features" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Features</a> <a href="#services" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Services</a> <a href="#about" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">About</a> <a href="#contact" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Contact</a>
     </nav>
-    
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-6xl md:text-8xl font-black orbitron mb-6 hero-gradient">
-                    $FROBRY
-                </h1>
-                <div class="text-2xl md:text-3xl mb-8 h-16 flex items-center justify-center">
-                    <span id="typingText" class="text-cyan-400"></span>
-                    <span class="typing-cursor"></span>
-                </div>
-                <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                    Where artificial intelligence meets meme culture. Join the future of decentralized fun, powered by good vibes and cutting-edge technology.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="https://pump.fun/coin/9ARYK4gCTLKdw2ionxunMGCrUJB7ovksMwGzHoEUpump" target="_blank" class="btn-primary px-8 py-4 rounded-full text-lg font-semibold glow-effect">
-                        🚀 Buy $FROBRY Now
-                    </a>
-                    <a href="brainpaper.html" class="btn-secondary px-8 py-4 rounded-full text-lg font-semibold">
-                        📖 Read Whitepaper
-                    </a>
-                </div>
-                <div class="mt-12 flex justify-center items-center space-x-8 text-sm text-gray-400">
-                    <div class="flex items-center space-x-2">
-                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                        <span>Live on Blockchain</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
-                        <span>AI-Powered</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="w-3 h-3 bg-purple-400 rounded-full animate-pulse"></div>
-                        <span>Community Driven</span>
-                    </div>
-                </div>
-            </div>
+   </div>
+  </header><!-- Main Content -->
+  <main><!-- Hero Section -->
+   <section class="hero" id="home">
+    <video class="hero-video" autoplay loop muted playsinline><source src="videoback.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+     <div class="hero-content">
+      <h1 id="heroTitle">Frobry AI Hub</h1>
+      <h2 id="heroSubtitle">Real AI Services, Real Results</h2>
+      <p id="heroDescription">Connect your AI projects with opportunities. Get visibility. Grow your business. Simple, actionable services that deliver value from day one.</p>
+      <div class="cta-buttons"><button class="btn btn-primary" id="ctaPrimary">🚀 Browse Services</button> <button class="btn btn-secondary" id="ctaSecondary">📞 Get Started</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Spacer to push content below fullscreen hero -->
+   <div class="hero-spacer"></div><!-- Features Section -->
+   <section class="features" id="features">
+    <div class="container">
+     <h2 class="section-title">Core Features</h2>
+     <div class="features-grid">
+      <div class="feature-card">
+       <h3 id="feature1Title">🎯 Curated AI Directory</h3>
+       <p>Showcase your AI projects in our premium directory. Get discovered by investors, partners, and clients actively seeking AI solutions.</p>
+      </div>
+      <div class="feature-card">
+       <h3 id="feature2Title">🤝 Strategic Connections</h3>
+       <p>Connect with the right people at the right time. Our network includes investors, enterprise clients, and strategic partners.</p>
+      </div>
+      <div class="feature-card">
+       <h3 id="feature3Title">📈 Social Amplification</h3>
+       <p>Amplify your reach across multiple channels. We handle the marketing so you can focus on building great AI products.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section class="services" id="services">
+    <div class="container">
+     <h2 class="section-title">Simple &amp; Actionable Services</h2>
+     <div class="services-grid">
+      <div class="service-card">
+       <div class="service-header">
+        <h3 class="green-service">AI Project Directory</h3>
+        <div class="service-price">
+         $29/month
         </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold orbitron mb-6 text-cyan-400">About $FROBRY</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Born from the fusion of cutting-edge AI technology and the unstoppable force of meme culture
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h3 class="text-3xl font-bold mb-4 text-white">The AI Meme Revolution</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        $FROBRY isn't just another memecoin. It's a revolutionary project that harnesses the power of 
-                        artificial intelligence to create, curate, and distribute the most viral memes in the crypto space.
-                    </p>
-                    <p class="text-gray-300 leading-relaxed">
-                        Our advanced AI algorithms analyze trending topics, social sentiment, and cultural phenomena 
-                        to generate memes that resonate with the community and drive engagement like never before.
-                    </p>
-                    <div class="flex items-center space-x-4 pt-4">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-2xl">🤖</span>
-                            <span class="text-cyan-400 font-semibold">AI-Generated Content</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-2xl">🚀</span>
-                            <span class="text-cyan-400 font-semibold">Viral Potential</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative">
-                    <div class="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
-                        <div class="text-center space-y-6">
-                            <div class="text-6xl mb-4">🧠</div>
-                            <h4 class="text-2xl font-bold text-cyan-400">AI-Powered Ecosystem</h4>
-                            <div class="grid grid-cols-2 gap-4 text-sm">
-                                <div class="bg-white/5 rounded-lg p-3">
-                                    <div class="text-2xl mb-2">📊</div>
-                                    <div class="font-semibold">Smart Analytics</div>
-                                </div>
-                                <div class="bg-white/5 rounded-lg p-3">
-                                    <div class="text-2xl mb-2">🎯</div>
-                                    <div class="font-semibold">Trend Prediction</div>
-                                </div>
-                                <div class="bg-white/5 rounded-lg p-3">
-                                    <div class="text-2xl mb-2">⚡</div>
-                                    <div class="font-semibold">Auto Generation</div>
-                                </div>
-                                <div class="bg-white/5 rounded-lg p-3">
-                                    <div class="text-2xl mb-2">🌐</div>
-                                    <div class="font-semibold">Global Reach</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+       </div>
+       <p class="service-description">Get your AI project featured in our curated directory</p>
+       <ul class="service-features">
+        <li>Public profile listing</li>
+        <li>Basic social media feature</li>
+        <li>Access to our AI community</li>
+        <li>Monthly opportunity alerts</li>
+       </ul><button class="btn btn-primary">Get Started</button>
+      </div>
+      <div class="service-card featured">
+       <div class="service-header">
+        <h3 class="yellow-service">Growth Amplification</h3>
+        <div class="service-price">
+         $99/month
         </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section id="features" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold orbitron mb-6 text-cyan-400">Revolutionary Features</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Discover what makes $FROBRY the most advanced memecoin in the crypto universe
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">🧠</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">AI-Powered Alpha Reports</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Our sentient AI, Frobry, scans the internet 24/7. It finds the next viral trend 
-                        and translates complex crypto alpha into simple, actionable insights.
-                    </p>
-                </div>
-                
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">🗳️</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Memetic Governance</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Holders of $FROBRY vote on which meme trends we ride next. 
-                        This is a meme democracy where the community decides our direction.
-                    </p>
-                </div>
-                
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">🎁</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Holder Rewards & Airdrops</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Loyalty is rewarded with random airdrops and exclusive access 
-                        for active hive mind members. Stay engaged, get rewarded.
-                    </p>
-                </div>
-                
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">📢</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Built-In Hype Mechanics</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Our ecosystem is designed for virality with shareable content 
-                        and memeable lore that spreads naturally across the internet.
-                    </p>
-                </div>
-                
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">🔒</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Locked & Renounced</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        The contract is verified, liquidity is locked. 
-                        We're here to build, not to rug. Complete transparency and security.
-                    </p>
-                </div>
-                
-                <div class="feature-card rounded-2xl p-8 text-center">
-                    <div class="text-5xl mb-6">⚡</div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Powered by Solana</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        Built on the fastest blockchain with near-zero fees 
-                        and instant transactions. Speed meets efficiency.
-                    </p>
-                </div>
-            </div>
+       </div>
+       <p class="service-description">Amplify your reach across multiple channels</p>
+       <ul class="service-features">
+        <li>Featured directory placement</li>
+        <li>3 social media posts monthly</li>
+        <li>Priority connection matching</li>
+        <li>Newsletter inclusion</li>
+        <li>Basic analytics report</li>
+       </ul><button class="btn btn-primary">Get Started</button>
+      </div>
+      <div class="service-card">
+       <div class="service-header">
+        <h3 class="red-service">Strategic Partnership</h3>
+        <div class="service-price">
+         $299/month
         </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="py-20 relative">
-        <div class="container mx-auto px-6 text-center">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-6xl font-bold orbitron mb-6 text-cyan-400">
-                    Ready to Join the Revolution?
-                </h2>
-                <p class="text-xl md:text-2xl mb-12 text-gray-300 leading-relaxed">
-                    Don't miss out on the future of memecoins. Get your $FROBRY tokens now and be part of the AI-powered meme revolution!
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-                    <a href="https://pump.fun/coin/9ARYK4gCTLKdw2ionxunMGCrUJB7ovksMwGzHoEUpump" target="_blank" class="btn-primary px-10 py-5 rounded-full text-xl font-bold glow-effect">
-                        🚀 Buy $FROBRY Now
-                    </a>
-                    <a href="https://t.me/frobry_announcements" target="_blank" class="btn-secondary px-10 py-5 rounded-full text-xl font-bold">
-                        📱 Join Community
-                    </a>
-                </div>
-                <div class="text-sm text-gray-400">
-                    <p>Contract Address: Chjh9da4ZPtzpkQXkq4PxaEm644LZ9BUoNGWiBoz1nWi (Always verify before purchasing)</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="bg-black/50 backdrop-blur-md border-t border-white/10 py-12">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between mb-8">
-                <div class="flex items-center space-x-3 mb-6 md:mb-0">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center glow-effect overflow-hidden">
-                        <img src="logo.png" alt="$FROBRY Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="w-full h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center" style="display: none;">
-                            <span class="text-black font-bold orbitron">F</span>
-                        </div>
-                    </div>
-                    <span class="text-2xl font-bold orbitron">$FROBRY</span>
-                </div>
-                
-                <div class="flex flex-wrap justify-center md:justify-start items-center gap-4 md:gap-8 mb-6 md:mb-0">
-                    <a href="#home" class="hover:text-cyan-400 transition-colors hover-glow">Home</a>
-                    <a href="brainpaper.html" class="hover:text-cyan-400 transition-colors hover-glow">Brainpaper</a>
-                    <a href="https://pump.fun/coin/9ARYK4gCTLKdw2ionxunMGCrUJB7ovksMwGzHoEUpump" target="_blank" class="hover:text-cyan-400 transition-colors hover-glow">Buy</a>
-                    <a href="community.html" class="hover:text-cyan-400 transition-colors hover-glow">Community</a>
-                    <a href="contact.html" class="hover:text-cyan-400 transition-colors hover-glow">Contact</a>
-                </div>
-                
-                <div class="flex space-x-4">
-                    <a href="https://www.instagram.com/frobry.coin" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="text-center text-xs text-gray-500 leading-relaxed mt-8 pt-8 border-t border-white/10">
-                <p>*$FROBRY is a meme coin with no intrinsic value or expectation of financial return. There is no formal team or roadmap. The coin is completely for memes purposes only. This token is not an investment vehicle and should not be purchased with the expectation of profit. Cryptocurrency investments are highly speculative and volatile. You may lose all of your investment. Past performance does not guarantee future results. Please do your own research and consult with a financial advisor before making any investment decisions. The creators of $FROBRY are not responsible for any financial losses incurred from trading this token.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        // Matrix Rain Effect
-        function createMatrixRain() {
-            const matrixRain = document.getElementById('matrixRain');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            
-            for (let i = 0; i < 50; i++) {
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars[Math.floor(Math.random() * chars.length)];
-                char.style.left = Math.random() * 100 + '%';
-                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                char.style.animationDelay = Math.random() * 2 + 's';
-                matrixRain.appendChild(char);
-            }
-        }
-        
-        // Typing Animation
-        function startTypingAnimation() {
-            const texts = [
-                'The AI Memecoin Revolution',
-                'Where Memes Meet Intelligence',
-                'Good Vibes Only',
-                'Community Driven Future'
-            ];
+       </div>
+       <p class="service-description">Complete growth strategy and connections</p>
+       <ul class="service-features">
+        <li>Premium directory featuring</li>
+        <li>8 social media posts monthly</li>
+        <li>Dedicated connection introductions</li>
+        <li>Custom content strategy</li>
+        <li>Priority support</li>
+        <li>Investor/partner matching</li>
+       </ul><button class="btn btn-primary">Get Started</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- How It Works -->
+   <section class="how-it-works">
+    <div class="container">
+     <h2 class="section-title">How It Works</h2>
+     <div class="steps-grid">
+      <div class="step-card">
+       <div class="step-number">
+        1
+       </div>
+       <h3>Choose Your Service</h3>
+       <p>Select from our straightforward service packages</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        2
+       </div>
+       <h3>Submit Your Project</h3>
+       <p>Share basic details about your AI project or needs</p>
+      </div>
+      <div class="step-card">
+       <div class="step-number">
+        3
+       </div>
+       <h3>Get Results</h3>
+       <p>We handle the visibility and connections - you focus on your work</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Why Choose Section -->
+   <section class="why-choose">
+    <div class="container">
+     <h2 class="section-title">Why Choose Frobry AI Hub</h2>
+     <div class="benefits-grid">
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        🎯
+       </div>
+       <div class="benefit-content">
+        <h3>No Complex Setup</h3>
+        <p>Get started in minutes, not months</p>
+       </div>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        🤝
+       </div>
+       <div class="benefit-content">
+        <h3>Real Connections</h3>
+        <p>Genuine introductions to relevant partners</p>
+       </div>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        📈
+       </div>
+       <div class="benefit-content">
+        <h3>Measurable Growth</h3>
+        <p>Clear visibility and opportunity tracking</p>
+       </div>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        💼
+       </div>
+       <div class="benefit-content">
+        <h3>Business Focused</h3>
+        <p>Services designed for actual business outcomes</p>
+       </div>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        🌍
+       </div>
+       <div class="benefit-content">
+        <h3>Global Network</h3>
+        <p>Access to international AI ecosystem</p>
+       </div>
+      </div>
+      <div class="benefit-card">
+       <div class="benefit-icon">
+        ⚡
+       </div>
+       <div class="benefit-content">
+        <h3>Immediate Impact</h3>
+        <p>See results from your first month</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Call to Action Section -->
+   <section class="cta-section" id="contact">
+    <div class="container">
+     <div class="cta-box">
+      <h2 class="cta-title">Ready to Grow Your AI Project?</h2>
+      <p class="cta-description">Choose your service package and start connecting with opportunities today!</p>
+      <div class="cta-buttons-large"><button class="btn btn-primary">🎯 View Service Packages</button> <button class="btn btn-secondary">📧 Contact Our Team</button> <button class="btn btn-secondary">💬 Quick Consultation</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section class="about" id="about">
+    <div class="container">
+     <div class="about-content">
+      <div class="about-text">
+       <h2 id="aboutTitle">About Frobry AI Hub</h2>
+       <p id="aboutDescription">We bridge the gap between AI innovation and business growth through simple, effective services that actually work.</p>
+      </div>
+      <div class="mission-box">
+       <h3 id="missionTitle">Our Mission</h3>
+       <p id="missionDescription">To create the most accessible platform for AI professionals and businesses to connect, collaborate, and grow - without the complexity.</p>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main><!-- Footer -->
+  <footer>
+   <div class="container">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h3>Frobry AI Hub - Real AI Services</h3>
+      <div class="footer-contact">
+       <p>📧 contact@frobry.com</p>
+       <p>🌐 www.frobry.com</p>
+      </div>
+     </div>
+     <div class="footer-links"><a href="#home">Home</a> <a href="#services">Services</a> <a href="#features">Directory</a> <a href="#services">Pricing</a> <a href="#about">Contact</a>
+     </div>
+    </div>
+    <div class="footer-disclaimer">
+     <p>*Frobry AI Hub provides visibility and connection services for AI projects. We facilitate introductions but outcomes depend on individual projects. All services are delivered as described in our service agreements.*</p>
+    </div>
+    <div class="footer-copyright">
+     <p>© 2025 Frobry AI Hub. All rights reserved.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+    // Default Config
+    const defaultConfig = {
+      background_color: '#000000',
+      surface_color: '#1a1a1a',
+      text_color: '#ffffff',
+      primary_action_color: '#00ced1',
+      secondary_action_color: '#ffffff',
+      font_family: 'Inter',
+      font_size: 16,
+      hero_title: 'Frobry AI Hub',
+      hero_subtitle: 'Real AI Services, Real Results',
+      hero_description: 'Connect your AI projects with opportunities. Get visibility. Grow your business. Simple, actionable services that deliver value from day one.',
+      cta_primary: '🚀 Browse Services',
+      cta_secondary: '📞 Get Started',
+      feature_1_title: '🎯 Curated AI Directory',
+      feature_2_title: '🤝 Strategic Connections',
+      feature_3_title: '📈 Social Amplification',
+      about_title: 'About Frobry AI Hub',
+      about_description: 'We bridge the gap between AI innovation and business growth through simple, effective services that actually work.',
+      mission_title: 'Our Mission',
+      mission_description: 'To create the most accessible platform for AI professionals and businesses to connect, collaborate, and grow - without the complexity.'
+    };
 
-            let textIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            const typingElement = document.getElementById('typingText');
-            
-            function type() {
-                const currentText = texts[textIndex];
-                
-                if (isDeleting) {
-                    typingElement.textContent = currentText.substring(0, charIndex - 1);
-                    charIndex--;
-                } else {
-                    typingElement.textContent = currentText.substring(0, charIndex + 1);
-                    charIndex++;
-                }
+    // Menu Toggle
+    const menuButton = document.getElementById("menu-toggle");
 
-                let typeSpeed = isDeleting ? 50 : 100;
-                
-                if (!isDeleting && charIndex === currentText.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    textIndex = (textIndex + 1) % texts.length;
-                    typeSpeed = 500;
-                }
-                
-                setTimeout(type, typeSpeed);
-            }
-            
-            type();
-        }
+    const toggleMenu = () => {
+      document.body.classList.toggle("menu-toggled");
+    };
+
+    menuButton.onclick = () => toggleMenu();
+
+    // Close menu when clicking on menu items
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMenu();
         
-        // Mobile Menu Functions
-        function resizeNav() {
-            const navFullscreen = document.getElementById('nav-fullscreen');
-            const navOverlay = document.getElementById('nav-overlay');
-            
-            if (navFullscreen) {
-                navFullscreen.style.height = window.innerHeight + 'px';
-            }
-            
-            if (navOverlay) {
-                const radius = Math.sqrt(Math.pow(window.innerHeight, 2) + Math.pow(window.innerWidth, 2));
-                const diameter = radius * 2;
-                navOverlay.style.width = diameter + 'px';
-                navOverlay.style.height = diameter + 'px';
-                navOverlay.style.marginTop = -radius + 'px';
-                navOverlay.style.marginLeft = -radius + 'px';
-            }
-        }
-        
-        function initMobileNav() {
-            const navToggle = document.getElementById('nav-toggle');
-            const navOverlay = document.getElementById('nav-overlay');
-            const navFullscreen = document.getElementById('nav-fullscreen');
-            
-            if (navToggle && navOverlay && navFullscreen) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('open');
-                    navOverlay.classList.toggle('open');
-                    navFullscreen.classList.toggle('open');
-                });
-                
-                // Close menu when clicking on links
-                const navLinks = navFullscreen.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        navToggle.classList.remove('open');
-                        navOverlay.classList.remove('open');
-                        navFullscreen.classList.remove('open');
-                    });
-                });
-                
-                // Close menu when clicking on the overlay (outside the menu)
-                navOverlay.addEventListener('click', function() {
-                    navToggle.classList.remove('open');
-                    navOverlay.classList.remove('open');
-                    navFullscreen.classList.remove('open');
-                });
-            }
-            
-            window.addEventListener('resize', resizeNav);
-            resizeNav();
-        }
-        
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // CURSOR PERSONALIZADO Y EFECTOS
-        const customCursor = document.getElementById('customCursor');
-        const cursorTrail = document.getElementById('cursorTrail');
-        let mouseX = 0, mouseY = 0;
-        let trailX = 0, trailY = 0;
-        
-        // Seguimiento del cursor
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            customCursor.style.left = mouseX + 'px';
-            customCursor.style.top = mouseY + 'px';
-        });
-        
-        // Trail del cursor con retraso
-        function animateTrail() {
-            trailX += (mouseX - trailX) * 0.1;
-            trailY += (mouseY - trailY) * 0.1;
-            
-            cursorTrail.style.left = trailX + 'px';
-            cursorTrail.style.top = trailY + 'px';
-            
-            requestAnimationFrame(animateTrail);
-        }
-        animateTrail();
-        
-        // Efecto ripple al hacer clic
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple';
-            ripple.style.left = e.clientX + 'px';
-            ripple.style.top = e.clientY + 'px';
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            document.body.appendChild(ripple);
-            
+        // Smooth scroll to section
+        const targetId = item.getAttribute('href');
+        if (targetId === '#home') {
+          // Scroll to top of page for home
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 600);
+        } else {
+          const targetSection = document.querySelector(targetId);
+          if (targetSection) {
             setTimeout(() => {
-                ripple.remove();
+              targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 600);
-        });
-        
-        // Efectos de hover mejorados
-        document.querySelectorAll('.feature-card, .btn-primary, .btn-secondary, .hover-glow, a, button').forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                customCursor.classList.add('clickable');
-                customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursorTrail.style.transform = 'translate(-50%, -50%) scale(2)';
-                cursorTrail.style.background = 'radial-gradient(circle, rgba(0, 255, 255, 0.6) 0%, transparent 70%)';
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                customCursor.classList.remove('clickable');
-                customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorTrail.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorTrail.style.background = 'radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%)';
-            });
-        });
-        
-        // Cursor de selección para texto
-        document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div').forEach(element => {
-            element.addEventListener('mousedown', () => {
-                customCursor.classList.add('selecting');
-            });
-            
-            element.addEventListener('mouseup', () => {
-                customCursor.classList.remove('selecting');
-            });
-        });
-        
-        // Detectar cuando se está seleccionando texto
-        document.addEventListener('selectstart', () => {
-            customCursor.classList.add('selecting');
-        });
-        
-        document.addEventListener('selectionchange', () => {
-            const selection = window.getSelection();
-            if (selection.toString().length === 0) {
-                customCursor.classList.remove('selecting');
-            }
-        });
+          }
+        }
+      });
+    });
 
-        // Partículas que siguen al cursor
-        let particles = [];
-        
-        function createParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.background = '#00ffff';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '9996';
-            particle.style.opacity = '0.8';
-            document.body.appendChild(particle);
-            
-            particles.push({
-                element: particle,
-                x: x,
-                y: y,
-                vx: (Math.random() - 0.5) * 4,
-                vy: (Math.random() - 0.5) * 4,
-                life: 60
-            });
-        }
-        
-        function updateParticles() {
-            particles.forEach((particle, index) => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                particle.life--;
-                
-                particle.element.style.left = particle.x + 'px';
-                particle.element.style.top = particle.y + 'px';
-                particle.element.style.opacity = particle.life / 60;
-                
-                if (particle.life <= 0) {
-                    particle.element.remove();
-                    particles.splice(index, 1);
-                }
-            });
-            
-            requestAnimationFrame(updateParticles);
-        }
-        updateParticles();
-        
-        // Crear partículas ocasionalmente
-        let particleTimer = 0;
-        document.addEventListener('mousemove', (e) => {
-            particleTimer++;
-            if (particleTimer % 5 === 0) {
-                createParticle(e.clientX, e.clientY);
+    // Smooth Scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        if (!this.classList.contains('menu-item')) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#home') {
+            // Scroll to top of page for home
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const target = document.querySelector(targetId);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-        });
-        
-        // Initialize effects
-        createMatrixRain();
-        startTypingAnimation();
-        initMobileNav();
-        
-        // Add click handlers for buttons
-        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-            button.addEventListener('click', function() {
-                // Add click animation
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-        
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-        
-        // Mouse tracking effect for feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--x', `${x}px`);
-                card.style.setProperty('--y', `${y}px`);
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.setProperty('--x', '50%');
-                card.style.setProperty('--y', '50%');
-            });
-        });
-        
-        // EFECTOS DE PARALLAX
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.floating-orb');
-            const connectionLines = document.querySelectorAll('.connection-line');
-            
-            parallaxElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-            
-            connectionLines.forEach((line, index) => {
-                const speed = 0.3 + (index * 0.1);
-                const rotation = line.style.transform.match(/rotate\(([^)]+)\)/);
-                const currentRotation = rotation ? rotation[1] : '0deg';
-                line.style.transform = `translateY(${scrolled * speed}px) rotate(${currentRotation})`;
-            });
-        });
-        
-        // EFECTO DE MAGNETISMO EN BOTONES
-        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-            button.addEventListener('mousemove', (e) => {
-                const rect = button.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'translate(0px, 0px) scale(1)';
-            });
-        });
-        
-        // EFECTO DE ONDAS EN EL FONDO
-        function createWaveEffect() {
-            const wave = document.createElement('div');
-            wave.style.position = 'fixed';
-            wave.style.width = '2px';
-            wave.style.height = '2px';
-            wave.style.background = 'rgba(0, 255, 255, 0.1)';
-            wave.style.borderRadius = '50%';
-            wave.style.left = Math.random() * window.innerWidth + 'px';
-            wave.style.top = window.innerHeight + 'px';
-            wave.style.pointerEvents = 'none';
-            wave.style.zIndex = '1';
-            document.body.appendChild(wave);
-            
-            let size = 2;
-            let opacity = 0.1;
-            let y = window.innerHeight;
-            
-            function animateWave() {
-                y -= 2;
-                size += 0.5;
-                opacity -= 0.001;
-                
-                wave.style.top = y + 'px';
-                wave.style.width = size + 'px';
-                wave.style.height = size + 'px';
-                wave.style.background = `rgba(0, 255, 255, ${opacity})`;
-                
-                if (y > -100 && opacity > 0) {
-                    requestAnimationFrame(animateWave);
-                } else {
-                    wave.remove();
-                }
-            }
-            
-            animateWave();
+          }
         }
+      });
+    });
+
+    // Button Click Effects
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const ripple = document.createElement('div');
+        ripple.style.position = 'absolute';
+        ripple.style.width = '20px';
+        ripple.style.height = '20px';
+        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+        ripple.style.borderRadius = '50%';
+        ripple.style.transform = 'translate(-50%, -50%)';
+        ripple.style.animation = 'ripple 0.6s ease-out';
+        ripple.style.left = e.offsetX + 'px';
+        ripple.style.top = e.offsetY + 'px';
+        ripple.style.pointerEvents = 'none';
         
-        // Crear ondas periódicamente
-        setInterval(createWaveEffect, 3000);
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97b617aaf676698a',t:'MTc1NzI0NjkxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        this.style.position = 'relative';
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+      @keyframes ripple {
+        to {
+          width: 200px;
+          height: 200px;
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(rippleStyle);
+
+    // Prevent flash on load
+    document.body.classList.add('loaded');
+
+    // Handle arrow click
+    function handleArrowClick() {
+      document.getElementById('scrollArrow').classList.remove('visible');
+      document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Show/hide scroll arrow based on scroll position and cursor
+    const scrollArrow = document.querySelector('.scroll-down-arrow');
+    const heroSection = document.querySelector('.hero');
+    
+    // Track mouse position and scroll position
+    document.addEventListener('mousemove', (e) => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      
+      // Only show arrow if we're at the top of the page (hero is visible)
+      if (scrollY < window.innerHeight * 0.5) {
+        const heroRect = heroSection.getBoundingClientRect();
+        const arrowRect = scrollArrow.getBoundingClientRect();
+        
+        // Check if mouse is over hero section
+        const overHero = (
+          e.clientX >= heroRect.left &&
+          e.clientX <= heroRect.right &&
+          e.clientY >= heroRect.top &&
+          e.clientY <= heroRect.bottom
+        );
+        
+        // Check if mouse is over arrow
+        const overArrow = (
+          e.clientX >= arrowRect.left &&
+          e.clientX <= arrowRect.right &&
+          e.clientY >= arrowRect.top &&
+          e.clientY <= arrowRect.bottom
+        );
+        
+        // Show arrow if over hero or over arrow itself
+        if (overHero || overArrow) {
+          scrollArrow.classList.add('visible');
+        } else {
+          scrollArrow.classList.remove('visible');
+        }
+      } else {
+        // Hide arrow when scrolled past hero
+        scrollArrow.classList.remove('visible');
+      }
+    });
+    
+    // Also hide arrow on scroll
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY >= window.innerHeight * 0.5) {
+        scrollArrow.classList.remove('visible');
+      }
+    });
+
+    // Element SDK Implementation
+    async function onConfigChange(config) {
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = 'Arial, sans-serif';
+
+      // Apply colors
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+
+      document.body.style.background = backgroundColor;
+      document.body.style.color = textColor;
+      
+      // Update all surface colors
+      document.querySelectorAll('.feature-card, .service-card, .step-card, .benefit-card, .mission-box, .cta-box, .footer-disclaimer').forEach(el => {
+        el.style.background = surfaceColor;
+      });
+
+      // Update primary action colors (buttons and accents)
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.style.color = primaryColor;
+        btn.style.borderColor = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.3)`;
+      });
+
+      document.querySelectorAll('.btn-secondary').forEach(btn => {
+        btn.style.color = secondaryColor;
+        btn.style.borderColor = `rgba(${parseInt(secondaryColor.slice(1,3), 16)}, ${parseInt(secondaryColor.slice(3,5), 16)}, ${parseInt(secondaryColor.slice(5,7), 16)}, 0.1)`;
+      });
+
+      // Update accent colors (headings, logo, etc.) - excluding service titles
+      document.querySelectorAll('.feature-card h3, .step-card h3, .benefit-content h3, .mission-box h3, .footer-brand h3, .step-number, .hero-content h2').forEach(el => {
+        el.style.color = primaryColor;
+      });
+
+      // Update menu toggle colors
+      document.querySelectorAll('#menu-toggle-icon > span').forEach(span => {
+        span.style.backgroundColor = primaryColor;
+      });
+
+      document.querySelectorAll('#menu-toggle-label > .word').forEach(word => {
+        word.style.color = primaryColor;
+      });
+
+      // Service titles keep their individual colors
+      const greenService = document.querySelector('.green-service');
+      const yellowService = document.querySelector('.yellow-service');
+      const redService = document.querySelector('.red-service');
+      
+      if (greenService) {
+        greenService.style.color = '#00ff00';
+        greenService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 255, 0, 0.4)';
+      }
+      if (yellowService) {
+        yellowService.style.color = '#ffff00';
+        yellowService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 0, 0.4)';
+      }
+      if (redService) {
+        redService.style.color = '#ff0000';
+        redService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 0, 0, 0.4)';
+      }
+
+      // Apply fonts
+      document.getElementById('heroTitle').style.fontFamily = `${customFont}, 'Orbitron', ${baseFontStack}`;
+      document.getElementById('heroSubtitle').style.fontFamily = `${customFont}, 'Orbitron', ${baseFontStack}`;
+      document.getElementById('heroDescription').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      
+      // Apply font sizes
+      document.getElementById('heroTitle').style.fontSize = `${baseSize * 4.5}px`;
+      document.getElementById('heroSubtitle').style.fontSize = `${baseSize * 2}px`;
+      document.getElementById('heroDescription').style.fontSize = `${baseSize * 1.25}px`;
+
+      // Update editable text content
+      document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
+      document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('heroDescription').textContent = config.hero_description || defaultConfig.hero_description;
+      document.getElementById('ctaPrimary').textContent = config.cta_primary || defaultConfig.cta_primary;
+      document.getElementById('ctaSecondary').textContent = config.cta_secondary || defaultConfig.cta_secondary;
+      document.getElementById('feature1Title').textContent = config.feature_1_title || defaultConfig.feature_1_title;
+      document.getElementById('feature2Title').textContent = config.feature_2_title || defaultConfig.feature_2_title;
+      document.getElementById('feature3Title').textContent = config.feature_3_title || defaultConfig.feature_3_title;
+      document.getElementById('aboutTitle').textContent = config.about_title || defaultConfig.about_title;
+      document.getElementById('aboutDescription').textContent = config.about_description || defaultConfig.about_description;
+      document.getElementById('missionTitle').textContent = config.mission_title || defaultConfig.mission_title;
+      document.getElementById('missionDescription').textContent = config.mission_description || defaultConfig.mission_description;
+    }
+
+    // Apply initial config immediately to prevent flash
+    onConfigChange(defaultConfig);
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                config.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['hero_description', config.hero_description || defaultConfig.hero_description],
+          ['cta_primary', config.cta_primary || defaultConfig.cta_primary],
+          ['cta_secondary', config.cta_secondary || defaultConfig.cta_secondary],
+          ['feature_1_title', config.feature_1_title || defaultConfig.feature_1_title],
+          ['feature_2_title', config.feature_2_title || defaultConfig.feature_2_title],
+          ['feature_3_title', config.feature_3_title || defaultConfig.feature_3_title],
+          ['about_title', config.about_title || defaultConfig.about_title],
+          ['about_description', config.about_description || defaultConfig.about_description],
+          ['mission_title', config.mission_title || defaultConfig.mission_title],
+          ['mission_description', config.mission_description || defaultConfig.mission_description]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99bfe40b57a5bb52',t:'MTc2MjcxODM2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
