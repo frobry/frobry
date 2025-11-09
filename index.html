@@ -20,6 +20,24 @@
     html, body {
       height: 100%;
       overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    /* Hide Scrollbar */
+    ::-webkit-scrollbar {
+      width: 0px;
+      display: none;
+    }
+
+    /* Firefox Scrollbar */
+    html {
+      scrollbar-width: none;
+    }
+    
+    body {
+      -ms-overflow-style: none;
     }
 
     body {
@@ -1244,16 +1262,33 @@
         font-size: 36px;
       }
 
+      .hero-content {
+        padding-top: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
       .hero-content h1 {
-        font-size: 42px;
+        font-size: 60px;
+        margin-bottom: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        max-width: 100%;
       }
 
       .hero-content h2 {
         font-size: 24px;
+        margin-bottom: 40px;
       }
 
       .hero-content p {
         font-size: 16px;
+        margin-bottom: 60px;
+      }
+
+      .features {
+        margin-top: 180%;
       }
 
       .features-grid,
@@ -1328,7 +1363,7 @@
   </div><!-- Header -->
   <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 206, 209, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); padding: 20px 20px; height: 64px; box-sizing: border-box;">
    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 100%; margin: 0; padding: 0; height: 100%;">
-    <div style="font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 900; background: linear-gradient(90deg, #00ced1, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 24px;">
+    <div id="headerLogo" style="font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 900; background: linear-gradient(90deg, #00ced1, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 24px;">
      Frobry AI Hub
     </div>
     <nav style="display: none; gap: 30px; align-items: center;"><a href="#home" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Home</a> <a href="#features" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Features</a> <a href="#services" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Services</a> <a href="#about" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">About</a> <a href="#contact" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Contact</a>
@@ -1344,7 +1379,7 @@
       <h1 id="heroTitle">Frobry AI Hub</h1>
       <h2 id="heroSubtitle">Real AI Services, Real Results</h2>
       <p id="heroDescription">Connect your AI projects with opportunities. Get visibility. Grow your business. Simple, actionable services that deliver value from day one.</p>
-      <div class="cta-buttons"><button class="btn btn-primary" id="ctaPrimary">🚀 Browse Services</button> <button class="btn btn-secondary" id="ctaSecondary">📞 Get Started</button>
+      <div class="cta-buttons"><button class="btn btn-primary" id="ctaPrimary" onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">🚀 Browse Services</button> <button class="btn btn-secondary" id="ctaSecondary">📞 Get Started</button>
       </div>
      </div>
     </div>
@@ -1672,6 +1707,33 @@
     // Prevent flash on load
     document.body.classList.add('loaded');
 
+    // Auto-resize mobile hero title to fit on one line
+    function resizeMobileTitle() {
+      if (window.innerWidth <= 768) {
+        const heroTitle = document.getElementById('heroTitle');
+        const container = heroTitle.parentElement;
+        const containerWidth = container.offsetWidth - 40; // Account for padding
+        
+        let fontSize = 60;
+        heroTitle.style.fontSize = fontSize + 'px';
+        
+        // Reduce font size until text fits
+        while (heroTitle.scrollWidth > containerWidth && fontSize > 20) {
+          fontSize -= 0.5;
+          heroTitle.style.fontSize = fontSize + 'px';
+        }
+      } else {
+        // Reset to default for desktop
+        const heroTitle = document.getElementById('heroTitle');
+        heroTitle.style.fontSize = '';
+      }
+    }
+
+    // Run on load and resize
+    window.addEventListener('load', resizeMobileTitle);
+    window.addEventListener('resize', resizeMobileTitle);
+    resizeMobileTitle();
+
     // Handle arrow click
     function handleArrowClick() {
       document.getElementById('scrollArrow').classList.remove('visible');
@@ -1895,5 +1957,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99bfe40b57a5bb52',t:'MTc2MjcxODM2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99c035efb6cbd11c',t:'MTc2MjcyMTcyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
