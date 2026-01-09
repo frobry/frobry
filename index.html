@@ -1,1961 +1,972 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr" class="h-full">
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frobry AI Hub - Special Menu</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;family=Inter:wght@400;700&amp;family=Rubik:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <title>Task Manager Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     body {
       box-sizing: border-box;
+      font-family: 'Space Grotesk', sans-serif;
     }
     
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
-
-    /* Hide Scrollbar */
-    ::-webkit-scrollbar {
-      width: 0px;
-      display: none;
-    }
-
-    /* Firefox Scrollbar */
-    html {
-      scrollbar-width: none;
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 6px;
     }
     
-    body {
-      -ms-overflow-style: none;
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: #1a1a2e;
     }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #000000;
-      color: #ffffff;
-      position: relative;
-      cursor: default;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 3px;
     }
-
-    body.loaded {
-      opacity: 1;
-    }
-
-    /* Special Menu Styles */
-    :root {
-      --menu-background-light: rgb(0, 139, 141);
-      --menu-background-dark: rgb(0, 0, 0);
-      
-      --menu-gradient-color-1: rgb(0, 100, 0);
-      --menu-gradient-color-2: rgb(0, 139, 141);
-      --menu-gradient-color-3: rgb(0, 80, 80);
-      --menu-gradient-color-4: rgb(0, 40, 40);
-    }
-
-    @keyframes arc-rotation {
-      from {
-        transform: translate3d(-50%, -50%, 0px) rotate(0deg);
-      }
-      
-      to {
-        transform: translate3d(-50%, -50%, 0px) rotate(360deg);
-      }
-    }
-
-    body.menu-toggled > #special-menu {
-      pointer-events: all; 
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:first-of-type {
-      transform: translate3d(0px, 9px, 0px) rotate(45deg);
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:nth-of-type(2) {
-      opacity: 0;
-      transform: translate3d(-5px, 0px, 0px);
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span:nth-of-type(3) {
-      transform: translate3d(0px, -9px, 0px) rotate(-45deg);
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word {
-      opacity: 0;
-      transform: translate3d(-30%, 0px, 0px) skew(20deg) scaleX(1.2);  
-      transition: opacity 250ms cubic-bezier(.71, .19, .87, .33), 
-        transform 250ms cubic-bezier(.71, .19, .87, .33);
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word:nth-of-type(2) {
-      transition-delay: 100ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-gradient {
-      height: 200vmax;
-      opacity: 1;
-      transform: translate3d(-50%, -50%, 0px);
-      transition: height 600ms cubic-bezier(.58, .2, .62, .93), 
-        width 600ms cubic-bezier(.58, .2, .62, .93), 
-        transform 600ms cubic-bezier(.58, .2, .62, .93), 
-        opacity 400ms;
-      width: 200vmax;
-    }
-
-    body.menu-toggled > #special-menu > #menu-gradient-blur {
-      opacity: 1; 
-    }
-
-    body.menu-toggled > #special-menu > #menu-arcs-wrapper {
-      opacity: 1;
-      transform: scale(1);
-      transition: transform 600ms cubic-bezier(.16, .68, .25, .83), 
-        opacity 600ms cubic-bezier(.87, .12, .92, .39); 
-    }
-
-    body.menu-toggled > #special-menu > #menu-items {
-      opacity: 1;
-      pointer-events: all;
-      transform: translate3d(0px, 0px, 0px);
-      transition: opacity 600ms 200ms, transform 600ms 200ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item {
-      opacity: 1;
-      transform: translate3d(0px, 0px, 0px);
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(1) {
-      transition: opacity 600ms 300ms, transform 600ms 300ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(2) {
-      transition: opacity 600ms 350ms, transform 600ms 350ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(3) {
-      transition: opacity 600ms 400ms, transform 600ms 400ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(4) {
-      transition: opacity 600ms 450ms, transform 600ms 450ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-items > .menu-item:nth-of-type(5) {
-      transition: opacity 600ms 500ms, transform 600ms 500ms;
-    }
-
-    #special-menu {
-      height: 100%;
-      left: 0;
-      pointer-events: none;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 10000;
-    }
-
-    #menu-toggle {
-      align-items: center;
-      cursor: pointer;
-      display: flex;
-      gap: 15px;
-      right: 20px;
-      pointer-events: all;
-      position: fixed;
-      top: 20px;
-      z-index: 10001;
-    }
-
-    #menu-toggle-icon {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 30px;
-    }
-
-    #menu-toggle > #menu-toggle-icon > span {
-      background-color: #00ced1;
-      border-radius: 2px;
-      display: block;
-      height: 3px;
-      transition: background-color 600ms, opacity 250ms, transform 250ms;
-      width: 100%;
-      box-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-    }
-
-    #menu-toggle > #menu-toggle-icon > span:nth-of-type(2) {
-      transition: background-color 600ms, opacity 250ms 100ms, transform 250ms 100ms;
-    }
-
-    #menu-toggle > #menu-toggle-icon > span:nth-of-type(3) {
-      transition: background-color 600ms, opacity 250ms 200ms, transform 250ms 200ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-icon > span {
-      background-color: var(--menu-background-light);
-      box-shadow: none;
-    }
-
-    #menu-toggle-label {
-      display: flex;
-      gap: 8px;
-      overflow: hidden;
-    }
-
-    #menu-toggle-label > .word {
-      color: #00ced1;
-      font-size: 18px;
-      font-weight: 700;
-      font-family: 'Orbitron', monospace;
-      transition: color 600ms, opacity 250ms 200ms, transform 250ms 200ms;
-      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-    }
-
-    #menu-toggle-label > .word:nth-of-type(2) {
-      transition: color 600ms, opacity 250ms 300ms, transform 250ms 300ms;
-    }
-
-    body.menu-toggled > #special-menu > #menu-toggle > #menu-toggle-label > .word {
-      color: var(--menu-background-light);
-      text-shadow: none;
-    }
-
-    #menu-gradient {
-      background: radial-gradient(
-        circle at center,
-        var(--menu-gradient-color-1) 0%,
-        var(--menu-gradient-color-2) 25%,
-        var(--menu-gradient-color-3) 50%,
-        var(--menu-gradient-color-4) 100%
-      );
-      border-radius: 50%;
-      height: 0vmax;
-      left: 50%;
-      opacity: 0;
-      position: absolute;
-      top: 50%;
-      transform: translate3d(-50%, -50%, 0px) scale(0.8);
-      transition: height 600ms cubic-bezier(.58, .2, .62, .93), 
-        width 600ms cubic-bezier(.58, .2, .62, .93), 
-        transform 600ms cubic-bezier(.58, .2, .62, .93), 
-        opacity 400ms 200ms;
-      width: 0vmax;
-      z-index: 1;
-    }
-
-    #menu-gradient-blur {
-      backdrop-filter: blur(100px);
-      height: 100%;
-      left: 0;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      transition: opacity 600ms;
-      width: 100%;
-      z-index: 2;
-    }
-
-    #menu-arcs-wrapper {
-      height: 100%;
-      left: 0;
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      transform: scale(0.9);
-      transition: transform 600ms cubic-bezier(.16, .68, .25, .83) 200ms, 
-        opacity 600ms cubic-bezier(.87, .12, .92, .39) 200ms;
-      width: 100%;
-      z-index: 3;
-    }
-
-    .menu-arc {
-      animation: arc-rotation 10s linear infinite;
-      border: 2px solid rgba(236, 229, 220, 0.15);
-      border-radius: 50%;
-      height: 80%;
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      width: 80%;
-    }
-
-    .menu-arc:nth-of-type(2) {
-      animation-duration: 15s;
-      animation-direction: reverse;
-      height: 60%;
-      width: 60%;
-      border-color: rgba(236, 229, 220, 0.1);
-    }
-
-    .menu-arc:nth-of-type(3) {
-      animation-duration: 20s;
-      height: 40%;
-      width: 40%;
-      border-color: rgba(236, 229, 220, 0.08);
-    }
-
-    #menu-items {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      height: 100%;
-      justify-content: center;
-      left: 0;
-      opacity: 0;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-      transform: translate3d(0px, -30px, 0px);
-      transition: opacity 400ms, transform 400ms;
-      width: 100%;
-      z-index: 4;
-    }
-
-    .menu-item {
-      color: #ffffff;
-      cursor: pointer;
-      font-size: 56px;
-      font-weight: 900;
-      font-family: 'Orbitron', monospace;
-      opacity: 0;
-      position: relative;
-      text-decoration: none;
-      transform: translate3d(0px, -20px, 0px);
-      transition: color 300ms, opacity 400ms, transform 400ms;
-      text-shadow: 0 0 20px rgba(0, 206, 209, 0.5);
-    }
-
-    .menu-item::before {
-      background-color: var(--menu-background-light);
-      bottom: -5px;
-      content: '';
-      height: 4px;
-      left: 0;
-      position: absolute;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 300ms;
-      width: 100%;
-      box-shadow: 0 0 10px var(--menu-background-light);
-    }
-
-    .menu-item:hover {
-      color: #00ced1;
-      text-shadow: 0 0 30px rgba(0, 206, 209, 0.8);
-    }
-
-    .menu-item:hover::before {
-      transform: scaleX(1);
-      background-color: #00ced1;
-    }
-
-    /* Main Content */
-    main {
-      position: relative;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* Spacer to push content below hero */
-    .hero-spacer {
-      height: 100%;
-      width: 100%;
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      overflow: hidden;
-      margin: 0;
-      width: 100%;
-      z-index: 1;
-      background: #000000;
-    }
-
-    .hero-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-      opacity: 0.6;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 5;
-      pointer-events: auto;
-    }
-
-    .hero-content h1 {
-      font-family: 'Orbitron', monospace;
-      font-size: 72px;
-      font-weight: 900;
-      background: linear-gradient(90deg, #00ced1, #00ff00, #00ced1, #00ff00);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 20px;
-      text-shadow: none;
-      animation: gradientShift 3s ease-in-out infinite;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-
-    .hero-content h2 {
-      font-family: 'Orbitron', monospace;
-      font-size: 32px;
-      font-weight: 700;
-      color: #00ced1;
-      margin-bottom: 30px;
-      position: relative;
-      display: inline-block;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .hero-content p {
-      font-size: 20px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.9);
-      max-width: 800px;
-      margin: 0 auto 50px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Scroll Down Arrow */
-    .scroll-down-arrow {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      animation: float 3s ease-in-out infinite;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .scroll-down-arrow.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .scroll-down-arrow button {
-      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-      border: 2px solid #00ced1;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 
-        5px 5px 15px rgba(0, 0, 0, 0.4),
-        -5px -5px 15px rgba(255, 255, 255, 0.05),
-        0 0 20px rgba(0, 206, 209, 0.3);
-    }
-
-    .scroll-down-arrow button:hover {
-      transform: scale(1.1);
-      box-shadow: 
-        7px 7px 20px rgba(0, 0, 0, 0.5),
-        -7px -7px 20px rgba(255, 255, 255, 0.06),
-        0 0 30px rgba(0, 206, 209, 0.5);
-      border-color: #00ced1;
-    }
-
-    .scroll-down-arrow button:active {
-      transform: scale(0.95);
-      box-shadow: 
-        inset 3px 3px 8px rgba(0, 0, 0, 0.4),
-        inset -3px -3px 8px rgba(255, 255, 255, 0.05);
-    }
-
-    .scroll-down-arrow svg {
-      width: 24px;
-      height: 24px;
-      fill: #00ced1;
-      filter: drop-shadow(0 0 5px rgba(0, 206, 209, 0.5));
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-    }
-
-    .btn {
-      padding: 18px 40px;
-      font-size: 18px;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
+    
+    .task-card {
       transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-      color: #00ced1;
-      box-shadow: 
-        5px 5px 10px rgba(0, 0, 0, 0.3),
-        -5px -5px 10px rgba(255, 255, 255, 0.05),
-        inset 2px 2px 5px rgba(255, 255, 255, 0.1);
-      border: none;
-    }
-
-    .btn-primary:hover,
-    .btn-secondary:hover {
-      box-shadow: 
-        7px 7px 14px rgba(0, 0, 0, 0.4),
-        -7px -7px 14px rgba(255, 255, 255, 0.06),
-        inset 2px 2px 5px rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-primary:active,
-    .btn-secondary:active {
-      box-shadow: 
-        inset 3px 3px 6px rgba(0, 0, 0, 0.4),
-        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
-    }
-
-    /* Features Section */
-    .features {
-      padding: 100px 0;
-      margin-top: 100%;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
     }
     
-    .features::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .section-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 48px;
-      font-weight: 900;
-      text-align: center;
-      color: #ffffff;
-      margin-bottom: 60px;
-      position: relative;
-      z-index: 300;
-      text-shadow: 
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        -2px -2px 4px rgba(255, 255, 255, 0.1),
-        0 0 25px rgba(0, 206, 209, 0.2);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .feature-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 40px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        8px 8px 16px rgba(0, 0, 0, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .feature-card:hover {
-      box-shadow:
-        12px 12px 24px rgba(0, 0, 0, 0.5),
-        -12px -12px 24px rgba(255, 255, 255, 0.06),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
-      background: #0a0a0a;
-    }
-
-    .feature-card h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 24px;
-      font-weight: 700;
-      color: #00ced1;
-      margin-bottom: 20px;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .feature-card p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    /* About Section */
-    .about {
-      padding: 100px 0;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
+    .task-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
     }
     
-    .about::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      z-index: 300;
-    }
-
-    .about-text h2 {
-      font-family: 'Orbitron', monospace;
-      font-size: 42px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 300;
-      text-shadow: 
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        -2px -2px 4px rgba(255, 255, 255, 0.1),
-        0 0 25px rgba(0, 206, 209, 0.2);
-    }
-
-    .about-text p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: rgba(255, 255, 255, 0.85);
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .mission-box {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 30px;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        8px 8px 16px rgba(0, 0, 0, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .mission-box h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 28px;
-      color: #00ced1;
-      margin-bottom: 15px;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    /* Services Section */
-    .services {
-      padding: 100px 0;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
+    .sidebar-item {
+      transition: all 0.2s ease;
     }
     
-    .services::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .services-grid {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 60px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 300;
-    }
-
-    .service-card {
-      background: #1a1a1a;
-      border-radius: 16px;
-      padding: 40px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        8px 8px 16px rgba(0, 0, 0, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      display: flex;
-      flex-direction: column;
-      width: 350px;
-      max-width: 100%;
-    }
-
-    .service-card.featured {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow:
-        8px 8px 16px rgba(0, 0, 0, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .service-card:hover {
-      box-shadow:
-        12px 12px 24px rgba(0, 0, 0, 0.5),
-        -12px -12px 24px rgba(255, 255, 255, 0.06),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
-      background: #0a0a0a;
-    }
-
-    .service-header {
-      margin-bottom: 20px;
-    }
-
-    .service-header h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 24px;
-      font-weight: 700;
-      color: #00ced1;
-      margin-bottom: 10px;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .service-header h3.green-service {
-      color: #00ff00;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(0, 255, 0, 0.4);
-    }
-
-    .service-header h3.yellow-service {
-      color: #ffff00;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(255, 255, 0, 0.4);
-    }
-
-    .service-header h3.red-service {
-      color: #ff0000;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(255, 0, 0, 0.4);
-    }
-
-    .service-price {
-      font-size: 36px;
-      font-weight: 900;
-      color: #ffffff;
-      font-family: 'Orbitron', monospace;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.5),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .service-description {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 25px;
-    }
-
-    .service-features {
-      list-style: none;
-      margin-bottom: 30px;
-    }
-
-    .service-features li {
-      padding: 10px 0;
-      color: rgba(255, 255, 255, 0.85);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .service-features li:before {
-      content: '✓ ';
-      color: #00ced1;
-      font-weight: bold;
-      margin-right: 10px;
-      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-    }
-
-    .service-card .btn {
-      margin-top: auto;
-      margin-bottom: 0;
-      margin-left: 0;
-      margin-right: auto;
-      width: fit-content;
-    }
-
-    /* How It Works */
-    .how-it-works {
-      padding: 100px 0;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
+    .sidebar-item:hover, .sidebar-item.active {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, transparent 100%);
+      border-left: 3px solid #3b82f6;
     }
     
-    .how-it-works::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 60px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .step-card {
-      text-align: center;
-      padding: 40px;
-      background: #1a1a1a;
-      border-radius: 16px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        8px 8px 16px rgba(0, 0, 0, 0.4),
-        -8px -8px 16px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .step-card:hover {
-      box-shadow:
-        12px 12px 24px rgba(0, 0, 0, 0.5),
-        -12px -12px 24px rgba(255, 255, 255, 0.06),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
-      background: #0a0a0a;
-    }
-
-    .step-number {
-      font-family: 'Orbitron', monospace;
-      font-size: 72px;
-      font-weight: 900;
-      color: #00ced1;
-      margin-bottom: 20px;
-      text-shadow: 
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        -2px -2px 4px rgba(255, 255, 255, 0.1),
-        0 0 30px rgba(0, 206, 209, 0.3);
-    }
-
-    .step-card h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 24px;
-      color: #00ced1;
-      margin-bottom: 15px;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .step-card p {
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.6;
-    }
-
-    /* Why Choose Section */
-    .why-choose {
-      padding: 100px 0;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
+    .modal-backdrop {
+      backdrop-filter: blur(4px);
     }
     
-    .why-choose::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-top: 60px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .benefit-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 30px;
-      background: #1a1a1a;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        6px 6px 12px rgba(0, 0, 0, 0.4),
-        -6px -6px 12px rgba(255, 255, 255, 0.05),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .benefit-card:hover {
-      box-shadow:
-        10px 10px 20px rgba(0, 0, 0, 0.5),
-        -10px -10px 20px rgba(255, 255, 255, 0.06),
-        inset 1px 1px 0 rgba(255, 255, 255, 0.15);
-      background: #0a0a0a;
-    }
-
-    .benefit-icon {
-      font-size: 36px;
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 10px rgba(0, 206, 209, 0.3));
-    }
-
-    .benefit-content h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 20px;
-      color: #00ced1;
-      margin-bottom: 10px;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.4),
-        -1px -1px 2px rgba(255, 255, 255, 0.1);
-    }
-
-    .benefit-content p {
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.6;
-    }
-
-    /* Call to Action Section */
-    .cta-section {
-      padding: 100px 0;
-      background: #000000;
-      position: relative;
-      z-index: 200;
-      pointer-events: auto;
+    .pulse-dot {
+      animation: pulse 2s infinite;
     }
     
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
-    }
-
-    .cta-box {
-      background: #1a1a1a;
-      border-radius: 20px;
-      padding: 80px 60px;
-      text-align: center;
-      position: relative;
-      z-index: 300;
-      overflow: hidden;
-      box-shadow:
-        12px 12px 24px rgba(0, 0, 0, 0.5),
-        -12px -12px 24px rgba(255, 255, 255, 0.05),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .cta-box::before {
-      display: none;
-    }
-
-    .cta-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 48px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 300;
-      text-shadow: 
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        -2px -2px 4px rgba(255, 255, 255, 0.1),
-        0 0 30px rgba(0, 206, 209, 0.2);
-    }
-
-    .cta-description {
-      font-size: 20px;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .cta-buttons-large {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 300;
-    }
-
-    .cta-buttons-large .btn {
-      font-size: 20px;
-      padding: 20px 45px;
-    }
-
-    /* Footer */
-    footer {
-      background: #000000;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 60px 0 30px;
-      position: relative;
-      z-index: 200;
-      box-shadow: 
-        inset 0 2px 4px rgba(255, 255, 255, 0.05);
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
     
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000000;
-      z-index: 200;
+    .category-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
     }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-bottom: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-brand h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 24px;
-      font-weight: 700;
-      color: #00ced1;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 300;
-      text-shadow: 
-        2px 2px 4px rgba(0, 0, 0, 0.5),
-        -1px -1px 2px rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(0, 206, 209, 0.3);
-    }
-
-    .footer-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-contact p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 16px;
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: flex-end;
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      padding: 8px 16px;
-      border-radius: 8px;
-    }
-
-    .footer-links a:hover {
-      color: #00ced1;
-      background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-      box-shadow: 
-        inset 2px 2px 5px rgba(0, 0, 0, 0.3),
-        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
-      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-    }
-
-    .footer-disclaimer {
-      background: #1a1a1a;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 300;
-      box-shadow:
-        inset 3px 3px 6px rgba(0, 0, 0, 0.4),
-        inset -3px -3px 6px rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .footer-disclaimer p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 12px;
-      line-height: 1.6;
-      text-align: center;
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-copyright {
-      text-align: center;
-      position: relative;
-      z-index: 300;
-    }
-
-    .footer-copyright p {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
-      position: relative;
-      z-index: 300;
-    }
-
-    /* Header Link Hover */
-    header nav a:hover {
-      color: #00ced1 !important;
-      text-shadow: 0 0 10px rgba(0, 206, 209, 0.5);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      header nav {
-        display: none !important;
-      }
-    }
-
-    @media (max-width: 768px) {
-      #menu-toggle {
-        right: 20px;
-        top: 20px;
-      }
-
-      #menu-toggle-label {
-        display: none;
-      }
-
-      .menu-item {
-        font-size: 36px;
-      }
-
-      .hero-content {
-        padding-top: 80px;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      .hero-content h1 {
-        font-size: 60px;
-        margin-bottom: 30px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: clip;
-        max-width: 100%;
-      }
-
-      .hero-content h2 {
-        font-size: 24px;
-        margin-bottom: 40px;
-      }
-
-      .hero-content p {
-        font-size: 16px;
-        margin-bottom: 60px;
-      }
-
-      .features {
-        margin-top: 180%;
-      }
-
-      .features-grid,
-      .services-grid,
-      .steps-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .container {
-        padding: 0 20px;
-      }
-
-      .cta-box {
-        padding: 50px 30px;
-      }
-
-      .cta-title {
-        font-size: 32px;
-      }
-
-      .cta-description {
-        font-size: 16px;
-      }
-
-      .cta-buttons-large {
-        flex-direction: column;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .footer-links {
-        align-items: flex-start;
-      }
+    
+    .priority-indicator {
+      width: 4px;
+      border-radius: 2px;
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Special Animated Menu -->
-  <div id="special-menu">
-   <div id="menu-toggle">
-    <div id="menu-toggle-icon"><span></span> <span></span> <span></span>
-    </div>
-    <div id="menu-toggle-label"><span class="word">Open</span> <span class="word">Menu</span>
-    </div>
-   </div>
-   <div id="menu-gradient"></div>
-   <div id="menu-gradient-blur"></div>
-   <div id="menu-arcs-wrapper">
-    <div class="menu-arc"></div>
-    <div class="menu-arc"></div>
-    <div class="menu-arc"></div>
-   </div>
-   <nav id="menu-items"><a href="#home" class="menu-item">Home</a> <a href="#features" class="menu-item">Features</a> <a href="#services" class="menu-item">Services</a> <a href="#about" class="menu-item">About</a> <a href="#contact" class="menu-item">Contact</a>
-   </nav>
-  </div><!-- Scroll Down Arrow -->
-  <div class="scroll-down-arrow" id="scrollArrow"><button onclick="handleArrowClick()" aria-label="Scroll to features">
-    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" transform="rotate(90 12 12)" />
-    </svg></button>
-  </div><!-- Header -->
-  <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 206, 209, 0.2); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); padding: 20px 20px; height: 64px; box-sizing: border-box;">
-   <div style="display: flex; justify-content: space-between; align-items: center; max-width: 100%; margin: 0; padding: 0; height: 100%;">
-    <div id="headerLogo" style="font-family: 'Orbitron', monospace; font-size: 24px; font-weight: 900; background: linear-gradient(90deg, #00ced1, #00ff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 24px;">
-     Frobry AI Hub
-    </div>
-    <nav style="display: none; gap: 30px; align-items: center;"><a href="#home" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Home</a> <a href="#features" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Features</a> <a href="#services" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Services</a> <a href="#about" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">About</a> <a href="#contact" style="color: rgba(255, 255, 255, 0.9); text-decoration: none; font-weight: 600; transition: color 0.3s ease; font-size: 16px;">Contact</a>
-    </nav>
-   </div>
-  </header><!-- Main Content -->
-  <main><!-- Hero Section -->
-   <section class="hero" id="home">
-    <video class="hero-video" autoplay loop muted playsinline><source src="videoback.mp4" type="video/mp4">
-    </video>
-    <div class="container">
-     <div class="hero-content">
-      <h1 id="heroTitle">Frobry AI Hub</h1>
-      <h2 id="heroSubtitle">Real AI Services, Real Results</h2>
-      <p id="heroDescription">Connect your AI projects with opportunities. Get visibility. Grow your business. Simple, actionable services that deliver value from day one.</p>
-      <div class="cta-buttons"><button class="btn btn-primary" id="ctaPrimary" onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })">🚀 Browse Services</button> <button class="btn btn-secondary" id="ctaSecondary">📞 Get Started</button>
+ <body class="h-full bg-[#0a0a0f] text-white overflow-hidden">
+  <div id="app" class="h-full flex"><!-- Sidebar -->
+   <aside id="sidebar" class="w-64 bg-[#0f0f18] border-r border-[#1a1a2e] flex flex-col h-full"><!-- Logo -->
+    <div class="p-6 border-b border-[#1a1a2e]">
+     <h1 id="app-title" class="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Task Manager Pro</h1>
+     <p class="text-xs text-gray-500 mt-1">Gestion intelligente</p>
+    </div><!-- Navigation -->
+    <nav class="flex-1 py-4 overflow-y-auto scrollbar-thin">
+     <div class="px-3 mb-6">
+      <p class="text-[10px] uppercase tracking-wider text-gray-600 px-3 mb-2">Navigation</p><button onclick="setView('dashboard')" id="nav-dashboard" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white">
+       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+       </svg><span id="dashboard-label">Tableau de bord</span> </button> <button onclick="setView('tasks')" id="nav-tasks" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white">
+       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+       </svg><span id="tasks-label">Tâches</span> <span id="tasks-count" class="ml-auto bg-blue-600/20 text-blue-400 text-xs px-2 py-0.5 rounded-full">0</span> </button> <button onclick="setView('completed')" id="nav-completed" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white">
+       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+       </svg><span>Tâches réalisées</span> <span id="completed-count" class="ml-auto bg-green-600/20 text-green-400 text-xs px-2 py-0.5 rounded-full">0</span> </button>
+     </div><!-- Categories -->
+     <div class="px-3 mb-6">
+      <p class="text-[10px] uppercase tracking-wider text-gray-600 px-3 mb-2">Catégories</p><button onclick="filterByCategory('urgent-important')" id="cat-urgent-important" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white"> <span class="w-2 h-2 rounded-full bg-red-500"></span> <span class="truncate">Urgent &amp; Important</span> </button> <button onclick="filterByCategory('urgent-not-important')" id="cat-urgent-not-important" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white"> <span class="w-2 h-2 rounded-full bg-orange-500"></span> <span class="truncate">Urgent &amp; Non important</span> </button> <button onclick="filterByCategory('not-urgent-important')" id="cat-not-urgent-important" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white"> <span class="w-2 h-2 rounded-full bg-blue-500"></span> <span class="truncate">Important &amp; Non urgent</span> </button> <button onclick="filterByCategory('not-urgent-not-important')" id="cat-not-urgent-not-important" class="sidebar-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 hover:text-white"> <span class="w-2 h-2 rounded-full bg-gray-500"></span> <span class="truncate">Non urgent &amp; Non important</span> </button>
+     </div><!-- User Selector -->
+     <div class="px-3">
+      <p class="text-[10px] uppercase tracking-wider text-gray-600 px-3 mb-2">Utilisateur</p>
+      <div class="space-y-1"><button onclick="filterByUser('all')" id="user-all" class="sidebar-item w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-[10px] font-bold">
+         👥
+        </div><span>Tous</span> </button> <button onclick="filterByUser('Bryan')" id="user-Bryan" class="sidebar-item w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-[10px] font-bold">
+         B
+        </div><span>Bryan</span> </button> <button onclick="filterByUser('Ugo')" id="user-Ugo" class="sidebar-item w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-[10px] font-bold">
+         U
+        </div><span>Ugo</span> </button> <button onclick="filterByUser('Iban')" id="user-Iban" class="sidebar-item w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-[10px] font-bold">
+         I
+        </div><span>Iban</span> </button> <button onclick="filterByUser('Thomas')" id="user-Thomas" class="sidebar-item w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-[10px] font-bold">
+         T
+        </div><span>Thomas</span> </button>
+      </div>
+     </div>
+    </nav><!-- Stats Footer -->
+    <div class="p-4 border-t border-[#1a1a2e]">
+     <div class="bg-[#1a1a2e] rounded-lg p-3">
+      <div class="flex items-center justify-between text-xs"><span class="text-gray-500">Total tâches</span> <span id="total-tasks" class="text-white font-semibold">0</span>
+      </div>
+      <div class="flex items-center justify-between text-xs mt-2"><span class="text-gray-500">Complétées</span> <span id="completion-rate" class="text-green-400 font-semibold">0%</span>
       </div>
      </div>
     </div>
-   </section><!-- Spacer to push content below fullscreen hero -->
-   <div class="hero-spacer"></div><!-- Features Section -->
-   <section class="features" id="features">
-    <div class="container">
-     <h2 class="section-title">Core Features</h2>
-     <div class="features-grid">
-      <div class="feature-card">
-       <h3 id="feature1Title">🎯 Curated AI Directory</h3>
-       <p>Showcase your AI projects in our premium directory. Get discovered by investors, partners, and clients actively seeking AI solutions.</p>
-      </div>
-      <div class="feature-card">
-       <h3 id="feature2Title">🤝 Strategic Connections</h3>
-       <p>Connect with the right people at the right time. Our network includes investors, enterprise clients, and strategic partners.</p>
-      </div>
-      <div class="feature-card">
-       <h3 id="feature3Title">📈 Social Amplification</h3>
-       <p>Amplify your reach across multiple channels. We handle the marketing so you can focus on building great AI products.</p>
-      </div>
+   </aside><!-- Main Content -->
+   <main class="flex-1 flex flex-col h-full overflow-hidden"><!-- Top Bar -->
+    <header class="bg-[#0f0f18] border-b border-[#1a1a2e] px-6 py-4">
+     <div class="flex items-center justify-between gap-4"><!-- Search -->
+      <div class="flex-1 max-w-md">
+       <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg><input type="text" id="search-input" placeholder="Rechercher une tâche..." oninput="handleSearch(this.value)" class="w-full bg-[#1a1a2e] border border-[#252536] rounded-lg pl-10 pr-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors">
+       </div>
+      </div><!-- Filters -->
+      <div class="flex items-center gap-2"><select id="filter-status" onchange="applyFilters()" class="bg-[#1a1a2e] border border-[#252536] rounded-lg px-3 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-blue-500"> <option value="all">Tous les statuts</option> <option value="todo">À faire</option> <option value="in-progress">En cours</option> </select> <select id="filter-urgency" onchange="applyFilters()" class="bg-[#1a1a2e] border border-[#252536] rounded-lg px-3 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-blue-500"> <option value="all">Toute urgence</option> <option value="urgent">Urgent</option> <option value="not-urgent">Non urgent</option> </select>
+      </div><!-- Create Button --> <button onclick="openModal()" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors">
+       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+       </svg> Créer une tâche </button>
      </div>
-    </div>
-   </section><!-- Services Section -->
-   <section class="services" id="services">
-    <div class="container">
-     <h2 class="section-title">Simple &amp; Actionable Services</h2>
-     <div class="services-grid">
-      <div class="service-card">
-       <div class="service-header">
-        <h3 class="green-service">AI Project Directory</h3>
-        <div class="service-price">
-         $29/month
+    </header><!-- Content Area -->
+    <div id="content-area" class="flex-1 overflow-y-auto scrollbar-thin p-6"><!-- Dashboard View -->
+     <div id="view-dashboard" class="hidden">
+      <h2 class="text-2xl font-bold mb-6">Tableau de bord</h2><!-- Stats Cards -->
+      <div class="grid grid-cols-4 gap-4 mb-8">
+       <div class="bg-gradient-to-br from-red-500/10 to-red-600/5 border border-red-500/20 rounded-xl p-4">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs text-gray-500">Urgent &amp; Important</p>
+          <p id="stat-urgent-important" class="text-2xl font-bold text-white">0</p>
+         </div>
         </div>
        </div>
-       <p class="service-description">Get your AI project featured in our curated directory</p>
-       <ul class="service-features">
-        <li>Public profile listing</li>
-        <li>Basic social media feature</li>
-        <li>Access to our AI community</li>
-        <li>Monthly opportunity alerts</li>
-       </ul><button class="btn btn-primary">Get Started</button>
-      </div>
-      <div class="service-card featured">
-       <div class="service-header">
-        <h3 class="yellow-service">Growth Amplification</h3>
-        <div class="service-price">
-         $99/month
+       <div class="bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 rounded-xl p-4">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs text-gray-500">Urgent &amp; Non important</p>
+          <p id="stat-urgent-not-important" class="text-2xl font-bold text-white">0</p>
+         </div>
         </div>
        </div>
-       <p class="service-description">Amplify your reach across multiple channels</p>
-       <ul class="service-features">
-        <li>Featured directory placement</li>
-        <li>3 social media posts monthly</li>
-        <li>Priority connection matching</li>
-        <li>Newsletter inclusion</li>
-        <li>Basic analytics report</li>
-       </ul><button class="btn btn-primary">Get Started</button>
-      </div>
-      <div class="service-card">
-       <div class="service-header">
-        <h3 class="red-service">Strategic Partnership</h3>
-        <div class="service-price">
-         $299/month
+       <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 rounded-xl p-4">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs text-gray-500">Important &amp; Non urgent</p>
+          <p id="stat-not-urgent-important" class="text-2xl font-bold text-white">0</p>
+         </div>
         </div>
        </div>
-       <p class="service-description">Complete growth strategy and connections</p>
-       <ul class="service-features">
-        <li>Premium directory featuring</li>
-        <li>8 social media posts monthly</li>
-        <li>Dedicated connection introductions</li>
-        <li>Custom content strategy</li>
-        <li>Priority support</li>
-        <li>Investor/partner matching</li>
-       </ul><button class="btn btn-primary">Get Started</button>
+       <div class="bg-gradient-to-br from-gray-500/10 to-gray-600/5 border border-gray-500/20 rounded-xl p-4">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 rounded-lg bg-gray-500/20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+          </svg>
+         </div>
+         <div>
+          <p class="text-xs text-gray-500">Non urgent &amp; Non important</p>
+          <p id="stat-not-urgent-not-important" class="text-2xl font-bold text-white">0</p>
+         </div>
+        </div>
+       </div>
+      </div><!-- Eisenhower Matrix -->
+      <h3 class="text-lg font-semibold mb-4">Matrice d'Eisenhower</h3>
+      <div class="grid grid-cols-2 gap-4 mb-8">
+       <div class="bg-[#0f0f18] border border-red-500/30 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-red-500"></span>
+         <h4 class="text-sm font-medium text-red-400">Faire imm��diatement</h4>
+        </div>
+        <div id="matrix-urgent-important" class="space-y-2 min-h-[100px]"></div>
+       </div>
+       <div class="bg-[#0f0f18] border border-blue-500/30 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-blue-500"></span>
+         <h4 class="text-sm font-medium text-blue-400">Planifier</h4>
+        </div>
+        <div id="matrix-not-urgent-important" class="space-y-2 min-h-[100px]"></div>
+       </div>
+       <div class="bg-[#0f0f18] border border-orange-500/30 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-orange-500"></span>
+         <h4 class="text-sm font-medium text-orange-400">Déléguer</h4>
+        </div>
+        <div id="matrix-urgent-not-important" class="space-y-2 min-h-[100px]"></div>
+       </div>
+       <div class="bg-[#0f0f18] border border-gray-500/30 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-gray-500"></span>
+         <h4 class="text-sm font-medium text-gray-400">Éliminer</h4>
+        </div>
+        <div id="matrix-not-urgent-not-important" class="space-y-2 min-h-[100px]"></div>
+       </div>
+      </div>
+     </div><!-- Tasks View -->
+     <div id="view-tasks" class="hidden">
+      <div class="flex items-center justify-between mb-6">
+       <h2 class="text-2xl font-bold">Tâches actives</h2><button onclick="clearCategoryFilter()" id="clear-filter-btn" class="hidden text-sm text-blue-400 hover:text-blue-300">Effacer le filtre</button>
+      </div>
+      <div id="tasks-container" class="space-y-3"></div>
+      <div id="empty-tasks" class="hidden flex flex-col items-center justify-center py-16">
+       <div class="w-16 h-16 rounded-full bg-[#1a1a2e] flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+        </svg>
+       </div>
+       <p class="text-gray-500 text-sm">Aucune tâche active</p><button onclick="openModal()" class="mt-4 text-blue-400 hover:text-blue-300 text-sm">Créer votre première tâche</button>
+      </div>
+     </div><!-- Completed View -->
+     <div id="view-completed" class="hidden">
+      <h2 class="text-2xl font-bold mb-6">Tâches réalisées</h2>
+      <div id="completed-container" class="space-y-3"></div>
+      <div id="empty-completed" class="hidden flex flex-col items-center justify-center py-16">
+       <div class="w-16 h-16 rounded-full bg-[#1a1a2e] flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+       </div>
+       <p class="text-gray-500 text-sm">Aucune tâche complétée</p>
       </div>
      </div>
     </div>
-   </section><!-- How It Works -->
-   <section class="how-it-works">
-    <div class="container">
-     <h2 class="section-title">How It Works</h2>
-     <div class="steps-grid">
-      <div class="step-card">
-       <div class="step-number">
-        1
-       </div>
-       <h3>Choose Your Service</h3>
-       <p>Select from our straightforward service packages</p>
+   </main>
+  </div><!-- Create/Edit Modal -->
+  <div id="task-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+   <div class="absolute inset-0 bg-black/60 modal-backdrop" onclick="closeModal()"></div>
+   <div class="relative bg-[#0f0f18] border border-[#252536] rounded-2xl w-full max-w-lg mx-4 shadow-2xl">
+    <div class="p-6 border-b border-[#252536]">
+     <h3 id="modal-title" class="text-lg font-semibold">Créer une tâche</h3>
+    </div>
+    <form id="task-form" onsubmit="handleSubmit(event)" class="p-6 space-y-4"><input type="hidden" id="task-id">
+     <div><label for="task-title" class="block text-sm text-gray-400 mb-1.5">Titre *</label> <input type="text" id="task-title" required placeholder="Ex: Finaliser le rapport Q4" class="w-full bg-[#1a1a2e] border border-[#252536] rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500">
+     </div>
+     <div><label for="task-description" class="block text-sm text-gray-400 mb-1.5">Description</label> <textarea id="task-description" rows="3" placeholder="Détails de la tâche..." class="w-full bg-[#1a1a2e] border border-[#252536] rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 resize-none"></textarea>
+     </div>
+     <div class="grid grid-cols-2 gap-4">
+      <div><label for="task-user" class="block text-sm text-gray-400 mb-1.5">Assigné à</label> <select id="task-user" class="w-full bg-[#1a1a2e] border border-[#252536] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500"> <option value="Bryan">Bryan</option> <option value="Ugo">Ugo</option> <option value="Iban">Iban</option> <option value="Thomas">Thomas</option> </select>
       </div>
-      <div class="step-card">
-       <div class="step-number">
-        2
-       </div>
-       <h3>Submit Your Project</h3>
-       <p>Share basic details about your AI project or needs</p>
-      </div>
-      <div class="step-card">
-       <div class="step-number">
-        3
-       </div>
-       <h3>Get Results</h3>
-       <p>We handle the visibility and connections - you focus on your work</p>
+      <div><label for="task-due-date" class="block text-sm text-gray-400 mb-1.5">Date limite</label> <input type="date" id="task-due-date" class="w-full bg-[#1a1a2e] border border-[#252536] rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
       </div>
      </div>
-    </div>
-   </section><!-- Why Choose Section -->
-   <section class="why-choose">
-    <div class="container">
-     <h2 class="section-title">Why Choose Frobry AI Hub</h2>
-     <div class="benefits-grid">
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        🎯
-       </div>
-       <div class="benefit-content">
-        <h3>No Complex Setup</h3>
-        <p>Get started in minutes, not months</p>
-       </div>
-      </div>
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        🤝
-       </div>
-       <div class="benefit-content">
-        <h3>Real Connections</h3>
-        <p>Genuine introductions to relevant partners</p>
-       </div>
-      </div>
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        📈
-       </div>
-       <div class="benefit-content">
-        <h3>Measurable Growth</h3>
-        <p>Clear visibility and opportunity tracking</p>
-       </div>
-      </div>
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        💼
-       </div>
-       <div class="benefit-content">
-        <h3>Business Focused</h3>
-        <p>Services designed for actual business outcomes</p>
-       </div>
-      </div>
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        🌍
-       </div>
-       <div class="benefit-content">
-        <h3>Global Network</h3>
-        <p>Access to international AI ecosystem</p>
-       </div>
-      </div>
-      <div class="benefit-card">
-       <div class="benefit-icon">
-        ⚡
-       </div>
-       <div class="benefit-content">
-        <h3>Immediate Impact</h3>
-        <p>See results from your first month</p>
-       </div>
-      </div>
+     <div class="flex gap-6"><label class="flex items-center gap-3 cursor-pointer">
+       <div class="relative"><input type="checkbox" id="task-urgent" class="sr-only peer">
+        <div class="w-10 h-6 bg-[#1a1a2e] rounded-full peer peer-checked:bg-red-600 transition-colors"></div>
+        <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full peer-checked:translate-x-4 transition-transform"></div>
+       </div><span class="text-sm text-gray-300">Urgent</span> </label> <label class="flex items-center gap-3 cursor-pointer">
+       <div class="relative"><input type="checkbox" id="task-important" class="sr-only peer">
+        <div class="w-10 h-6 bg-[#1a1a2e] rounded-full peer peer-checked:bg-blue-600 transition-colors"></div>
+        <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full peer-checked:translate-x-4 transition-transform"></div>
+       </div><span class="text-sm text-gray-300">Important</span> </label>
      </div>
-    </div>
-   </section><!-- Call to Action Section -->
-   <section class="cta-section" id="contact">
-    <div class="container">
-     <div class="cta-box">
-      <h2 class="cta-title">Ready to Grow Your AI Project?</h2>
-      <p class="cta-description">Choose your service package and start connecting with opportunities today!</p>
-      <div class="cta-buttons-large"><button class="btn btn-primary">🎯 View Service Packages</button> <button class="btn btn-secondary">📧 Contact Our Team</button> <button class="btn btn-secondary">💬 Quick Consultation</button>
-      </div>
+     <div class="flex justify-end gap-3 pt-4"><button type="button" onclick="closeModal()" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">Annuler</button> <button type="submit" id="submit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"> <span id="submit-text">Créer</span>
+       <svg id="submit-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewbox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+       </svg></button>
      </div>
-    </div>
-   </section><!-- About Section -->
-   <section class="about" id="about">
-    <div class="container">
-     <div class="about-content">
-      <div class="about-text">
-       <h2 id="aboutTitle">About Frobry AI Hub</h2>
-       <p id="aboutDescription">We bridge the gap between AI innovation and business growth through simple, effective services that actually work.</p>
-      </div>
-      <div class="mission-box">
-       <h3 id="missionTitle">Our Mission</h3>
-       <p id="missionDescription">To create the most accessible platform for AI professionals and businesses to connect, collaborate, and grow - without the complexity.</p>
-      </div>
+    </form>
+   </div>
+  </div><!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+   <div class="absolute inset-0 bg-black/60 modal-backdrop" onclick="closeDeleteModal()"></div>
+   <div class="relative bg-[#0f0f18] border border-[#252536] rounded-2xl w-full max-w-sm mx-4 shadow-2xl p-6">
+    <div class="text-center">
+     <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-4">
+      <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+      </svg>
      </div>
-    </div>
-   </section>
-  </main><!-- Footer -->
-  <footer>
-   <div class="container">
-    <div class="footer-content">
-     <div class="footer-brand">
-      <h3>Frobry AI Hub - Real AI Services</h3>
-      <div class="footer-contact">
-       <p>📧 contact@frobry.com</p>
-       <p>🌐 www.frobry.com</p>
-      </div>
+     <h3 class="text-lg font-semibold mb-2">Supprimer cette tâche ?</h3>
+     <p class="text-sm text-gray-500 mb-6">Cette action est irréversible.</p>
+     <div class="flex gap-3"><button onclick="closeDeleteModal()" class="flex-1 px-4 py-2.5 text-sm text-gray-400 hover:text-white border border-[#252536] rounded-lg transition-colors">Annuler</button> <button onclick="confirmDelete()" id="confirm-delete-btn" class="flex-1 px-4 py-2.5 text-sm text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors flex items-center justify-center gap-2"> <span>Supprimer</span>
+       <svg id="delete-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewbox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+       </svg></button>
      </div>
-     <div class="footer-links"><a href="#home">Home</a> <a href="#services">Services</a> <a href="#features">Directory</a> <a href="#services">Pricing</a> <a href="#about">Contact</a>
-     </div>
-    </div>
-    <div class="footer-disclaimer">
-     <p>*Frobry AI Hub provides visibility and connection services for AI projects. We facilitate introductions but outcomes depend on individual projects. All services are delivered as described in our service agreements.*</p>
-    </div>
-    <div class="footer-copyright">
-     <p>© 2025 Frobry AI Hub. All rights reserved.</p>
     </div>
    </div>
-  </footer>
+  </div><!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+   <div class="bg-[#1a1a2e] border border-[#252536] rounded-lg px-4 py-3 shadow-xl flex items-center gap-3">
+    <svg id="toast-icon-success" class="hidden w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <svg id="toast-icon-error" class="hidden w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg><span id="toast-message" class="text-sm text-white"></span>
+   </div>
+  </div>
   <script>
+    // State
+    let allTasks = [];
+    let currentView = 'dashboard';
+    let currentUserFilter = 'all';
+    let currentCategoryFilter = null;
+    let searchQuery = '';
+    let taskToDelete = null;
+    
     // Default Config
     const defaultConfig = {
-      background_color: '#000000',
-      surface_color: '#1a1a1a',
+      app_title: 'Frobry Manager Pro',
+      dashboard_label: 'Tableau de bord',
+      tasks_label: 'Tâches',
+      background_color: '#0a0a0f',
+      surface_color: '#0f0f18',
       text_color: '#ffffff',
-      primary_action_color: '#00ced1',
-      secondary_action_color: '#ffffff',
-      font_family: 'Inter',
-      font_size: 16,
-      hero_title: 'Frobry AI Hub',
-      hero_subtitle: 'Real AI Services, Real Results',
-      hero_description: 'Connect your AI projects with opportunities. Get visibility. Grow your business. Simple, actionable services that deliver value from day one.',
-      cta_primary: '🚀 Browse Services',
-      cta_secondary: '📞 Get Started',
-      feature_1_title: '🎯 Curated AI Directory',
-      feature_2_title: '🤝 Strategic Connections',
-      feature_3_title: '📈 Social Amplification',
-      about_title: 'About Frobry AI Hub',
-      about_description: 'We bridge the gap between AI innovation and business growth through simple, effective services that actually work.',
-      mission_title: 'Our Mission',
-      mission_description: 'To create the most accessible platform for AI professionals and businesses to connect, collaborate, and grow - without the complexity.'
+      primary_action_color: '#3b82f6',
+      secondary_action_color: '#6b7280'
     };
-
-    // Menu Toggle
-    const menuButton = document.getElementById("menu-toggle");
-
-    const toggleMenu = () => {
-      document.body.classList.toggle("menu-toggled");
-    };
-
-    menuButton.onclick = () => toggleMenu();
-
-    // Close menu when clicking on menu items
-    document.querySelectorAll('.menu-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMenu();
-        
-        // Smooth scroll to section
-        const targetId = item.getAttribute('href');
-        if (targetId === '#home') {
-          // Scroll to top of page for home
-          setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }, 600);
-        } else {
-          const targetSection = document.querySelector(targetId);
-          if (targetSection) {
-            setTimeout(() => {
-              targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 600);
-          }
-        }
-      });
-    });
-
-    // Smooth Scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        if (!this.classList.contains('menu-item')) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          if (targetId === '#home') {
-            // Scroll to top of page for home
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            const target = document.querySelector(targetId);
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
-        }
-      });
-    });
-
-    // Button Click Effects
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        const ripple = document.createElement('div');
-        ripple.style.position = 'absolute';
-        ripple.style.width = '20px';
-        ripple.style.height = '20px';
-        ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-        ripple.style.borderRadius = '50%';
-        ripple.style.transform = 'translate(-50%, -50%)';
-        ripple.style.animation = 'ripple 0.6s ease-out';
-        ripple.style.left = e.offsetX + 'px';
-        ripple.style.top = e.offsetY + 'px';
-        ripple.style.pointerEvents = 'none';
-        
-        this.style.position = 'relative';
-        this.appendChild(ripple);
-        
-        setTimeout(() => ripple.remove(), 600);
-      });
-    });
-
-    const rippleStyle = document.createElement('style');
-    rippleStyle.textContent = `
-      @keyframes ripple {
-        to {
-          width: 200px;
-          height: 200px;
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(rippleStyle);
-
-    // Prevent flash on load
-    document.body.classList.add('loaded');
-
-    // Auto-resize mobile hero title to fit on one line
-    function resizeMobileTitle() {
-      if (window.innerWidth <= 768) {
-        const heroTitle = document.getElementById('heroTitle');
-        const container = heroTitle.parentElement;
-        const containerWidth = container.offsetWidth - 40; // Account for padding
-        
-        let fontSize = 60;
-        heroTitle.style.fontSize = fontSize + 'px';
-        
-        // Reduce font size until text fits
-        while (heroTitle.scrollWidth > containerWidth && fontSize > 20) {
-          fontSize -= 0.5;
-          heroTitle.style.fontSize = fontSize + 'px';
-        }
-      } else {
-        // Reset to default for desktop
-        const heroTitle = document.getElementById('heroTitle');
-        heroTitle.style.fontSize = '';
-      }
-    }
-
-    // Run on load and resize
-    window.addEventListener('load', resizeMobileTitle);
-    window.addEventListener('resize', resizeMobileTitle);
-    resizeMobileTitle();
-
-    // Handle arrow click
-    function handleArrowClick() {
-      document.getElementById('scrollArrow').classList.remove('visible');
-      document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-    }
     
-    // Show/hide scroll arrow based on scroll position and cursor
-    const scrollArrow = document.querySelector('.scroll-down-arrow');
-    const heroSection = document.querySelector('.hero');
-    
-    // Track mouse position and scroll position
-    document.addEventListener('mousemove', (e) => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      
-      // Only show arrow if we're at the top of the page (hero is visible)
-      if (scrollY < window.innerHeight * 0.5) {
-        const heroRect = heroSection.getBoundingClientRect();
-        const arrowRect = scrollArrow.getBoundingClientRect();
+    // Element SDK Setup
+    const elementApi = {
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const title = document.getElementById('app-title');
+        const dashboardLabel = document.getElementById('dashboard-label');
+        const tasksLabel = document.getElementById('tasks-label');
         
-        // Check if mouse is over hero section
-        const overHero = (
-          e.clientX >= heroRect.left &&
-          e.clientX <= heroRect.right &&
-          e.clientY >= heroRect.top &&
-          e.clientY <= heroRect.bottom
-        );
+        if (title) title.textContent = config.app_title || defaultConfig.app_title;
+        if (dashboardLabel) dashboardLabel.textContent = config.dashboard_label || defaultConfig.dashboard_label;
+        if (tasksLabel) tasksLabel.textContent = config.tasks_label || defaultConfig.tasks_label;
         
-        // Check if mouse is over arrow
-        const overArrow = (
-          e.clientX >= arrowRect.left &&
-          e.clientX <= arrowRect.right &&
-          e.clientY >= arrowRect.top &&
-          e.clientY <= arrowRect.bottom
-        );
-        
-        // Show arrow if over hero or over arrow itself
-        if (overHero || overArrow) {
-          scrollArrow.classList.add('visible');
-        } else {
-          scrollArrow.classList.remove('visible');
-        }
-      } else {
-        // Hide arrow when scrolled past hero
-        scrollArrow.classList.remove('visible');
-      }
-    });
-    
-    // Also hide arrow on scroll
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY >= window.innerHeight * 0.5) {
-        scrollArrow.classList.remove('visible');
-      }
-    });
-
-    // Element SDK Implementation
-    async function onConfigChange(config) {
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseSize = config.font_size || defaultConfig.font_size;
-      const baseFontStack = 'Arial, sans-serif';
-
-      // Apply colors
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
-      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-
-      document.body.style.background = backgroundColor;
-      document.body.style.color = textColor;
-      
-      // Update all surface colors
-      document.querySelectorAll('.feature-card, .service-card, .step-card, .benefit-card, .mission-box, .cta-box, .footer-disclaimer').forEach(el => {
-        el.style.background = surfaceColor;
-      });
-
-      // Update primary action colors (buttons and accents)
-      document.querySelectorAll('.btn-primary').forEach(btn => {
-        btn.style.color = primaryColor;
-        btn.style.borderColor = `rgba(${parseInt(primaryColor.slice(1,3), 16)}, ${parseInt(primaryColor.slice(3,5), 16)}, ${parseInt(primaryColor.slice(5,7), 16)}, 0.3)`;
-      });
-
-      document.querySelectorAll('.btn-secondary').forEach(btn => {
-        btn.style.color = secondaryColor;
-        btn.style.borderColor = `rgba(${parseInt(secondaryColor.slice(1,3), 16)}, ${parseInt(secondaryColor.slice(3,5), 16)}, ${parseInt(secondaryColor.slice(5,7), 16)}, 0.1)`;
-      });
-
-      // Update accent colors (headings, logo, etc.) - excluding service titles
-      document.querySelectorAll('.feature-card h3, .step-card h3, .benefit-content h3, .mission-box h3, .footer-brand h3, .step-number, .hero-content h2').forEach(el => {
-        el.style.color = primaryColor;
-      });
-
-      // Update menu toggle colors
-      document.querySelectorAll('#menu-toggle-icon > span').forEach(span => {
-        span.style.backgroundColor = primaryColor;
-      });
-
-      document.querySelectorAll('#menu-toggle-label > .word').forEach(word => {
-        word.style.color = primaryColor;
-      });
-
-      // Service titles keep their individual colors
-      const greenService = document.querySelector('.green-service');
-      const yellowService = document.querySelector('.yellow-service');
-      const redService = document.querySelector('.red-service');
-      
-      if (greenService) {
-        greenService.style.color = '#00ff00';
-        greenService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 255, 0, 0.4)';
-      }
-      if (yellowService) {
-        yellowService.style.color = '#ffff00';
-        yellowService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 0, 0.4)';
-      }
-      if (redService) {
-        redService.style.color = '#ff0000';
-        redService.style.textShadow = '2px 2px 4px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 0, 0, 0.4)';
-      }
-
-      // Apply fonts
-      document.getElementById('heroTitle').style.fontFamily = `${customFont}, 'Orbitron', ${baseFontStack}`;
-      document.getElementById('heroSubtitle').style.fontFamily = `${customFont}, 'Orbitron', ${baseFontStack}`;
-      document.getElementById('heroDescription').style.fontFamily = `${customFont}, ${baseFontStack}`;
-      
-      // Apply font sizes
-      document.getElementById('heroTitle').style.fontSize = `${baseSize * 4.5}px`;
-      document.getElementById('heroSubtitle').style.fontSize = `${baseSize * 2}px`;
-      document.getElementById('heroDescription').style.fontSize = `${baseSize * 1.25}px`;
-
-      // Update editable text content
-      document.getElementById('heroTitle').textContent = config.hero_title || defaultConfig.hero_title;
-      document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-      document.getElementById('heroDescription').textContent = config.hero_description || defaultConfig.hero_description;
-      document.getElementById('ctaPrimary').textContent = config.cta_primary || defaultConfig.cta_primary;
-      document.getElementById('ctaSecondary').textContent = config.cta_secondary || defaultConfig.cta_secondary;
-      document.getElementById('feature1Title').textContent = config.feature_1_title || defaultConfig.feature_1_title;
-      document.getElementById('feature2Title').textContent = config.feature_2_title || defaultConfig.feature_2_title;
-      document.getElementById('feature3Title').textContent = config.feature_3_title || defaultConfig.feature_3_title;
-      document.getElementById('aboutTitle').textContent = config.about_title || defaultConfig.about_title;
-      document.getElementById('aboutDescription').textContent = config.about_description || defaultConfig.about_description;
-      document.getElementById('missionTitle').textContent = config.mission_title || defaultConfig.mission_title;
-      document.getElementById('missionDescription').textContent = config.mission_description || defaultConfig.mission_description;
-    }
-
-    // Apply initial config immediately to prevent flash
-    onConfigChange(defaultConfig);
-
-    // Initialize Element SDK
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig: defaultConfig,
-        onConfigChange: onConfigChange,
-        mapToCapabilities: (config) => ({
-          recolorables: [
-            {
-              get: () => config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                window.elementSdk.setConfig({ background_color: value });
-              }
-            },
-            {
-              get: () => config.surface_color || defaultConfig.surface_color,
-              set: (value) => {
-                config.surface_color = value;
-                window.elementSdk.setConfig({ surface_color: value });
-              }
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                window.elementSdk.setConfig({ text_color: value });
-              }
-            },
-            {
-              get: () => config.primary_action_color || defaultConfig.primary_action_color,
-              set: (value) => {
-                config.primary_action_color = value;
-                window.elementSdk.setConfig({ primary_action_color: value });
-              }
-            },
-            {
-              get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
-              set: (value) => {
-                config.secondary_action_color = value;
-                window.elementSdk.setConfig({ secondary_action_color: value });
-              }
-            }
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              window.elementSdk.setConfig({ font_family: value });
-            }
+        // Apply colors
+        document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+        document.getElementById('sidebar').style.backgroundColor = config.surface_color || defaultConfig.surface_color;
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
           },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              window.elementSdk.setConfig({ font_size: value });
-            }
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); }
           }
-        }),
-        mapToEditPanelValues: (config) => new Map([
-          ['hero_title', config.hero_title || defaultConfig.hero_title],
-          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
-          ['hero_description', config.hero_description || defaultConfig.hero_description],
-          ['cta_primary', config.cta_primary || defaultConfig.cta_primary],
-          ['cta_secondary', config.cta_secondary || defaultConfig.cta_secondary],
-          ['feature_1_title', config.feature_1_title || defaultConfig.feature_1_title],
-          ['feature_2_title', config.feature_2_title || defaultConfig.feature_2_title],
-          ['feature_3_title', config.feature_3_title || defaultConfig.feature_3_title],
-          ['about_title', config.about_title || defaultConfig.about_title],
-          ['about_description', config.about_description || defaultConfig.about_description],
-          ['mission_title', config.mission_title || defaultConfig.mission_title],
-          ['mission_description', config.mission_description || defaultConfig.mission_description]
-        ])
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['app_title', config.app_title || defaultConfig.app_title],
+        ['dashboard_label', config.dashboard_label || defaultConfig.dashboard_label],
+        ['tasks_label', config.tasks_label || defaultConfig.tasks_label]
+      ])
+    };
+    
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allTasks = data;
+        updateUI();
+      }
+    };
+    
+    // Initialize SDKs
+    async function init() {
+      if (window.elementSdk) {
+        window.elementSdk.init(elementApi);
+      }
+      
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          showToast('Erreur de connexion aux données', 'error');
+        }
+      }
+      
+      setView('dashboard');
+    }
+    
+    // View Management
+    function setView(view) {
+      currentView = view;
+      currentCategoryFilter = null;
+      
+      document.querySelectorAll('[id^="view-"]').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`view-${view}`).classList.remove('hidden');
+      
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+      document.getElementById(`nav-${view}`)?.classList.add('active');
+      
+      document.getElementById('clear-filter-btn').classList.add('hidden');
+      
+      updateUI();
+    }
+    
+    // Category Helpers
+    function getCategory(task) {
+      const isUrgent = task.is_urgent === true || task.is_urgent === 'true' || task.is_urgent === 1;
+      const isImportant = task.is_important === true || task.is_important === 'true' || task.is_important === 1;
+      
+      if (isUrgent && isImportant) return 'urgent-important';
+      if (isUrgent && !isImportant) return 'urgent-not-important';
+      if (!isUrgent && isImportant) return 'not-urgent-important';
+      return 'not-urgent-not-important';
+    }
+    
+    function getCategoryLabel(category) {
+      const labels = {
+        'urgent-important': 'Urgent & Important',
+        'urgent-not-important': 'Urgent & Non important',
+        'not-urgent-important': 'Important & Non urgent',
+        'not-urgent-not-important': 'Non urgent & Non important'
+      };
+      return labels[category] || category;
+    }
+    
+    function getCategoryColor(category) {
+      const colors = {
+        'urgent-important': 'bg-red-500',
+        'urgent-not-important': 'bg-orange-500',
+        'not-urgent-important': 'bg-blue-500',
+        'not-urgent-not-important': 'bg-gray-500'
+      };
+      return colors[category] || 'bg-gray-500';
+    }
+    
+    function getPriorityColor(category) {
+      const colors = {
+        'urgent-important': 'bg-red-500',
+        'urgent-not-important': 'bg-orange-500',
+        'not-urgent-important': 'bg-blue-500',
+        'not-urgent-not-important': 'bg-gray-600'
+      };
+      return colors[category] || 'bg-gray-600';
+    }
+    
+    function calculatePriority(task) {
+      const isUrgent = task.is_urgent === true || task.is_urgent === 'true' || task.is_urgent === 1;
+      const isImportant = task.is_important === true || task.is_important === 'true' || task.is_important === 1;
+      
+      let priority = 0;
+      if (isUrgent) priority += 2;
+      if (isImportant) priority += 1;
+      return priority;
+    }
+    
+    function getAIRecommendation(task) {
+      if (getCategory(task) !== 'not-urgent-not-important') return null;
+      
+      const daysSinceCreation = Math.floor((Date.now() - new Date(task.created_at).getTime()) / (1000 * 60 * 60 * 24));
+      const hasDueDate = !!task.due_date;
+      
+      if (daysSinceCreation > 7 && !hasDueDate) {
+        return { action: 'Supprimer', reason: 'Tâche inactive depuis +7 jours sans échéance' };
+      }
+      if (daysSinceCreation > 14) {
+        return { action: 'Supprimer', reason: 'Tâche inactive depuis +14 jours' };
+      }
+      return { action: 'Conserver', reason: 'Tâche récente ou avec échéance définie' };
+    }
+    
+    // Filtering
+    function filterByUser(user) {
+      currentUserFilter = user;
+      
+      document.querySelectorAll('[id^="user-"]').forEach(el => el.classList.remove('active'));
+      document.getElementById(`user-${user}`)?.classList.add('active');
+      
+      updateUI();
+    }
+    
+    function filterByCategory(category) {
+      currentCategoryFilter = category;
+      currentView = 'tasks';
+      
+      // Update view display
+      document.querySelectorAll('[id^="view-"]').forEach(el => el.classList.add('hidden'));
+      document.getElementById('view-tasks').classList.remove('hidden');
+      
+      // Update nav highlighting
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+      
+      // Show clear filter button
+      document.getElementById('clear-filter-btn').classList.remove('hidden');
+      
+      updateUI();
+    }
+    
+    function clearCategoryFilter() {
+      currentCategoryFilter = null;
+      document.getElementById('clear-filter-btn').classList.add('hidden');
+      updateUI();
+    }
+    
+    function handleSearch(query) {
+      searchQuery = query.toLowerCase();
+      updateUI();
+    }
+    
+    function applyFilters() {
+      updateUI();
+    }
+    
+    function getFilteredTasks(tasks, includeCompleted = false) {
+      // Start with status filter
+      let filtered = tasks.filter(t => includeCompleted ? t.status === 'completed' : t.status !== 'completed' && t.status !== 'deleted');
+      
+      // Apply category filter STRICTLY (must match exact category)
+      if (currentCategoryFilter) {
+        filtered = filtered.filter(t => {
+          const taskCategory = getCategory(t);
+          return taskCategory === currentCategoryFilter;
+        });
+      }
+      
+      // Apply user filter
+      if (currentUserFilter !== 'all') {
+        filtered = filtered.filter(t => t.assigned_user === currentUserFilter);
+      }
+      
+      // Apply search filter
+      if (searchQuery) {
+        filtered = filtered.filter(t => 
+          t.title.toLowerCase().includes(searchQuery) || 
+          (t.description && t.description.toLowerCase().includes(searchQuery))
+        );
+      }
+      
+      // Apply status filter from dropdown
+      const statusFilter = document.getElementById('filter-status')?.value;
+      if (statusFilter && statusFilter !== 'all') {
+        filtered = filtered.filter(t => t.status === statusFilter);
+      }
+      
+      // Apply urgency filter from dropdown
+      const urgencyFilter = document.getElementById('filter-urgency')?.value;
+      if (urgencyFilter && urgencyFilter !== 'all') {
+        if (urgencyFilter === 'urgent') {
+          filtered = filtered.filter(t => t.is_urgent === true || t.is_urgent === 'true' || t.is_urgent === 1);
+        } else {
+          filtered = filtered.filter(t => t.is_urgent !== true && t.is_urgent !== 'true' && t.is_urgent !== 1);
+        }
+      }
+      
+      // Sort by priority (highest first)
+      filtered.sort((a, b) => calculatePriority(b) - calculatePriority(a));
+      
+      return filtered;
+    }
+    
+    // UI Update
+    function updateUI() {
+      const activeTasks = allTasks.filter(t => t.status !== 'completed' && t.status !== 'deleted');
+      const completedTasks = allTasks.filter(t => t.status === 'completed');
+      
+      // Update counts
+      document.getElementById('tasks-count').textContent = activeTasks.length;
+      document.getElementById('completed-count').textContent = completedTasks.length;
+      document.getElementById('total-tasks').textContent = allTasks.filter(t => t.status !== 'deleted').length;
+      
+      const total = allTasks.filter(t => t.status !== 'deleted').length;
+      const rate = total > 0 ? Math.round((completedTasks.length / total) * 100) : 0;
+      document.getElementById('completion-rate').textContent = `${rate}%`;
+      
+      // Update stats
+      const stats = {
+        'urgent-important': activeTasks.filter(t => getCategory(t) === 'urgent-important').length,
+        'urgent-not-important': activeTasks.filter(t => getCategory(t) === 'urgent-not-important').length,
+        'not-urgent-important': activeTasks.filter(t => getCategory(t) === 'not-urgent-important').length,
+        'not-urgent-not-important': activeTasks.filter(t => getCategory(t) === 'not-urgent-not-important').length
+      };
+      
+      document.getElementById('stat-urgent-important').textContent = stats['urgent-important'];
+      document.getElementById('stat-urgent-not-important').textContent = stats['urgent-not-important'];
+      document.getElementById('stat-not-urgent-important').textContent = stats['not-urgent-important'];
+      document.getElementById('stat-not-urgent-not-important').textContent = stats['not-urgent-not-important'];
+      
+      // Highlight category filter if active
+      document.querySelectorAll('[id^="cat-"]').forEach(el => el.classList.remove('active'));
+      if (currentCategoryFilter) {
+        const categoryBtn = document.getElementById(`cat-${currentCategoryFilter}`);
+        if (categoryBtn) {
+          categoryBtn.classList.add('active');
+        }
+      }
+      
+      // Update views based on current view
+      if (currentView === 'dashboard') {
+        updateDashboard(activeTasks);
+      } else if (currentView === 'tasks') {
+        updateTasksList(getFilteredTasks(allTasks, false));
+      } else if (currentView === 'completed') {
+        updateCompletedList(getFilteredTasks(allTasks, true));
+      }
+    }
+    
+    function updateDashboard(tasks) {
+      const categories = ['urgent-important', 'not-urgent-important', 'urgent-not-important', 'not-urgent-not-important'];
+      
+      categories.forEach(cat => {
+        const container = document.getElementById(`matrix-${cat}`);
+        const catTasks = tasks.filter(t => getCategory(t) === cat).slice(0, 3);
+        
+        if (catTasks.length === 0) {
+          container.innerHTML = '<p class="text-xs text-gray-600 italic">Aucune tâche</p>';
+        } else {
+          container.innerHTML = catTasks.map(t => `
+            <div class="bg-[#1a1a2e] rounded-lg p-2 text-xs">
+              <p class="text-white truncate">${escapeHtml(t.title)}</p>
+              <p class="text-gray-500 mt-1">${t.assigned_user}</p>
+            </div>
+          `).join('');
+        }
       });
     }
+    
+    function updateTasksList(tasks) {
+      const container = document.getElementById('tasks-container');
+      const empty = document.getElementById('empty-tasks');
+      
+      if (tasks.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      
+      container.innerHTML = tasks.map(task => {
+        const category = getCategory(task);
+        const aiRec = getAIRecommendation(task);
+        const dueDate = task.due_date ? new Date(task.due_date).toLocaleDateString('fr-FR') : null;
+        
+        return `
+          <div class="task-card bg-[#0f0f18] border border-[#252536] rounded-xl p-4 flex gap-4" data-task-id="${task.__backendId}">
+            <div class="priority-indicator ${getPriorityColor(category)}"></div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <h3 class="font-medium text-white truncate">${escapeHtml(task.title)}</h3>
+                    <span class="category-badge ${getCategoryColor(category)} text-white px-2 py-0.5 rounded-full uppercase font-medium flex-shrink-0">${getCategoryLabel(category)}</span>
+                  </div>
+                  ${task.description ? `<p class="text-sm text-gray-500 line-clamp-2 mb-2">${escapeHtml(task.description)}</p>` : ''}
+                  <div class="flex items-center gap-4 text-xs text-gray-500">
+                    <span class="flex items-center gap-1">
+                      <div class="w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-[8px] font-bold text-white">${task.assigned_user.charAt(0)}</div>
+                      ${task.assigned_user}
+                    </span>
+                    ${dueDate ? `<span class="flex items-center gap-1">
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                      ${dueDate}
+                    </span>` : ''}
+                    <span class="flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full ${task.status === 'in-progress' ? 'bg-yellow-500' : 'bg-gray-500'}"></span>
+                      ${task.status === 'in-progress' ? 'En cours' : 'À faire'}
+                    </span>
+                  </div>
+                  ${aiRec ? `
+                    <div class="mt-3 p-2 rounded-lg ${aiRec.action === 'Supprimer' ? 'bg-red-500/10 border border-red-500/20' : 'bg-green-500/10 border border-green-500/20'}">
+                      <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 ${aiRec.action === 'Supprimer' ? 'text-red-400' : 'text-green-400'}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        <span class="text-xs ${aiRec.action === 'Supprimer' ? 'text-red-400' : 'text-green-400'} font-medium">IA : ${aiRec.action}</span>
+                        <span class="text-xs text-gray-500">— ${aiRec.reason}</span>
+                      </div>
+                    </div>
+                  ` : ''}
+                </div>
+                <div class="flex items-center gap-1 flex-shrink-0">
+                  <button onclick="completeTask('${task.__backendId}')" class="p-2 text-gray-500 hover:text-green-400 hover:bg-green-500/10 rounded-lg transition-colors" title="Terminer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                  </button>
+                  <button onclick="editTask('${task.__backendId}')" class="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors" title="Modifier">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                  </button>
+                  <button onclick="deleteTask('${task.__backendId}')" class="p-2 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors" title="Supprimer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function updateCompletedList(tasks) {
+      const container = document.getElementById('completed-container');
+      const empty = document.getElementById('empty-completed');
+      
+      if (tasks.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      
+      container.innerHTML = tasks.map(task => {
+        const completedDate = task.completed_at ? new Date(task.completed_at).toLocaleDateString('fr-FR') : 'N/A';
+        
+        return `
+          <div class="task-card bg-[#0f0f18] border border-[#252536] rounded-xl p-4 opacity-70" data-task-id="${task.__backendId}">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <h3 class="font-medium text-white line-through">${escapeHtml(task.title)}</h3>
+                  <p class="text-xs text-gray-500">${task.assigned_user} • Complétée le ${completedDate}</p>
+                </div>
+              </div>
+              <button onclick="restoreTask('${task.__backendId}')" class="p-2 text-gray-500 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors" title="Restaurer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    // Modal Functions
+    function openModal(taskId = null) {
+      const modal = document.getElementById('task-modal');
+      const title = document.getElementById('modal-title');
+      const submitText = document.getElementById('submit-text');
+      const form = document.getElementById('task-form');
+      
+      form.reset();
+      document.getElementById('task-id').value = '';
+      
+      if (taskId) {
+        const task = allTasks.find(t => t.__backendId === taskId);
+        if (task) {
+          title.textContent = 'Modifier la tâche';
+          submitText.textContent = 'Enregistrer';
+          document.getElementById('task-id').value = taskId;
+          document.getElementById('task-title').value = task.title;
+          document.getElementById('task-description').value = task.description || '';
+          document.getElementById('task-user').value = task.assigned_user;
+          document.getElementById('task-due-date').value = task.due_date ? task.due_date.split('T')[0] : '';
+          document.getElementById('task-urgent').checked = task.is_urgent;
+          document.getElementById('task-important').checked = task.is_important;
+        }
+      } else {
+        title.textContent = 'Créer une tâche';
+        submitText.textContent = 'Créer';
+      }
+      
+      modal.classList.remove('hidden');
+    }
+    
+    function closeModal() {
+      document.getElementById('task-modal').classList.add('hidden');
+    }
+    
+    function openDeleteModal(taskId) {
+      taskToDelete = taskId;
+      document.getElementById('delete-modal').classList.remove('hidden');
+    }
+    
+    function closeDeleteModal() {
+      taskToDelete = null;
+      document.getElementById('delete-modal').classList.add('hidden');
+    }
+    
+    // Task Actions
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (allTasks.filter(t => t.status !== 'deleted').length >= 999) {
+        showToast('Limite de 999 tâches atteinte', 'error');
+        return;
+      }
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const submitText = document.getElementById('submit-text');
+      const spinner = document.getElementById('submit-spinner');
+      
+      submitBtn.disabled = true;
+      spinner.classList.remove('hidden');
+      
+      const taskId = document.getElementById('task-id').value;
+      const isUrgent = document.getElementById('task-urgent').checked;
+      const isImportant = document.getElementById('task-important').checked;
+      
+      const taskData = {
+        title: document.getElementById('task-title').value,
+        description: document.getElementById('task-description').value,
+        assigned_user: document.getElementById('task-user').value,
+        is_urgent: isUrgent,
+        is_important: isImportant,
+        category: getCategory({ is_urgent: isUrgent, is_important: isImportant }),
+        priority: calculatePriority({ is_urgent: isUrgent, is_important: isImportant }),
+        due_date: document.getElementById('task-due-date').value ? new Date(document.getElementById('task-due-date').value).toISOString() : ''
+      };
+      
+      let result;
+      
+      if (taskId) {
+        const existingTask = allTasks.find(t => t.__backendId === taskId);
+        if (existingTask) {
+          const aiRec = getAIRecommendation({ ...existingTask, ...taskData });
+          result = await window.dataSdk.update({
+            ...existingTask,
+            ...taskData,
+            ai_recommendation: aiRec?.action || '',
+            ai_reasoning: aiRec?.reason || ''
+          });
+        }
+      } else {
+        const aiRec = getAIRecommendation({ ...taskData, created_at: new Date().toISOString() });
+        result = await window.dataSdk.create({
+          id: `task-${Date.now()}`,
+          ...taskData,
+          status: 'todo',
+          created_at: new Date().toISOString(),
+          completed_at: '',
+          ai_recommendation: aiRec?.action || '',
+          ai_reasoning: aiRec?.reason || ''
+        });
+      }
+      
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+      
+      if (result && result.isOk) {
+        closeModal();
+        showToast(taskId ? 'Tâche modifiée' : 'Tâche créée', 'success');
+      } else {
+        showToast('Erreur lors de l\'enregistrement', 'error');
+      }
+    }
+    
+    function editTask(taskId) {
+      openModal(taskId);
+    }
+    
+    function deleteTask(taskId) {
+      openDeleteModal(taskId);
+    }
+    
+    async function confirmDelete() {
+      if (!taskToDelete) return;
+      
+      const task = allTasks.find(t => t.__backendId === taskToDelete);
+      if (!task) {
+        closeDeleteModal();
+        return;
+      }
+      
+      const btn = document.getElementById('confirm-delete-btn');
+      const spinner = document.getElementById('delete-spinner');
+      
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      
+      const result = await window.dataSdk.delete(task);
+      
+      btn.disabled = false;
+      spinner.classList.add('hidden');
+      
+      if (result.isOk) {
+        showToast('Tâche supprimée', 'success');
+      } else {
+        showToast('Erreur lors de la suppression', 'error');
+      }
+      
+      closeDeleteModal();
+    }
+    
+    async function completeTask(taskId) {
+      const task = allTasks.find(t => t.__backendId === taskId);
+      if (!task) return;
+      
+      const result = await window.dataSdk.update({
+        ...task,
+        status: 'completed',
+        completed_at: new Date().toISOString()
+      });
+      
+      if (result.isOk) {
+        showToast('Tâche complétée !', 'success');
+      } else {
+        showToast('Erreur', 'error');
+      }
+    }
+    
+    async function restoreTask(taskId) {
+      const task = allTasks.find(t => t.__backendId === taskId);
+      if (!task) return;
+      
+      const result = await window.dataSdk.update({
+        ...task,
+        status: 'todo',
+        completed_at: ''
+      });
+      
+      if (result.isOk) {
+        showToast('Tâche restaurée', 'success');
+      } else {
+        showToast('Erreur', 'error');
+      }
+    }
+    
+    // Toast
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      const successIcon = document.getElementById('toast-icon-success');
+      const errorIcon = document.getElementById('toast-icon-error');
+      
+      toastMessage.textContent = message;
+      successIcon.classList.toggle('hidden', type !== 'success');
+      errorIcon.classList.toggle('hidden', type !== 'error');
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+    
+    // Utilities
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Initialize
+    init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99c035efb6cbd11c',t:'MTc2MjcyMTcyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb573cae226ee96',t:'MTc2Nzk3NzYyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
