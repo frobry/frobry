@@ -403,14 +403,63 @@
         window.elementSdk.init(elementApi);
       }
       
-      if (window.dataSdk) {
-        const result = await window.dataSdk.init(dataHandler);
-        if (!result.isOk) {
-          showToast('Erreur de connexion aux données', 'error');
+      // Check if Data SDK is available and functional
+      if (window.dataSdk && typeof window.dataSdk.init === 'function') {
+        try {
+          const result = await Promise.race([
+            window.dataSdk.init(dataHandler),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('Data SDK timeout')), 3000)
+            )
+          ]);
+          
+          if (!result.isOk) {
+            console.warn('Data SDK initialization failed, switching to local mode');
+            enableLocalMode();
+          }
+        } catch (error) {
+          console.warn('Data SDK unavailable, switching to local mode:', error.message);
+          enableLocalMode();
         }
+      } else {
+        console.warn('Data SDK not available, switching to local mode');
+        enableLocalMode();
       }
       
       setView('dashboard');
+    }
+    
+    // Local Mode for published versions
+    function enableLocalMode() {
+      window.isLocalMode = true;
+      allTasks = JSON.parse(localStorage.getItem('frobry_tasks') || '[]');
+      updateUI();
+      showNotification('Mode local activé - les données seront conservées dans cette session');
+    }
+    
+    function showNotification(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      const successIcon = document.getElementById('toast-icon-success');
+      const errorIcon = document.getElementById('toast-icon-error');
+      
+      toastMessage.textContent = message;
+      successIcon.classList.add('hidden');
+      errorIcon.classList.add('hidden');
+      
+      // Show info icon instead
+      const infoIcon = document.createElement('svg');
+      infoIcon.className = 'w-5 h-5 text-blue-400';
+      infoIcon.setAttribute('fill', 'none');
+      infoIcon.setAttribute('stroke', 'currentColor');
+      infoIcon.setAttribute('viewBox', '0 0 24 24');
+      infoIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+      
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 4000);
     }
     
     // View Management
@@ -834,28 +883,65 @@
       
       let result;
       
-      if (taskId) {
-        const existingTask = allTasks.find(t => t.__backendId === taskId);
-        if (existingTask) {
-          const aiRec = getAIRecommendation({ ...existingTask, ...taskData });
-          result = await window.dataSdk.update({
-            ...existingTask,
+      if (window.isLocalMode) {
+        // Local mode: save to localStorage
+        if (taskId) {
+          const existingTask = allTasks.find(t => t.__backendId === taskId);
+          if (existingTask) {
+            const aiRec = getAIRecommendation({ ...existingTask, ...taskData });
+            const updated = {
+              ...existingTask,
+              ...taskData,
+              ai_recommendation: aiRec?.action || '',
+              ai_reasoning: aiRec?.reason || ''
+            };
+            const index = allTasks.findIndex(t => t.__backendId === taskId);
+            allTasks[index] = updated;
+            result = { isOk: true };
+          }
+        } else {
+          const backendId = `local-${Date.now()}-${Math.random()}`;
+          const aiRec = getAIRecommendation({ ...taskData, created_at: new Date().toISOString() });
+          const newTask = {
+            __backendId: backendId,
+            id: `task-${Date.now()}`,
             ...taskData,
+            status: 'todo',
+            created_at: new Date().toISOString(),
+            completed_at: '',
+            ai_recommendation: aiRec?.action || '',
+            ai_reasoning: aiRec?.reason || ''
+          };
+          allTasks.push(newTask);
+          result = { isOk: true };
+        }
+        localStorage.setItem('frobry_tasks', JSON.stringify(allTasks));
+        updateUI();
+      } else {
+        // Data SDK mode
+        if (taskId) {
+          const existingTask = allTasks.find(t => t.__backendId === taskId);
+          if (existingTask) {
+            const aiRec = getAIRecommendation({ ...existingTask, ...taskData });
+            result = await window.dataSdk.update({
+              ...existingTask,
+              ...taskData,
+              ai_recommendation: aiRec?.action || '',
+              ai_reasoning: aiRec?.reason || ''
+            });
+          }
+        } else {
+          const aiRec = getAIRecommendation({ ...taskData, created_at: new Date().toISOString() });
+          result = await window.dataSdk.create({
+            id: `task-${Date.now()}`,
+            ...taskData,
+            status: 'todo',
+            created_at: new Date().toISOString(),
+            completed_at: '',
             ai_recommendation: aiRec?.action || '',
             ai_reasoning: aiRec?.reason || ''
           });
         }
-      } else {
-        const aiRec = getAIRecommendation({ ...taskData, created_at: new Date().toISOString() });
-        result = await window.dataSdk.create({
-          id: `task-${Date.now()}`,
-          ...taskData,
-          status: 'todo',
-          created_at: new Date().toISOString(),
-          completed_at: '',
-          ai_recommendation: aiRec?.action || '',
-          ai_reasoning: aiRec?.reason || ''
-        });
       }
       
       submitBtn.disabled = false;
@@ -892,7 +978,19 @@
       btn.disabled = true;
       spinner.classList.remove('hidden');
       
-      const result = await window.dataSdk.delete(task);
+      let result;
+      
+      if (window.isLocalMode) {
+        const index = allTasks.findIndex(t => t.__backendId === taskToDelete);
+        if (index > -1) {
+          allTasks.splice(index, 1);
+          localStorage.setItem('frobry_tasks', JSON.stringify(allTasks));
+          result = { isOk: true };
+        }
+        updateUI();
+      } else {
+        result = await window.dataSdk.delete(task);
+      }
       
       btn.disabled = false;
       spinner.classList.add('hidden');
@@ -910,11 +1008,26 @@
       const task = allTasks.find(t => t.__backendId === taskId);
       if (!task) return;
       
-      const result = await window.dataSdk.update({
-        ...task,
-        status: 'completed',
-        completed_at: new Date().toISOString()
-      });
+      let result;
+      
+      if (window.isLocalMode) {
+        const updated = {
+          ...task,
+          status: 'completed',
+          completed_at: new Date().toISOString()
+        };
+        const index = allTasks.findIndex(t => t.__backendId === taskId);
+        allTasks[index] = updated;
+        localStorage.setItem('frobry_tasks', JSON.stringify(allTasks));
+        result = { isOk: true };
+        updateUI();
+      } else {
+        result = await window.dataSdk.update({
+          ...task,
+          status: 'completed',
+          completed_at: new Date().toISOString()
+        });
+      }
       
       if (result.isOk) {
         showToast('Tâche complétée !', 'success');
@@ -927,11 +1040,26 @@
       const task = allTasks.find(t => t.__backendId === taskId);
       if (!task) return;
       
-      const result = await window.dataSdk.update({
-        ...task,
-        status: 'todo',
-        completed_at: ''
-      });
+      let result;
+      
+      if (window.isLocalMode) {
+        const updated = {
+          ...task,
+          status: 'todo',
+          completed_at: ''
+        };
+        const index = allTasks.findIndex(t => t.__backendId === taskId);
+        allTasks[index] = updated;
+        localStorage.setItem('frobry_tasks', JSON.stringify(allTasks));
+        result = { isOk: true };
+        updateUI();
+      } else {
+        result = await window.dataSdk.update({
+          ...task,
+          status: 'todo',
+          completed_at: ''
+        });
+      }
       
       if (result.isOk) {
         showToast('Tâche restaurée', 'success');
@@ -968,5 +1096,5 @@
     // Initialize
     init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb573cae226ee96',t:'MTc2Nzk3NzYyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bb5905dd03e9e85',t:'MTc2Nzk3ODc5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
