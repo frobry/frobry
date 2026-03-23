@@ -332,12 +332,17 @@
        <p class="text-sm leading-relaxed" style="color: #555;">Interventions rapides, transparence totale</p>
       </div>
 
-      <!-- IMAGE 2 : Vidéo / réparation en cours -->
+      <!-- VIDEO : Vidéo / réparation en cours -->
       <div>
        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
        <div class="img-placeholder" style="height: 360px;">
-        <video src="video.mp4" alt="Réparation téléphone en cours" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'play\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
-
+        <video width="100%" height="100%" style="object-fit: cover;" autoplay loop muted playsinline>
+         <source src="video.mp4" type="video/mp4">
+         Votre navigateur ne supporte pas la lecture de vidéo.
+        </video>
+       </div>
+       <p class="text-xs text-center mt-2" style="color: #999;">Aperçu réparation</p>
+      </div>
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">POURQUOI ME FAIRE CONFIANCE ?</h3>
        <div class="skill-block space-y-3">
