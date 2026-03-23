@@ -96,48 +96,48 @@
 
     .skill-block { border-left: 2px solid #000; padding-left: 24px; }
 
-    .img-placeholder {
-      width: 100%;
+    /* Styles pour les médias - format original respecté */
+    .media-container {
       background: #f0f0f0;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       cursor: pointer;
       transition: opacity 0.2s ease;
+      overflow: hidden;
     }
-    .img-placeholder:hover { opacity: 0.9; }
-
-    .img-placeholder img,
-    .img-placeholder video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .media-container:hover { opacity: 0.9; }
+    
+    .media-container img,
+    .media-container video {
+      max-width: 100%;
+      height: auto;
+      display: block;
       pointer-events: none;
     }
 
-    .portrait-placeholder {
-      width: 280px;
-      height: 360px;
+    /* Conteneur portrait avec taille max mais sans recadrage */
+    .portrait-container {
       background: #f0f0f0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      overflow: hidden;
       cursor: pointer;
       transition: opacity 0.2s ease;
-    }
-    .portrait-placeholder:hover { opacity: 0.9; }
-
-    .portrait-placeholder img {
+      max-width: 320px;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+    }
+    .portrait-container:hover { opacity: 0.9; }
+    
+    .portrait-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
       pointer-events: none;
     }
 
-    /* LIGHTBOX STYLES */
+    /* Lightbox styles */
     .lightbox {
       position: fixed;
       top: 0;
@@ -167,8 +167,10 @@
     }
     .lightbox-content img,
     .lightbox-content video {
-      max-width: 100%;
+      max-width: 90vw;
       max-height: 90vh;
+      width: auto;
+      height: auto;
       object-fit: contain;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
@@ -197,12 +199,6 @@
         width: 28px;
         height: 28px;
       }
-    }
-
-    .quote-block {
-      border-left: 2px solid #000;
-      padding-left: 20px;
-      font-style: italic;
     }
 
     .read-more-link {
@@ -385,7 +381,7 @@
         Je ne me contente pas d'exécuter des idées. Je les fais exister.
        </p>
       </div>
-      <div class="portrait-placeholder" data-lightbox="image1.png" data-type="image">
+      <div class="portrait-container" data-lightbox="image1.png" data-type="image">
        <img src="image1.png" alt="Bryan Froehlich" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'user\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
       </div>
      </div>
@@ -402,11 +398,11 @@
        <p class="text-sm leading-relaxed" style="color: #555;">Interventions rapides, transparence totale</p>
       </div>
 
-      <!-- VIDEO avec lightbox -->
+      <!-- VIDEO - format original respecté -->
       <div>
        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
-       <div id="video-container" class="img-placeholder" style="height: 360px;" data-lightbox="video.mp4" data-type="video">
-        <video id="repair-video" width="100%" height="100%" style="object-fit: cover;" autoplay loop muted playsinline>
+       <div id="video-container" class="media-container" data-lightbox="video.mp4" data-type="video">
+        <video id="repair-video" autoplay loop muted playsinline>
          <source src="video.mp4" type="video/mp4">
         </video>
        </div>
@@ -450,10 +446,10 @@
         <span class="read-more-link" onclick="toggleProjectDetails('nutrition')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 3 : Capture écran App Nutrition avec lightbox -->
+       <!-- IMAGE 3 : Capture écran App Nutrition - format original -->
        <div class="mt-4">
-        <div class="img-placeholder" style="height: 200px; max-width: 400px;" data-lightbox="image3.png" data-type="image">
-         <img src="image3.png" alt="Application Nutrition - capture d'écran" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
+        <div class="media-container" style="max-width: 400px;" data-lightbox="image3.png" data-type="image">
+         <img src="image3.png" alt="Application Nutrition - capture d'écran" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
         </div>
         <p class="text-xs mt-1" style="color: #999;">Cliquez pour agrandir</p>
        </div>
@@ -528,10 +524,10 @@
         <span class="read-more-link" onclick="toggleProjectDetails('crm')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 4 : Interface CRM avec lightbox -->
+       <!-- IMAGE 4 : Interface CRM - format original -->
        <div class="mt-4">
-        <div class="img-placeholder" style="height: 180px; max-width: 500px;" data-lightbox="image4.png" data-type="image">
-         <img src="image4.png" alt="Interface CRM" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
+        <div class="media-container" style="max-width: 500px;" data-lightbox="image4.png" data-type="image">
+         <img src="image4.png" alt="Interface CRM" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
         </div>
         <p class="text-xs mt-1" style="color: #999;">Cliquez pour agrandir</p>
        </div>
@@ -670,9 +666,9 @@
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Email</p>
         <p id="contact-email-display" class="text-sm" style="color: #444;">✉️ contact@frobry.com</p>
        </div>
-       <!-- IMAGE 6 : Icônes contact avec lightbox -->
-       <div class="img-placeholder" style="height: 100px; width: 100px;" data-lightbox="image6.png" data-type="image">
-        <img src="image6.png" alt="Icônes contact" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
+       <!-- IMAGE 6 : Icônes contact - format original -->
+       <div class="media-container" style="max-width: 100px;" data-lightbox="image6.png" data-type="image">
+        <img src="image6.png" alt="Icônes contact" style="width:100%; height:auto;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
        </div>
        <p class="text-xs" style="color: #999;">Cliquez pour agrandir</p>
       </div>
@@ -722,7 +718,6 @@
 
     // Tab navigation with fade transitions
     const navLinks = document.querySelectorAll('.nav-link');
-    const tabs = document.querySelectorAll('.tab-content');
     let currentTab = 'accueil';
     let isTransitioning = false;
 
@@ -786,18 +781,14 @@
       setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // ==================== LIGHTBOX SYSTEM ====================
+    // Lightbox system
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
     let currentMedia = null;
 
     function openLightbox(src, type) {
-      // Nettoyer le contenu précédent
-      if (currentMedia) {
-        currentMedia.remove();
-      }
+      if (currentMedia) currentMedia.remove();
       
-      // Créer le nouvel élément
       if (type === 'video') {
         const video = document.createElement('video');
         video.src = src;
@@ -805,7 +796,8 @@
         video.autoplay = true;
         video.style.maxWidth = '90vw';
         video.style.maxHeight = '90vh';
-        video.style.objectFit = 'contain';
+        video.style.width = 'auto';
+        video.style.height = 'auto';
         currentMedia = video;
       } else {
         const img = document.createElement('img');
@@ -813,34 +805,27 @@
         img.alt = 'Agrandissement';
         img.style.maxWidth = '90vw';
         img.style.maxHeight = '90vh';
-        img.style.objectFit = 'contain';
+        img.style.width = 'auto';
+        img.style.height = 'auto';
         currentMedia = img;
       }
       
-      // Insérer avant le bouton de fermeture
       const closeBtn = document.querySelector('.lightbox-close');
       lightboxContent.insertBefore(currentMedia, closeBtn);
-      
-      // Afficher la lightbox
       lightbox.classList.add('active');
     }
 
     function closeLightbox() {
       lightbox.classList.remove('active');
       if (currentMedia) {
-        // Pour la vidéo, on arrête la lecture
-        if (currentMedia.tagName === 'VIDEO') {
-          currentMedia.pause();
-        }
+        if (currentMedia.tagName === 'VIDEO') currentMedia.pause();
         currentMedia.remove();
         currentMedia = null;
       }
     }
 
-    // Ajouter les écouteurs sur tous les éléments avec data-lightbox
     document.querySelectorAll('[data-lightbox]').forEach(element => {
       element.addEventListener('click', (e) => {
-        // Éviter que le clic ne se propage si on clique sur un élément enfant
         e.stopPropagation();
         const src = element.getAttribute('data-lightbox');
         const type = element.getAttribute('data-type') || 'image';
@@ -848,24 +833,11 @@
       });
     });
 
-    // Fermer avec la croix
     document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-    
-    // Fermer en cliquant sur le fond
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-    
-    // Fermer avec la touche Echap
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-        closeLightbox();
-      }
-    });
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
 
-    // Fallback pour la vidéo si elle ne charge pas
+    // Fallback vidéo
     const repairVideo = document.getElementById('repair-video');
     if (repairVideo) {
       repairVideo.addEventListener('error', function() {
@@ -874,7 +846,6 @@
         if (container) {
           container.innerHTML = '<i data-lucide="play" style="width:48px; height:48px; color:#bbb;"></i>';
           lucide.createIcons();
-          // Re-attacher l'événement lightbox sur le conteneur
           container.setAttribute('data-lightbox', 'video.mp4');
           container.setAttribute('data-type', 'video');
         }
