@@ -137,6 +137,25 @@
       pointer-events: none;
     }
 
+    /* Bouton devis */
+    .quote-btn {
+      display: inline-block;
+      background: #000;
+      color: #fff;
+      padding: 12px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+      margin-top: 16px;
+    }
+    .quote-btn:hover { opacity: 0.7; }
+
     /* Lightbox styles */
     .lightbox {
       position: fixed;
@@ -191,10 +210,6 @@
       color: #fff;
     }
     @media (max-width: 768px) {
-       #site-title {
-        font-size: 1.5rem !important;
-      }
-    }
       .lightbox-close {
         top: -48px;
         right: 0;
@@ -340,6 +355,18 @@
       nav {
         display: none !important;
       }
+      
+      /* Réduction du titre sur mobile */
+      #site-title {
+        font-size: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #site-title {
+        font-size: 1.2rem !important;
+        letter-spacing: 0.1em !important;
+      }
     }
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -356,6 +383,7 @@
      </div>
      <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
       <span class="nav-link active-link" data-tab="accueil">ACCUEIL</span>
+      <span class="nav-link" data-tab="services">SERVICES</span>
       <span class="nav-link" data-tab="reparations">RÉPARATIONS</span>
       <span class="nav-link" data-tab="projets">PROJETS</span>
       <span class="nav-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
@@ -377,7 +405,7 @@
        <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">CRÉER, IMAGINER, CONSTRUIRE</h2>
        <p id="hero-intro" class="text-sm leading-relaxed" style="color: #555; max-width: 580px;">
         Depuis toujours, j'ai ce besoin de partir d'une idée — parfois simple, parfois ambitieuse — et de la transformer en quelque chose de réel, utile et concret.<br><br>
-        Depuis quelques années, j'explore et développe cet état d'esprit à travers la réparation mobile, la création d'applications, le développement web et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.<br><br>
+        Depuis quelques années, j'explore et développe cet état d'esprit à travers la création de sites internet, d'applications mobiles, la réparation mobile et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.<br><br>
         Observer, comprendre, imaginer des solutions, puis les construire.<br><br>
         Chaque projet est pour moi une opportunité de créer quelque chose de nouveau, d'optimiser ce qui existe déjà, ou de répondre à un besoin de manière plus intelligente.<br><br>
         Aujourd'hui, je combine créativité, technique et vision pour concevoir des outils qui ne sont pas juste fonctionnels — mais utiles, évolutifs et pensés pour avoir un réel impact.<br><br>
@@ -387,6 +415,63 @@
       </div>
       <div class="portrait-container" data-lightbox="image1.png" data-type="image">
        <img src="image1.png" alt="Bryan Froehlich" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'user\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+      </div>
+     </div>
+    </section>
+
+    <!-- ==================== SERVICES (NOUVEAU) ==================== -->
+    <section id="tab-services" class="tab-content">
+     <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">CE QUE JE PEUX FAIRE POUR VOUS</h2>
+     
+     <div class="space-y-12">
+      
+      <!-- Création de sites internet -->
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-3">CRÉATION DE SITES INTERNET</h3>
+       <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 12px;">
+        Vous avez besoin d'une présence en ligne ? Je crée des sites web sur mesure, modernes, épurés et parfaitement adaptés à votre activité. Du site vitrine à la plateforme plus complexe, je m'adapte à vos besoins.
+       </p>
+       <ul class="text-sm leading-relaxed space-y-2 ml-4" style="color: #555;">
+        <li>• Sites vitrines et portfolios</li>
+        <li>• Sites e-commerce</li>
+        <li>• Design responsive (mobile, tablette, ordinateur)</li>
+        <li>• Optimisation performance et SEO</li>
+        <li>• Interface administrable facile à gérer</li>
+       </ul>
+      </div>
+
+      <!-- Création d'applications mobiles -->
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-3">CRÉATION D'APPLICATIONS MOBILES</h3>
+       <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 12px;">
+        Vous avez une idée d'application ? Je la concrétise. De la conception à la publication sur l'App Store et Google Play, je vous accompagne pour créer une application utile, intuitive et performante.
+       </p>
+       <ul class="text-sm leading-relaxed space-y-2 ml-4" style="color: #555;">
+        <li>• Applications iOS et Android</li>
+        <li>• Conception UI/UX soignée</li>
+        <li>• Backend et base de données</li>
+        <li>• Publication et suivi</li>
+        <li>• Exemple concret : App Nutrition (disponible sur l'App Store)</li>
+       </ul>
+      </div>
+
+      <!-- Autres compétences -->
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-3">AUTRES PRESTATIONS</h3>
+       <ul class="text-sm leading-relaxed space-y-2 ml-4" style="color: #555;">
+        <li>• CRM sur mesure pour entreprises</li>
+        <li>• Outils numériques et automatisation</li>
+        <li>• Conseil et accompagnement technique</li>
+        <li>• Maintenance et évolution de projets existants</li>
+       </ul>
+      </div>
+
+      <!-- Appel à l'action pour devis -->
+      <div class="mt-8 pt-4 text-center">
+       <p class="text-sm leading-relaxed mb-4" style="color: #555;">
+        Chaque projet est unique. Contactez-moi pour discuter de vos besoins et obtenir un devis personnalisé, sans engagement.
+       </p>
+       <button onclick="switchTab('contact')" class="quote-btn">DEMANDER UN DEVIS</button>
       </div>
      </div>
     </section>
@@ -450,7 +535,6 @@
         <span class="read-more-link" onclick="toggleProjectDetails('nutrition')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 3 : Capture écran App Nutrition - format original -->
        <div class="mt-4">
         <div class="media-container" style="max-width: 400px;" data-lightbox="image3.png" data-type="image">
          <img src="image3.png" alt="Application Nutrition - capture d'écran" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
@@ -528,7 +612,6 @@
         <span class="read-more-link" onclick="toggleProjectDetails('crm')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 4 : Interface CRM - format original -->
        <div class="mt-4">
         <div class="media-container" style="max-width: 500px;" data-lightbox="image4.png" data-type="image">
          <img src="image4.png" alt="Interface CRM" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
@@ -657,7 +740,7 @@
        </div>
        <div>
         <label for="message" class="text-xs uppercase tracking-widest font-bold block mb-2">Message</label>
-        <textarea id="message" class="form-field" rows="5" placeholder="Votre message..." required></textarea>
+        <textarea id="message" class="form-field" rows="5" placeholder="Votre message... Précisez votre projet (site internet, application, réparation...) et je vous répondrai avec un devis personnalisé." required></textarea>
        </div>
        <button type="submit" class="submit-btn">ENVOYER</button>
       </form>
@@ -670,7 +753,6 @@
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Email</p>
         <p id="contact-email-display" class="text-sm" style="color: #444;">✉️ contact@frobry.com</p>
        </div>
-       <!-- IMAGE 6 : Icônes contact - format original -->
        <div class="media-container" style="max-width: 100px;" data-lightbox="image6.png" data-type="image">
         <img src="image6.png" alt="Icônes contact" style="width:100%; height:auto;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
        </div>
@@ -706,6 +788,7 @@
    </div>
    <div class="mobile-menu-links">
     <span class="mobile-menu-link" data-tab="accueil">ACCUEIL</span>
+    <span class="mobile-menu-link" data-tab="services">SERVICES</span>
     <span class="mobile-menu-link" data-tab="reparations">RÉPARATIONS</span>
     <span class="mobile-menu-link" data-tab="projets">PROJETS</span>
     <span class="mobile-menu-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
@@ -774,7 +857,7 @@
     // Contact form
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      showToast('Message envoyé avec succès !');
+      showToast('Message envoyé avec succès ! Je vous répondrai rapidement avec un devis personnalisé.');
       this.reset();
     });
 
@@ -782,7 +865,7 @@
       const toast = document.getElementById('toast');
       toast.textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
     // Lightbox system
