@@ -35,6 +35,17 @@
       }
     }
 
+     .mobile-linkedin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mobile-linkedin i {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
     /* Header border aligné avec le contenu */
     header {
       border-bottom: 1px solid #e5e5e5;
@@ -114,7 +125,7 @@
     }
     .star-icon svg {
       width: 16px;
-      height: 16px;
+      height: 20px;
       fill: #f5b042;
       stroke: #f5b042;
     }
@@ -385,11 +396,15 @@
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
    <header class="w-full sticky top-0 bg-white z-50">
-    <div class="container-full header-spacing">
-     <div class="flex items-center justify-between header-title-margin">
+    <div class="flex items-center justify-between header-title-margin">
       <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase serif-title" style="letter-spacing: 0.08em;">BRYAN FROEHLICH</h1>
-      <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
-     </div>
+      <div class="flex items-center gap-4">
+        <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="mobile-linkedin" style="color: #999;" title="LinkedIn">
+          <i data-lucide="linkedin" style="width:20px; height:20px;"></i>
+        </a>
+        <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
      <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
       <span class="nav-link active-link" data-tab="accueil">ACCUEIL</span>
       <span class="nav-link" data-tab="services">SERVICES</span>
