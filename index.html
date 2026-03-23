@@ -13,6 +13,29 @@
     html, body { height: 100%; margin: 0; }
     body { font-family: 'DM Sans', sans-serif; }
 
+    /* Pleine largeur avec espacement de 100px sur les côtés */
+    .container-full {
+      max-width: calc(100% - 200px);
+      margin-left: 100px;
+      margin-right: 100px;
+    }
+
+    @media (max-width: 1024px) {
+      .container-full {
+        max-width: calc(100% - 80px);
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container-full {
+        max-width: calc(100% - 48px);
+        margin-left: 24px;
+        margin-right: 24px;
+      }
+    }
+
     .tab-content {
       opacity: 0;
       display: none;
@@ -73,33 +96,36 @@
 
     .skill-block { border-left: 2px solid #000; padding-left: 24px; }
 
+    .img-placeholder {
+      width: 100%;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .portrait-placeholder {
-      width: 200px;
-      height: 260px;
+      width: 280px;
+      height: 360px;
       background: #f0f0f0;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .img-placeholder {
+    .portrait-placeholder img {
       width: 100%;
-      height: 180px;
-      background: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .img-placeholder-sm {
-      width: 100%;
-      max-width: 400px;
-      height: 160px;
-      background: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 100%;
+      object-fit: cover;
     }
 
     .quote-block {
@@ -114,26 +140,19 @@
       cursor: pointer;
       font-size: 0.875rem;
       transition: opacity 0.2s;
+      display: inline-block;
+      margin-top: 8px;
     }
     .read-more-link:hover { opacity: 0.6; }
 
     .project-details {
       display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e5e5;
     }
     .project-details.visible {
       display: block;
-      opacity: 1;
-    }
-
-    .fade-up {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.5s ease forwards;
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .toast-msg {
@@ -247,59 +266,81 @@
       .burger-btn {
         display: block;
       }
-
       nav {
         display: none !important;
       }
     }
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <style>body { box-sizing: border-box; }</style>
  </head>
  <body class="h-full bg-white text-black">
-  <div id="app-wrapper" class="w-full h-full overflow-auto"><!-- HEADER / NAV -->
+  <div id="app-wrapper" class="w-full h-full overflow-auto">
+   
+   <!-- HEADER / NAV avec container-full -->
    <header class="w-full sticky top-0 bg-white z-50" style="border-bottom: 1px solid #e5e5e5;">
-    <div class="max-w-5xl mx-auto px-6 pt-10 pb-4">
+    <div class="container-full pt-10 pb-4">
      <div class="flex items-start justify-between mb-6">
-      <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase" style="letter-spacing: 0.15em;">BRYAN FROEHLICH</h1><button class="burger-btn" id="burger-btn"> <i data-lucide="menu"></i> </button>
+      <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase" style="letter-spacing: 0.15em;">BRYAN FROEHLICH</h1>
+      <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
      </div>
-     <nav class="flex flex-wrap gap-6 items-center" id="main-nav"><span class="nav-link active-link" data-tab="accueil">ACCUEIL</span> <span class="nav-link" data-tab="reparations">RÉPARATIONS</span> <span class="nav-link" data-tab="projets">PROJETS</span> <span class="nav-link" data-tab="formation">FORMATION &amp; LOISIRS</span> <span class="nav-link" data-tab="contact">CONTACT</span> <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="transition-colors" style="color: #999; margin-left: auto;" title="LinkedIn" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#999'"> <i data-lucide="linkedin" style="width:18px; height:18px;"></i> </a>
+     <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
+      <span class="nav-link active-link" data-tab="accueil">ACCUEIL</span>
+      <span class="nav-link" data-tab="reparations">RÉPARATIONS</span>
+      <span class="nav-link" data-tab="projets">PROJETS</span>
+      <span class="nav-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
+      <span class="nav-link" data-tab="contact">CONTACT</span>
+      <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="transition-colors" style="color: #999; margin-left: auto;" title="LinkedIn" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#999'">
+       <i data-lucide="linkedin" style="width:18px; height:18px;"></i>
+      </a>
      </nav>
     </div>
-   </header><!-- CONTENT AREA -->
-   <main class="max-w-5xl mx-auto px-6 py-12"><!-- ACCUEIL -->
+   </header>
+
+   <!-- CONTENT AREA avec container-full -->
+   <main class="container-full py-12">
+
+    <!-- ==================== ACCUEIL ==================== -->
     <section id="tab-accueil" class="tab-content active visible">
      <div class="flex flex-col md:flex-row gap-12 items-start">
       <div class="flex-1">
        <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">CRÉER, IMAGINER, CONSTRUIRE</h2>
-       <p id="hero-intro" class="text-sm leading-relaxed" style="color: #555; max-width: 580px;">Depuis toujours, j'ai ce besoin de partir d'une idée — parfois simple, parfois ambitieuse — et de la transformer en quelque chose de réel, utile et concret.<br><br>
-         Depuis quelques années, j'explore et développe cet état d'esprit à travers la réparation mobile, la création d'applications, le développement web et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.<br><br>
-         Observer, comprendre, imaginer des solutions, puis les construire.<br><br>
-         Chaque projet est pour moi une opportunité de créer quelque chose de nouveau, d'optimiser ce qui existe déjà, ou de répondre à un besoin de manière plus intelligente.<br><br>
-         Aujourd'hui, je combine créativité, technique et vision pour concevoir des outils qui ne sont pas juste fonctionnels — mais utiles, évolutifs et pensés pour avoir un réel impact.<br><br>
-         Autonome, curieux, toujours en train de tester, apprendre et améliorer.<br><br>
-         Je ne me contente pas d'exécuter des idées. Je les fais exister.</p>
+       <p id="hero-intro" class="text-sm leading-relaxed" style="color: #555; max-width: 580px;">
+        Depuis toujours, j'ai ce besoin de partir d'une idée — parfois simple, parfois ambitieuse — et de la transformer en quelque chose de réel, utile et concret.<br><br>
+        Depuis quelques années, j'explore et développe cet état d'esprit à travers la réparation mobile, la création d'applications, le développement web et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.<br><br>
+        Observer, comprendre, imaginer des solutions, puis les construire.<br><br>
+        Chaque projet est pour moi une opportunité de créer quelque chose de nouveau, d'optimiser ce qui existe déjà, ou de répondre à un besoin de manière plus intelligente.<br><br>
+        Aujourd'hui, je combine créativité, technique et vision pour concevoir des outils qui ne sont pas juste fonctionnels — mais utiles, évolutifs et pensés pour avoir un réel impact.<br><br>
+        Autonome, curieux, toujours en train de tester, apprendre et améliorer.<br><br>
+        Je ne me contente pas d'exécuter des idées. Je les fais exister.
+       </p>
       </div>
       <div class="portrait-placeholder">
-       <i data-lucide="user" style="width:48px; height:48px; color:#bbb;"></i>
+       <!-- IMAGE 1 : Photo portrait -->
+       <img src="image1.png" alt="Bryan Froehlich" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'user\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
       </div>
      </div>
-    </section><!-- RÉPARATIONS -->
+    </section>
+
+    <!-- ==================== RÉPARATIONS ==================== -->
     <section id="tab-reparations" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">RÉPARATION MOBILE &amp; TABLETTES</h2>
-     <div class="space-y-10"><!-- Intro -->
+     <div class="space-y-10">
       <div class="space-y-4">
        <p class="text-sm leading-relaxed" style="color: #555;">Depuis 2018 – une passion devenue expertise</p>
        <p class="text-sm leading-relaxed" style="color: #555;">Diagnostic précis, réparation minutieuse, composants de qualité</p>
        <p class="text-sm leading-relaxed" style="color: #555;">Clientèle fidèle sur Pau et environs</p>
        <p class="text-sm leading-relaxed" style="color: #555;">Interventions rapides, transparence totale</p>
-      </div><!-- Vidéo -->
+      </div>
+
+      <!-- IMAGE 2 : Vidéo / réparation en cours -->
       <div>
        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
-       <div class="img-placeholder" style="height: 300px;">
-        <i data-lucide="play" style="width:48px; height:48px; color:#bbb;"></i>
+       <div class="img-placeholder" style="height: 360px;">
+        <img src="image2.png" alt="Réparation téléphone en cours" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'play\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
        </div>
-      </div><!-- Confiance -->
+       <p class="text-xs text-center mt-2" style="color: #999;">Remplacez par une vidéo (image2.png ou video.mp4)</p>
+      </div>
+
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">POURQUOI ME FAIRE CONFIANCE ?</h3>
        <div class="skill-block space-y-3">
@@ -308,7 +349,8 @@
         <p class="text-sm leading-relaxed" style="color: #555;">✓ Transparence sur les devis et les réparations</p>
         <p class="text-sm leading-relaxed" style="color: #555;">✓ Suivi client personnalisé</p>
        </div>
-      </div><!-- Prestations -->
+      </div>
+
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">PRESTATIONS</h3>
        <div class="skill-block space-y-3">
@@ -321,16 +363,30 @@
        </div>
       </div>
      </div>
-    </section><!-- PROJETS -->
+    </section>
+
+    <!-- ==================== PROJETS ==================== -->
     <section id="tab-projets" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">PROJETS MARQUANTS</h2>
-     <div class="space-y-14"><!-- Projet 1: App Nutrition -->
+     <div class="space-y-14">
+
+      <!-- Projet 1: App Nutrition -->
       <div>
-       <div class="skill-block mb-4">
+       <div class="skill-block">
         <h3 class="text-sm font-bold uppercase tracking-widest mb-3">APPLICATION NUTRITION</h3>
-        <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 1rem;">Conception et développement d'une application mobile de suivi nutritionnel, publiée sur l'App Store. Permet aux utilisateurs d'organiser leurs repas, suivre leurs habitudes alimentaires et visualiser leur progression.</p><span class="read-more-link" onclick="toggleProjectDetails('nutrition')">En savoir plus...</span>
-       </div><!-- Détails App Nutrition (caché par défaut) -->
-       <div id="nutrition-details" class="project-details space-y-5 ml-0">
+        <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 0.5rem;">Conception et développement d'une application mobile de suivi nutritionnel, publiée sur l'App Store. Permet aux utilisateurs d'organiser leurs repas, suivre leurs habitudes alimentaires et visualiser leur progression.</p>
+        <span class="read-more-link" onclick="toggleProjectDetails('nutrition')">En savoir plus...</span>
+       </div>
+
+       <!-- IMAGE 3 : Capture écran App Nutrition -->
+       <div class="mt-4">
+        <div class="img-placeholder" style="height: 200px; max-width: 400px;">
+         <img src="image3.png" alt="Application Nutrition - capture d'écran" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
+        </div>
+        <p class="text-xs mt-1" style="color: #999;">image3.png — Capture App Nutrition</p>
+       </div>
+
+       <div id="nutrition-details" class="project-details space-y-5">
         <div class="space-y-4">
          <h4 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">Projet : Application de nutrition</h4>
          <p class="text-sm leading-relaxed" style="color: #555;">J'ai conçu une application de nutrition afin de trouver une solution pour améliorer la manière dont nous gérons notre alimentation, et comment nous nous organisons pour améliorer nos habitudes alimentaires, en rendant tout plus simple à gérer au quotidien.</p>
@@ -348,15 +404,7 @@
         <div class="space-y-4">
          <h4 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">Architecture globale</h4>
          <div class="text-sm leading-relaxed" style="color: #555; background: #f9f9f9; padding: 12px; border-left: 2px solid #000;">
-          <p>UTILISATEUR (Mobile iOS / Android)<br>
-            ↓<br>
-            Interface App (UI/UX)<br>
-            ↓<br>
-            API Backend (serveur)<br>
-            ↓<br>
-            Base de données<br>
-            ↓<br>
-            Services externes (paiement, scan, etc.)</p>
+          <p>UTILISATEUR (Mobile iOS / Android)<br>↓<br>Interface App (UI/UX)<br>↓<br>API Backend (serveur)<br>↓<br>Base de données<br>↓<br>Services externes (paiement, scan, etc.)</p>
          </div>
         </div>
         <div class="space-y-4">
@@ -389,24 +437,34 @@
           <li>• Services tiers (paiement, scan)</li>
          </ul>
         </div>
-        <div class="img-placeholder mb-5" style="height: 200px;">
-         <i data-lucide="smartphone" style="width:36px; height:36px; color:#bbb;"></i>
-        </div>
         <div class="space-y-4">
          <p class="text-sm leading-relaxed" style="color: #555;">Dans le cadre d'un projet pour une entreprise spécialisée dans le bien-être, j'ai participé à la conception et au développement d'une application mobile dédiée au suivi alimentaire et à l'accompagnement des utilisateurs dans leurs habitudes nutritionnelles.</p>
          <p class="text-sm leading-relaxed" style="color: #555;">Sur le plan technique, l'application repose sur une architecture mobile connectée à un backend via API, permettant la gestion des données utilisateurs, des contenus et des interactions en temps réel.</p>
          <p class="text-sm leading-relaxed" style="color: #555;">Une attention particulière a été portée à l'expérience utilisateur, à la simplicité d'utilisation et à la structuration des fonctionnalités pour favoriser l'engagement et la régularité.</p>
          <p class="text-sm leading-relaxed" style="color: #555;">Ce projet m'a permis de développer des compétences en conception produit, structuration fonctionnelle, et intégration de services mobiles.</p>
         </div>
-        <p class="text-xs" style="color: #999;">Légal : Ce projet a été développé dans un cadre professionnel. Les données, noms et éléments spécifiques à l'entreprise ont été anonymisés afin de respecter la confidentialité.</p><span class="read-more-link" onclick="toggleProjectDetails('nutrition')">Masquer les détails</span>
+        <p class="text-xs" style="color: #999;">Légal : Ce projet a été développé dans un cadre professionnel. Les données, noms et éléments spécifiques à l'entreprise ont été anonymisés afin de respecter la confidentialité.</p>
+        <span class="read-more-link" onclick="toggleProjectDetails('nutrition')">Masquer les détails</span>
        </div>
-      </div><!-- Projet 2: CRM -->
+      </div>
+
+      <!-- Projet 2: CRM -->
       <div>
-       <div class="skill-block mb-4">
+       <div class="skill-block">
         <h3 class="text-sm font-bold uppercase tracking-widest mb-3">CRM ENTREPRISE</h3>
-        <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 1rem;">Développement d'un CRM métier sur mesure pour une entreprise souhaitant structurer sa gestion commerciale et optimiser le suivi de ses prospects.</p><span class="read-more-link" onclick="toggleProjectDetails('crm')">En savoir plus...</span>
-       </div><!-- Détails CRM (caché par défaut) -->
-       <div id="crm-details" class="project-details space-y-5 ml-0">
+        <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 0.5rem;">Développement d'un CRM métier sur mesure pour une entreprise souhaitant structurer sa gestion commerciale et optimiser le suivi de ses prospects.</p>
+        <span class="read-more-link" onclick="toggleProjectDetails('crm')">En savoir plus...</span>
+       </div>
+
+       <!-- IMAGE 4 : Interface CRM -->
+       <div class="mt-4">
+        <div class="img-placeholder" style="height: 180px; max-width: 500px;">
+         <img src="image4.png" alt="Interface CRM" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
+        </div>
+        <p class="text-xs mt-1" style="color: #999;">image4.png — Interface CRM</p>
+       </div>
+
+       <div id="crm-details" class="project-details space-y-5">
         <div class="space-y-4">
          <h4 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">Projet : Développement d'un CRM métier</h4>
          <p class="text-sm leading-relaxed" style="color: #555;">J'ai conçu et développé un CRM (Customer Relationship Management) destiné à une entreprise souhaitant structurer et optimiser sa gestion commerciale et relation client.</p>
@@ -459,16 +517,16 @@
           <li>• JavaScript</li>
          </ul>
         </div>
-        <div class="img-placeholder mb-5" style="height: 200px;">
-         <i data-lucide="briefcase" style="width:36px; height:36px; color:#bbb;"></i>
-        </div>
-        <p class="text-xs" style="color: #999;">Légal : Ce projet a été développé dans un cadre professionnel. Les données, noms et éléments spécifiques à l'entreprise ont été anonymisés afin de respecter la confidentialité.</p><span class="read-more-link" onclick="toggleProjectDetails('crm')">Masquer les détails</span>
+        <p class="text-xs" style="color: #999;">Légal : Ce projet a été développé dans un cadre professionnel. Les données, noms et éléments spécifiques à l'entreprise ont été anonymisés afin de respecter la confidentialité.</p>
+        <span class="read-more-link" onclick="toggleProjectDetails('crm')">Masquer les détails</span>
        </div>
       </div>
      </div>
-    </section><!-- FORMATION & LOISIRS -->
+    </section>
+
+    <!-- ==================== FORMATION & LOISIRS ==================== -->
     <section id="tab-formation" class="tab-content">
-     <div class="space-y-14"><!-- Formation -->
+     <div class="space-y-14">
       <div>
        <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">FORMATION</h2>
        <div class="space-y-8">
@@ -489,7 +547,7 @@
          <p class="text-sm" style="color: #555;">Plomberie, rénovation, chantiers — développement de la polyvalence et du sens pratique.</p>
         </div>
        </div>
-      </div><!-- Loisirs -->
+      </div>
       <div>
        <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">LOISIRS</h2>
        <div class="skill-block space-y-4">
@@ -500,30 +558,38 @@
        </div>
       </div>
      </div>
-    </section><!-- CONTACT -->
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
     <section id="tab-contact" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">ME CONTACTER</h2>
      <div class="flex flex-col md:flex-row gap-12">
       <form id="contact-form" class="flex-1 space-y-5">
        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div>
-         <label for="prenom" class="text-xs uppercase tracking-widest font-bold block mb-2">Prénom</label> <input type="text" id="prenom" class="form-field" placeholder="Votre prénom" required>
+         <label for="prenom" class="text-xs uppercase tracking-widest font-bold block mb-2">Prénom</label>
+         <input type="text" id="prenom" class="form-field" placeholder="Votre prénom" required>
         </div>
         <div>
-         <label for="nom" class="text-xs uppercase tracking-widest font-bold block mb-2">Nom</label> <input type="text" id="nom" class="form-field" placeholder="Votre nom" required>
+         <label for="nom" class="text-xs uppercase tracking-widest font-bold block mb-2">Nom</label>
+         <input type="text" id="nom" class="form-field" placeholder="Votre nom" required>
         </div>
        </div>
        <div>
-        <label for="email" class="text-xs uppercase tracking-widest font-bold block mb-2">Email</label> <input type="email" id="email" class="form-field" placeholder="votre@email.com" required>
+        <label for="email" class="text-xs uppercase tracking-widest font-bold block mb-2">Email</label>
+        <input type="email" id="email" class="form-field" placeholder="votre@email.com" required>
        </div>
        <div>
-        <label for="sujet" class="text-xs uppercase tracking-widest font-bold block mb-2">Sujet</label> <input type="text" id="sujet" class="form-field" placeholder="L'objet de votre message">
+        <label for="sujet" class="text-xs uppercase tracking-widest font-bold block mb-2">Sujet</label>
+        <input type="text" id="sujet" class="form-field" placeholder="L'objet de votre message">
        </div>
        <div>
-        <label for="message" class="text-xs uppercase tracking-widest font-bold block mb-2">Message</label> <textarea id="message" class="form-field" rows="5" placeholder="Votre message..." required></textarea>
-       </div><button type="submit" class="submit-btn">ENVOYER</button>
+        <label for="message" class="text-xs uppercase tracking-widest font-bold block mb-2">Message</label>
+        <textarea id="message" class="form-field" rows="5" placeholder="Votre message..." required></textarea>
+       </div>
+       <button type="submit" class="submit-btn">ENVOYER</button>
       </form>
-      <div class="md:w-64 space-y-6">
+      <div class="md:w-80 space-y-6">
        <div>
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Téléphone</p>
         <p id="contact-phone" class="text-sm" style="color: #444;">📞 +33 7 66 06 18 85</p>
@@ -532,26 +598,40 @@
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Email</p>
         <p id="contact-email-display" class="text-sm" style="color: #444;">✉️ contact@frobry.com</p>
        </div>
-       <div class="img-placeholder-sm" style="height: 120px;">
-        <i data-lucide="mail" style="width:36px; height:36px; color:#bbb;"></i>
+       <!-- IMAGE 6 : Icônes contact -->
+       <div class="img-placeholder" style="height: 100px; width: 100px;">
+        <img src="image6.png" alt="Icônes contact" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
        </div>
+       <p class="text-xs" style="color: #999;">image6.png — Icônes contact</p>
       </div>
      </div>
     </section>
-   </main><!-- FOOTER -->
-   <footer class="max-w-5xl mx-auto px-6 py-8" style="border-top: 1px solid #e5e5e5;">
+   </main>
+
+   <!-- FOOTER avec container-full -->
+   <footer class="container-full py-8" style="border-top: 1px solid #e5e5e5;">
     <p class="text-xs uppercase tracking-widest" style="color: #999;">© 2025 Bryan Froehlich — Tous droits réservés</p>
    </footer>
-  </div><!-- Toast -->
-  <div id="toast" class="toast-msg"></div><!-- Mobile Menu -->
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast-msg"></div>
+
+  <!-- Mobile Menu -->
   <div id="mobile-menu" class="mobile-menu">
    <div class="mobile-menu-header">
-    <h2 class="text-xl font-bold" style="letter-spacing: 0.1em;">MENU</h2><button class="mobile-menu-close" id="close-menu-btn"> <i data-lucide="x"></i> </button>
+    <h2 class="text-xl font-bold" style="letter-spacing: 0.1em;">MENU</h2>
+    <button class="mobile-menu-close" id="close-menu-btn"><i data-lucide="x"></i></button>
    </div>
    <div class="mobile-menu-links">
-    <span class="mobile-menu-link" data-tab="accueil">ACCUEIL</span> <span class="mobile-menu-link" data-tab="reparations">RÉPARATIONS</span> <span class="mobile-menu-link" data-tab="projets">PROJETS</span> <span class="mobile-menu-link" data-tab="formation">FORMATION &amp; LOISIRS</span> <span class="mobile-menu-link" data-tab="contact">CONTACT</span>
+    <span class="mobile-menu-link" data-tab="accueil">ACCUEIL</span>
+    <span class="mobile-menu-link" data-tab="reparations">RÉPARATIONS</span>
+    <span class="mobile-menu-link" data-tab="projets">PROJETS</span>
+    <span class="mobile-menu-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
+    <span class="mobile-menu-link" data-tab="contact">CONTACT</span>
    </div>
   </div>
+
   <script>
     // Toggle project details
     function toggleProjectDetails(projectName) {
@@ -569,34 +649,24 @@
       if (tabName === currentTab || isTransitioning) return;
       isTransitioning = true;
 
-      // Update nav links
       navLinks.forEach(link => {
         link.classList.toggle('active-link', link.dataset.tab === tabName);
       });
 
-      // Fade out current
       const currentEl = document.getElementById('tab-' + currentTab);
       currentEl.classList.remove('visible');
 
       setTimeout(() => {
         currentEl.classList.remove('active');
 
-        // Fade in new
         const newEl = document.getElementById('tab-' + tabName);
         newEl.classList.add('active');
-
-        // Force reflow
         void newEl.offsetWidth;
-
         requestAnimationFrame(() => {
           newEl.classList.add('visible');
           currentTab = tabName;
           isTransitioning = false;
-
-          // Re-init lucide for new tab icons
           lucide.createIcons();
-
-          // Scroll to top of content
           document.getElementById('app-wrapper').scrollTo({ top: 0, behavior: 'smooth' });
         });
       }, 300);
@@ -612,18 +682,11 @@
     const closeMenuBtn = document.getElementById('close-menu-btn');
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-    burgerBtn.addEventListener('click', () => {
-      mobileMenu.classList.add('open');
-    });
-
-    closeMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.remove('open');
-    });
-
+    burgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+    closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
     mobileMenuLinks.forEach(link => {
       link.addEventListener('click', () => {
-        const tabName = link.dataset.tab;
-        switchTab(tabName);
+        switchTab(link.dataset.tab);
         mobileMenu.classList.remove('open');
       });
     });
@@ -642,141 +705,7 @@
       setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // Default config
-    const defaultConfig = {
-      background_color: '#ffffff',
-      text_color: '#000000',
-      accent_color: '#666666',
-      surface_color: '#f0f0f0',
-      action_color: '#000000',
-      font_family: 'DM Sans',
-      font_size: 14,
-      hero_subtitle: 'Technicien en Systèmes Numériques',
-      hero_intro: 'Réparation mobile depuis 2018, création d\'applications, développement web & systèmes numériques. Autonome, passionné, rigoureux.',
-      contact_phone: '+33 7 66 06 18 85',
-      contact_email: 'contact@frobry.com'
-    };
-
-    // Element SDK
-    window.elementSdk.init({
-      defaultConfig,
-      onConfigChange: async (config) => {
-        const bg = config.background_color || defaultConfig.background_color;
-        const text = config.text_color || defaultConfig.text_color;
-        const accent = config.accent_color || defaultConfig.accent_color;
-        const surface = config.surface_color || defaultConfig.surface_color;
-        const action = config.action_color || defaultConfig.action_color;
-        const font = config.font_family || defaultConfig.font_family;
-        const baseSize = config.font_size || defaultConfig.font_size;
-
-        // Background
-        document.body.style.backgroundColor = bg;
-        document.querySelector('header').style.backgroundColor = bg;
-        document.querySelector('header').style.borderBottomColor = surface;
-        document.querySelector('footer').style.borderTopColor = surface;
-
-        // Text color
-        document.body.style.color = text;
-        document.getElementById('site-title').style.color = text;
-        navLinks.forEach(l => l.style.color = text);
-
-        // Accent color for subtitles and secondary text
-        document.getElementById('hero-subtitle').style.color = accent;
-        document.querySelectorAll('.skill-block p, .quote-block p').forEach(el => el.style.color = accent);
-        document.querySelector('footer p').style.color = accent;
-
-        // Surface color for placeholders
-        document.querySelectorAll('.portrait-placeholder, .img-placeholder, .img-placeholder-sm').forEach(el => {
-          el.style.backgroundColor = surface;
-        });
-        document.querySelectorAll('.form-field').forEach(el => {
-          el.style.backgroundColor = surface;
-          el.style.borderColor = surface;
-        });
-
-        // Action color for buttons and borders
-        document.querySelectorAll('.submit-btn').forEach(el => {
-          el.style.backgroundColor = action;
-        });
-        document.querySelectorAll('.skill-block').forEach(el => {
-          el.style.borderLeftColor = action;
-        });
-        document.querySelectorAll('.quote-block').forEach(el => {
-          el.style.borderLeftColor = action;
-        });
-
-        // Font
-        const fontStack = `${font}, sans-serif`;
-        document.body.style.fontFamily = fontStack;
-        document.querySelectorAll('.form-field, .submit-btn').forEach(el => {
-          el.style.fontFamily = fontStack;
-        });
-
-        // Font size
-        document.getElementById('site-title').style.fontSize = `${baseSize * 2.1}px`;
-        document.querySelectorAll('.tab-content h2').forEach(el => {
-          el.style.fontSize = `${baseSize * 0.85}px`;
-        });
-        document.querySelectorAll('.skill-block h3').forEach(el => {
-          el.style.fontSize = `${baseSize * 0.85}px`;
-        });
-        document.querySelectorAll('.skill-block p, .quote-block p, .form-field').forEach(el => {
-          el.style.fontSize = `${baseSize}px`;
-        });
-        document.querySelectorAll('label').forEach(el => {
-          el.style.fontSize = `${baseSize * 0.78}px`;
-        });
-        document.getElementById('hero-intro').style.fontSize = `${baseSize * 1.1}px`;
-
-        // Text content
-        document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-        document.getElementById('hero-intro').textContent = config.hero_intro || defaultConfig.hero_intro;
-        document.getElementById('contact-phone').textContent = '📞 ' + (config.contact_phone || defaultConfig.contact_phone);
-        document.getElementById('contact-email-display').textContent = '✉️ ' + (config.contact_email || defaultConfig.contact_email);
-      },
-      mapToCapabilities: (config) => ({
-        recolorables: [
-          {
-            get: () => config.background_color || defaultConfig.background_color,
-            set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }
-          },
-          {
-            get: () => config.surface_color || defaultConfig.surface_color,
-            set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }
-          },
-          {
-            get: () => config.text_color || defaultConfig.text_color,
-            set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }
-          },
-          {
-            get: () => config.accent_color || defaultConfig.accent_color,
-            set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); }
-          },
-          {
-            get: () => config.action_color || defaultConfig.action_color,
-            set: (v) => { config.action_color = v; window.elementSdk.setConfig({ action_color: v }); }
-          }
-        ],
-        borderables: [],
-        fontEditable: {
-          get: () => config.font_family || defaultConfig.font_family,
-          set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
-        },
-        fontSizeable: {
-          get: () => config.font_size || defaultConfig.font_size,
-          set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
-        }
-      }),
-      mapToEditPanelValues: (config) => new Map([
-        ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
-        ['hero_intro', config.hero_intro || defaultConfig.hero_intro],
-        ['contact_phone', config.contact_phone || defaultConfig.contact_phone],
-        ['contact_email', config.contact_email || defaultConfig.contact_email]
-      ])
-    });
-
-    // Init Lucide icons
     lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e0910d932ade548',t:'MTc3NDIyMzA4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ </body>
 </html>
