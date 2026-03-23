@@ -35,6 +35,14 @@
       }
     }
 
+    /* Header border aligné avec le contenu */
+    header {
+      border-bottom: 1px solid #e5e5e5;
+    }
+    header .container-full {
+      border-bottom: none;
+    }
+
     .tab-content {
       opacity: 0;
       display: none;
@@ -98,6 +106,20 @@
     }
 
     .skill-block { border-left: 2px solid #000; padding-left: 24px; }
+
+    /* Style pour l'étoile jaune */
+    .star-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+    .star-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: #f5b042;
+      stroke: #f5b042;
+    }
 
     .media-container {
       background: #f0f0f0;
@@ -256,11 +278,13 @@
       cursor: pointer;
       padding: 8px;
       margin-left: auto;
+      line-height: 1;
     }
     .burger-btn i {
       width: 24px;
       height: 24px;
       color: #000;
+      display: block;
     }
 
     .mobile-menu {
@@ -285,16 +309,27 @@
       padding-bottom: 16px;
       border-bottom: 1px solid #e5e5e5;
     }
+    .mobile-menu-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin: 0;
+      line-height: 1.2;
+    }
     .mobile-menu-close {
       background: none;
       border: none;
       cursor: pointer;
       padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .mobile-menu-close i {
       width: 24px;
       height: 24px;
       color: #000;
+      display: block;
     }
     .mobile-menu-links {
       display: flex;
@@ -316,7 +351,10 @@
     @media (max-width: 768px) {
       .burger-btn { display: block; }
       nav { display: none !important; }
-      #site-title { font-size: 1.5rem !important; }
+      #site-title { font-size: 1.5rem !important; line-height: 1.2; }
+      .flex.items-start.justify-between.mb-6 {
+        align-items: center !important;
+      }
     }
     @media (max-width: 480px) {
       #site-title { font-size: 1.2rem !important; letter-spacing: 0.1em !important; }
@@ -327,9 +365,9 @@
  <body class="h-full bg-white text-black">
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
-   <header class="w-full sticky top-0 bg-white z-50" style="border-bottom: 1px solid #e5e5e5;">
+   <header class="w-full sticky top-0 bg-white z-50">
     <div class="container-full pt-10 pb-4">
-     <div class="flex items-start justify-between mb-6">
+     <div class="flex items-center justify-between mb-6">
       <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase" style="letter-spacing: 0.15em;">BRYAN FROEHLICH</h1>
       <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
      </div>
@@ -461,18 +499,16 @@
      </div>
     </section>
 
-    <!-- PROJETS (affichage direct, sans images ni boutons) -->
+    <!-- PROJETS (affichage direct) -->
     <section id="tab-projets" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">PROJETS MARQUANTS</h2>
      <div class="space-y-14">
 
-      <!-- Projet 1: App Nutrition -->
       <div>
        <div class="skill-block">
         <h3 class="text-sm font-bold uppercase tracking-widest mb-3">APPLICATION NUTRITION</h3>
         <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 0.5rem;">Conception et développement d'une application mobile de suivi nutritionnel, publiée sur l'App Store. Permet aux utilisateurs d'organiser leurs repas, suivre leurs habitudes alimentaires et visualiser leur progression.</p>
        </div>
-
        <div class="space-y-5 mt-6">
         <div class="space-y-4">
          <h4 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">Projet : Application de nutrition</h4>
@@ -534,13 +570,11 @@
        </div>
       </div>
 
-      <!-- Projet 2: CRM -->
       <div>
        <div class="skill-block">
         <h3 class="text-sm font-bold uppercase tracking-widest mb-3">CRM ENTREPRISE</h3>
         <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 0.5rem;">Développement d'un CRM métier sur mesure pour une entreprise souhaitant structurer sa gestion commerciale et optimiser le suivi de ses prospects.</p>
        </div>
-
        <div class="space-y-5 mt-6">
         <div class="space-y-4">
          <h4 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">Projet : Développement d'un CRM métier</h4>
@@ -617,16 +651,30 @@
        <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Bilbao (Espagne)</span><br>Tirage de câble électrique, peinture, travaux manuels, travail en équipe sur chantier.</p>
       </div>
       <div class="skill-block">
-       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2019–2020 – INFORMATIQUE & ÉTIQUETAGE</h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Domaine Bayard – Moulins</span><br>Support informatique, gestion des systèmes, étiquetage des bouteilles de vin.</p>
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">
+        2019–2020 – INFORMATIQUE & ÉTIQUETAGE
+        <span class="star-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#f5b042" stroke="#f5b042"/>
+          </svg>
+        </span>
+       </h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Domaine Bayard – Monein</span><br>Support informatique, gestion des systèmes, étiquetage des bouteilles de vin.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2019 – RÉNOVATION INTÉRIEURE</h3>
        <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Bilbao (Espagne)</span><br>Tirage de câble électrique, peinture, travaux manuels, développement de la polyvalence.</p>
       </div>
       <div class="skill-block">
-       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2018 – IMMOTIQUE</h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Etchebar</span><br>Systèmes intelligents et domotique, installation et configuration.</p>
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">
+        2018 – IMMOTIQUE
+        <span class="star-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#f5b042" stroke="#f5b042"/>
+          </svg>
+        </span>
+       </h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Etxebarri</span><br>Systèmes intelligents et domotique, installation et configuration.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2017–2018 – PLOMBERIE</h3>
@@ -744,7 +792,6 @@
   </div>
 
   <script>
-    // Configuration Web3Forms - REMPLACE TA_CLE_API_WEB3FORMS PAR TA VRAIE CLÉ !
     const WEB3FORMS_KEY = "TA_CLE_API_WEB3FORMS";
     
     const navLinks = document.querySelectorAll('.nav-link');
@@ -806,7 +853,6 @@
       }, 4000);
     }
 
-    // Formulaire avec Web3Forms
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
 
@@ -846,7 +892,6 @@
       }
     });
 
-    // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.querySelector('.lightbox-content');
     let currentMedia = null;
