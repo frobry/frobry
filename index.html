@@ -103,12 +103,17 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
     }
+    .img-placeholder:hover { opacity: 0.9; }
 
-    .img-placeholder img {
+    .img-placeholder img,
+    .img-placeholder video {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      pointer-events: none;
     }
 
     .portrait-placeholder {
@@ -120,12 +125,78 @@
       justify-content: center;
       flex-shrink: 0;
       overflow: hidden;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
     }
+    .portrait-placeholder:hover { opacity: 0.9; }
 
     .portrait-placeholder img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* LIGHTBOX STYLES */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-content img,
+    .lightbox-content video {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      transition: opacity 0.2s ease;
+    }
+    .lightbox-close:hover { opacity: 0.6; }
+    .lightbox-close i {
+      width: 32px;
+      height: 32px;
+      color: #fff;
+    }
+    @media (max-width: 768px) {
+      .lightbox-close {
+        top: -48px;
+        right: 0;
+      }
+      .lightbox-close i {
+        width: 28px;
+        height: 28px;
+      }
     }
 
     .quote-block {
@@ -314,8 +385,7 @@
         Je ne me contente pas d'exécuter des idées. Je les fais exister.
        </p>
       </div>
-      <div class="portrait-placeholder">
-       <!-- IMAGE 1 : Photo portrait -->
+      <div class="portrait-placeholder" data-lightbox="image1.png" data-type="image">
        <img src="image1.png" alt="Bryan Froehlich" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'user\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
       </div>
      </div>
@@ -332,17 +402,17 @@
        <p class="text-sm leading-relaxed" style="color: #555;">Interventions rapides, transparence totale</p>
       </div>
 
-      <!-- VIDEO : Vidéo / réparation en cours -->
+      <!-- VIDEO avec lightbox -->
       <div>
        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
-       <div class="img-placeholder" style="height: 360px;">
-        <video width="100%" height="100%" style="object-fit: cover;" autoplay loop muted playsinline>
+       <div id="video-container" class="img-placeholder" style="height: 360px;" data-lightbox="video.mp4" data-type="video">
+        <video id="repair-video" width="100%" height="100%" style="object-fit: cover;" autoplay loop muted playsinline>
          <source src="video.mp4" type="video/mp4">
-         Votre navigateur ne supporte pas la lecture de vidéo.
         </video>
        </div>
-       <p class="text-xs text-center mt-2" style="color: #999;">Aperçu réparation</p>
+       <p class="text-xs text-center mt-2" style="color: #999;">Cliquez pour agrandir</p>
       </div>
+
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">POURQUOI ME FAIRE CONFIANCE ?</h3>
        <div class="skill-block space-y-3">
@@ -380,12 +450,12 @@
         <span class="read-more-link" onclick="toggleProjectDetails('nutrition')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 3 : Capture écran App Nutrition -->
+       <!-- IMAGE 3 : Capture écran App Nutrition avec lightbox -->
        <div class="mt-4">
-        <div class="img-placeholder" style="height: 200px; max-width: 400px;">
+        <div class="img-placeholder" style="height: 200px; max-width: 400px;" data-lightbox="image3.png" data-type="image">
          <img src="image3.png" alt="Application Nutrition - capture d'écran" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
         </div>
-        <p class="text-xs mt-1" style="color: #999;">image3.png — Capture App Nutrition</p>
+        <p class="text-xs mt-1" style="color: #999;">Cliquez pour agrandir</p>
        </div>
 
        <div id="nutrition-details" class="project-details space-y-5">
@@ -458,12 +528,12 @@
         <span class="read-more-link" onclick="toggleProjectDetails('crm')">En savoir plus...</span>
        </div>
 
-       <!-- IMAGE 4 : Interface CRM -->
+       <!-- IMAGE 4 : Interface CRM avec lightbox -->
        <div class="mt-4">
-        <div class="img-placeholder" style="height: 180px; max-width: 500px;">
+        <div class="img-placeholder" style="height: 180px; max-width: 500px;" data-lightbox="image4.png" data-type="image">
          <img src="image4.png" alt="Interface CRM" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
         </div>
-        <p class="text-xs mt-1" style="color: #999;">image4.png — Interface CRM</p>
+        <p class="text-xs mt-1" style="color: #999;">Cliquez pour agrandir</p>
        </div>
 
        <div id="crm-details" class="project-details space-y-5">
@@ -600,11 +670,11 @@
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Email</p>
         <p id="contact-email-display" class="text-sm" style="color: #444;">✉️ contact@frobry.com</p>
        </div>
-       <!-- IMAGE 6 : Icônes contact -->
-       <div class="img-placeholder" style="height: 100px; width: 100px;">
+       <!-- IMAGE 6 : Icônes contact avec lightbox -->
+       <div class="img-placeholder" style="height: 100px; width: 100px;" data-lightbox="image6.png" data-type="image">
         <img src="image6.png" alt="Icônes contact" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
        </div>
-       <p class="text-xs" style="color: #999;">image6.png — Icônes contact</p>
+       <p class="text-xs" style="color: #999;">Cliquez pour agrandir</p>
       </div>
      </div>
     </section>
@@ -614,6 +684,15 @@
    <footer class="container-full py-8" style="border-top: 1px solid #e5e5e5;">
     <p class="text-xs uppercase tracking-widest" style="color: #999;">© 2025 Bryan Froehlich — Tous droits réservés</p>
    </footer>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox">
+   <div class="lightbox-content">
+    <button class="lightbox-close" id="lightbox-close">
+     <i data-lucide="x"></i>
+    </button>
+   </div>
   </div>
 
   <!-- Toast -->
@@ -705,6 +784,101 @@
       toast.textContent = msg;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ==================== LIGHTBOX SYSTEM ====================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.querySelector('.lightbox-content');
+    let currentMedia = null;
+
+    function openLightbox(src, type) {
+      // Nettoyer le contenu précédent
+      if (currentMedia) {
+        currentMedia.remove();
+      }
+      
+      // Créer le nouvel élément
+      if (type === 'video') {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.style.maxWidth = '90vw';
+        video.style.maxHeight = '90vh';
+        video.style.objectFit = 'contain';
+        currentMedia = video;
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = 'Agrandissement';
+        img.style.maxWidth = '90vw';
+        img.style.maxHeight = '90vh';
+        img.style.objectFit = 'contain';
+        currentMedia = img;
+      }
+      
+      // Insérer avant le bouton de fermeture
+      const closeBtn = document.querySelector('.lightbox-close');
+      lightboxContent.insertBefore(currentMedia, closeBtn);
+      
+      // Afficher la lightbox
+      lightbox.classList.add('active');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      if (currentMedia) {
+        // Pour la vidéo, on arrête la lecture
+        if (currentMedia.tagName === 'VIDEO') {
+          currentMedia.pause();
+        }
+        currentMedia.remove();
+        currentMedia = null;
+      }
+    }
+
+    // Ajouter les écouteurs sur tous les éléments avec data-lightbox
+    document.querySelectorAll('[data-lightbox]').forEach(element => {
+      element.addEventListener('click', (e) => {
+        // Éviter que le clic ne se propage si on clique sur un élément enfant
+        e.stopPropagation();
+        const src = element.getAttribute('data-lightbox');
+        const type = element.getAttribute('data-type') || 'image';
+        openLightbox(src, type);
+      });
+    });
+
+    // Fermer avec la croix
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    
+    // Fermer en cliquant sur le fond
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    
+    // Fermer avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    // Fallback pour la vidéo si elle ne charge pas
+    const repairVideo = document.getElementById('repair-video');
+    if (repairVideo) {
+      repairVideo.addEventListener('error', function() {
+        this.style.display = 'none';
+        const container = document.getElementById('video-container');
+        if (container) {
+          container.innerHTML = '<i data-lucide="play" style="width:48px; height:48px; color:#bbb;"></i>';
+          lucide.createIcons();
+          // Re-attacher l'événement lightbox sur le conteneur
+          container.setAttribute('data-lightbox', 'video.mp4');
+          container.setAttribute('data-type', 'video');
+        }
+      });
     }
 
     lucide.createIcons();
