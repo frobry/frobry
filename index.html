@@ -111,10 +111,11 @@
       justify-content: center;
       margin-left: 10px;
       vertical-align: middle;
+      transform: translateY(2px);
     }
     .star-icon svg {
       width: 16px;
-      height: 20px;
+      height: 14px;
       fill: #f5b042;
       stroke: #f5b042;
     }
@@ -385,10 +386,11 @@
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
    <header class="w-full sticky top-0 bg-white z-50">
-    <div class="flex items-center justify-between header-title-margin">
+    <div class="container-full header-spacing">
+     <div class="flex items-center justify-between header-title-margin">
       <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase serif-title" style="letter-spacing: 0.08em;">BRYAN FROEHLICH</h1>
       <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
-    </div>
+     </div>
      <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
       <span class="nav-link active-link" data-tab="accueil">ACCUEIL</span>
       <span class="nav-link" data-tab="services">SERVICES</span>
