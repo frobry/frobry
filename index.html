@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
@@ -38,9 +38,6 @@
     /* Header border aligné avec le contenu */
     header {
       border-bottom: 1px solid #e5e5e5;
-    }
-    header .container-full {
-      border-bottom: none;
     }
 
     .tab-content {
@@ -113,12 +110,19 @@
       align-items: center;
       justify-content: center;
       margin-left: 10px;
+      vertical-align: middle;
     }
     .star-icon svg {
       width: 16px;
-      height: 16px;
+      height: 12px;
       fill: #f5b042;
       stroke: #f5b042;
+    }
+
+    /* Titre avec serif pour plus de classe */
+    .serif-title {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.05em;
     }
 
     .media-container {
@@ -352,8 +356,8 @@
       .burger-btn { display: block; }
       nav { display: none !important; }
       #site-title { font-size: 1.5rem !important; line-height: 1.2; }
-      .flex.items-start.justify-between.mb-6 {
-        align-items: center !important;
+      .flex.items-center.justify-between.mb-6 {
+        margin-bottom: 1rem !important;
       }
     }
     @media (max-width: 480px) {
@@ -366,9 +370,9 @@
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
    <header class="w-full sticky top-0 bg-white z-50">
-    <div class="container-full pt-10 pb-4">
-     <div class="flex items-center justify-between mb-6">
-      <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase" style="letter-spacing: 0.15em;">BRYAN FROEHLICH</h1>
+    <div class="container-full pt-6 pb-0">
+     <div class="flex items-center justify-between mb-4">
+      <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase serif-title" style="letter-spacing: 0.08em;">BRYAN FROEHLICH</h1>
       <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
      </div>
      <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
@@ -499,7 +503,7 @@
      </div>
     </section>
 
-    <!-- PROJETS (affichage direct) -->
+    <!-- PROJETS -->
     <section id="tab-projets" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">PROJETS MARQUANTS</h2>
      <div class="space-y-14">
@@ -640,11 +644,11 @@
      <div class="space-y-8">
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2022 – CÂBLAGE</h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Poyer et fils – Escout</span><br>Travaux de câblage technique, installation et maintenance de réseaux.</p>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Poyer et fils – Escout (France)</span><br>Travaux de câblage technique, installation et maintenance de réseaux.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2021 – FIBRE OPTIQUE</h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Lycée professionnel Guynemer – Oloron-Sainte-Marie</span><br>Installation et maintenance de la fibre optique, diagnostic et raccordement.</p>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Lycée professionnel Guynemer – Oloron-Sainte-Marie (France)</span><br>Installation et maintenance de la fibre optique, diagnostic et raccordement.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2020 – RÉNOVATION INTÉRIEURE</h3>
@@ -652,14 +656,14 @@
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">
-        2019–2020 – INFORMATIQUE & ÉTIQUETAGE
+        2020 – INFORMATIQUE & ÉTIQUETAGE
         <span class="star-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#f5b042" stroke="#f5b042"/>
           </svg>
         </span>
        </h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Domaine Bayard – Monein</span><br>Support informatique, gestion des systèmes, étiquetage des bouteilles de vin.</p>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Domaine Bayard – Monein (France)</span><br>Support informatique, gestion des systèmes, étiquetage des bouteilles de vin.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2019 – RÉNOVATION INTÉRIEURE</h3>
@@ -669,16 +673,16 @@
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">
         2018 – IMMOTIQUE
         <span class="star-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="#f5b042" stroke="#f5b042"/>
           </svg>
         </span>
        </h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Etxebarri</span><br>Systèmes intelligents et domotique, installation et configuration.</p>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Etxebarri (Espagne)</span><br>Systèmes intelligents et domotique, installation et configuration.</p>
       </div>
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2017–2018 – PLOMBERIE</h3>
-       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Alentours de Pau</span><br>Interventions sur installations, rigueur technique, découverte du terrain.</p>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Alentours de Pau (France)</span><br>Interventions sur installations, rigueur technique, découverte du terrain.</p>
       </div>
      </div>
     </section>
