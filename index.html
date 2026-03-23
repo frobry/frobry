@@ -219,27 +219,6 @@
       }
     }
 
-    .read-more-link {
-      color: #000;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: opacity 0.2s;
-      display: inline-block;
-      margin-top: 8px;
-    }
-    .read-more-link:hover { opacity: 0.6; }
-
-    .project-details {
-      display: none;
-      margin-top: 24px;
-      padding-top: 16px;
-      border-top: 1px solid #e5e5e5;
-    }
-    .project-details.visible {
-      display: block;
-    }
-
     .toast-msg {
       position: fixed;
       bottom: 32px;
@@ -359,7 +338,8 @@
       <span class="nav-link" data-tab="services">SERVICES</span>
       <span class="nav-link" data-tab="reparations">RÉPARATIONS</span>
       <span class="nav-link" data-tab="projets">PROJETS</span>
-      <span class="nav-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
+      <span class="nav-link" data-tab="stages">STAGES</span>
+      <span class="nav-link" data-tab="formation">FORMATIONS &amp; LOISIRS</span>
       <span class="nav-link" data-tab="contact">CONTACT</span>
       <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="transition-colors" style="color: #999; margin-left: auto;" title="LinkedIn" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#999'">
        <i data-lucide="linkedin" style="width:18px; height:18px;"></i>
@@ -481,7 +461,7 @@
      </div>
     </section>
 
-    <!-- PROJETS -->
+    <!-- PROJETS (affichage direct, sans images ni boutons) -->
     <section id="tab-projets" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">PROJETS MARQUANTS</h2>
      <div class="space-y-14">
@@ -620,11 +600,46 @@
      </div>
     </section>
 
-    <!-- FORMATION & LOISIRS -->
+    <!-- STAGES -->
+    <section id="tab-stages" class="tab-content">
+     <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">STAGES & EXPÉRIENCES TERRAIN</h2>
+     <div class="space-y-8">
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2022 – CÂBLAGE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Poyer et fils – Escout</span><br>Travaux de câblage technique, installation et maintenance de réseaux.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2021 – FIBRE OPTIQUE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Lycée professionnel Guynemer – Oloron-Sainte-Marie</span><br>Installation et maintenance de la fibre optique, diagnostic et raccordement.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2020 – RÉNOVATION INTÉRIEURE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Bilbao (Espagne)</span><br>Tirage de câble électrique, peinture, travaux manuels, travail en équipe sur chantier.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2019–2020 – INFORMATIQUE & ÉTIQUETAGE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Domaine Bayard – Moulins</span><br>Support informatique, gestion des systèmes, étiquetage des bouteilles de vin.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2019 – RÉNOVATION INTÉRIEURE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Bilbao (Espagne)</span><br>Tirage de câble électrique, peinture, travaux manuels, développement de la polyvalence.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2018 – IMMOTIQUE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Etchebar</span><br>Systèmes intelligents et domotique, installation et configuration.</p>
+      </div>
+      <div class="skill-block">
+       <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2017–2018 – PLOMBERIE</h3>
+       <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Alentours de Pau</span><br>Interventions sur installations, rigueur technique, découverte du terrain.</p>
+      </div>
+     </div>
+    </section>
+
+    <!-- FORMATIONS & LOISIRS -->
     <section id="tab-formation" class="tab-content">
      <div class="space-y-14">
       <div>
-       <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">FORMATION</h2>
+       <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">FORMATIONS</h2>
        <div class="space-y-8">
         <div class="skill-block">
          <h3 class="text-sm font-bold uppercase tracking-widest mb-2">BAC+2 MARKETING SPORTIF — SPS ÉCOLE PAU-BIZANOS<span class="in-progress-badge">EN COURS</span></h3>
@@ -637,10 +652,6 @@
         <div class="skill-block">
          <h3 class="text-sm font-bold uppercase tracking-widest mb-2">BAC PRO SYSTÈMES NUMÉRIQUES (SSIHT)</h3>
          <p class="text-sm" style="color: #555;">Option Sûreté &amp; Sécurité des Infrastructures, de l'Habitat et du Tertiaire.</p>
-        </div>
-        <div class="skill-block">
-         <h3 class="text-sm font-bold uppercase tracking-widest mb-2">STAGES TERRAIN</h3>
-         <p class="text-sm" style="color: #555;">Plomberie, rénovation, chantiers — développement de la polyvalence et du sens pratique.</p>
         </div>
        </div>
       </div>
@@ -726,20 +737,16 @@
     <span class="mobile-menu-link" data-tab="services">SERVICES</span>
     <span class="mobile-menu-link" data-tab="reparations">RÉPARATIONS</span>
     <span class="mobile-menu-link" data-tab="projets">PROJETS</span>
-    <span class="mobile-menu-link" data-tab="formation">FORMATION &amp; LOISIRS</span>
+    <span class="mobile-menu-link" data-tab="stages">STAGES</span>
+    <span class="mobile-menu-link" data-tab="formation">FORMATIONS &amp; LOISIRS</span>
     <span class="mobile-menu-link" data-tab="contact">CONTACT</span>
    </div>
   </div>
 
   <script>
-    // Web3Forms - Clé configurée
-    const WEB3FORMS_KEY = "46d287e2-b83d-4818-989b-91ef8d2f3b5a";
+    // Configuration Web3Forms - REMPLACE TA_CLE_API_WEB3FORMS PAR TA VRAIE CLÉ !
+    const WEB3FORMS_KEY = "TA_CLE_API_WEB3FORMS";
     
-    function toggleProjectDetails(projectName) {
-      const detailsEl = document.getElementById(projectName + '-details');
-      detailsEl.classList.toggle('visible');
-    }
-
     const navLinks = document.querySelectorAll('.nav-link');
     let currentTab = 'accueil';
     let isTransitioning = false;
@@ -805,6 +812,11 @@
 
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
+      
+      if (WEB3FORMS_KEY === "TA_CLE_API_WEB3FORMS") {
+        showToast("⚠️ Configuration : remplacez TA_CLE_API_WEB3FORMS par votre clé Web3Forms", true);
+        return;
+      }
       
       submitBtn.disabled = true;
       submitBtn.textContent = "ENVOI EN COURS...";
