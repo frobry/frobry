@@ -10,8 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body { font-family: 'DM Sans', sans-serif; }
+    html, 
+    body { 
+      height: 100%; margin: 0; 
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .bg-custom {
+      background-color: #fff; 
+    }
 
     .container-full {
       max-width: calc(100% - 200px);
@@ -35,7 +42,6 @@
       }
     }
 
-    /* Header border aligné avec le contenu */
     header {
       border-bottom: 1px solid #e5e5e5;
     }
@@ -50,25 +56,6 @@
     }
     .tab-content.visible {
       opacity: 1;
-    }
-
-    .nav-link {
-      position: relative;
-      letter-spacing: 0.08em;
-      font-size: 13px;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-    .nav-link:hover { opacity: 0.5; }
-    .nav-link.active-link { font-weight: 700; }
-    .nav-link.active-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 1.5px;
-      background: #000;
     }
 
     .form-field {
@@ -104,7 +91,6 @@
 
     .skill-block { border-left: 2px solid #000; padding-left: 24px; }
 
-    /* Style pour l'étoile jaune */
     .star-icon {
       display: inline-flex;
       align-items: center;
@@ -120,7 +106,6 @@
       stroke: #f5b042;
     }
 
-    /* Titre avec serif pour plus de classe */
     .serif-title {
       font-family: 'Playfair Display', serif;
       letter-spacing: 0.05em;
@@ -134,6 +119,7 @@
       cursor: pointer;
       transition: opacity 0.2s ease;
       overflow: hidden;
+      border-radius: 0;
     }
     .media-container:hover { opacity: 0.9; }
     
@@ -155,6 +141,7 @@
       transition: opacity 0.2s ease;
       max-width: 320px;
       width: 100%;
+      border-radius: 0;
     }
     .portrait-container:hover { opacity: 0.9; }
     
@@ -277,154 +264,562 @@
     }
 
     .burger-btn {
-      display: none;
       background: none;
       border: none;
       cursor: pointer;
       padding: 8px;
-      margin-left: auto;
       line-height: 1;
     }
     .burger-btn i {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
       color: #000;
       display: block;
     }
 
-    .mobile-menu {
+    /* MENU OVERLAY style ZARA - 3 COLONNES AVEC ANIMATION WINDOWS 8 */
+    .menu-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #fff;
-      z-index: 100;
+      background: #faf7f2;
+      z-index: 1000;
       display: none;
-      flex-direction: column;
-      padding: 24px;
       overflow-y: auto;
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu-header {
+    .menu-overlay.open {
+      display: block;
+      opacity: 1;
+    }
+    .menu-inner {
+      width: 100%;
+      min-height: 100%;
+      padding: 0;
+    }
+    /* Header fixe dans le menu */
+    .menu-header {
+      position: sticky;
+      top: 0;
+      background: #faf7f2;
+      z-index: 10;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #e5e5e5;
+      align-items: flex-start;
+      padding: 60px 0 40px 0;
+      margin-bottom: 20px;
     }
-    .mobile-menu-header h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+    @media (max-width: 768px) {
+      .menu-header {
+        padding: 32px 0 24px 0;
+      }
+    }
+    .menu-header-left {
+      overflow: hidden;
+      padding-left: 0px;
+    }
+    .menu-header-left h1 {
+      font-size: 8rem;
+      font-weight: 400;
+      letter-spacing: -0.12em;
+      font-family: 'Playfair Display', serif;
       margin: 0;
-      line-height: 1.2;
+      line-height: 0.85;
+      transform: translateX(-12px);
     }
-    .mobile-menu-close {
+    .menu-header-right {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .menu-header-right button {
       background: none;
       border: none;
       cursor: pointer;
       padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .mobile-menu-close i {
-      width: 24px;
-      height: 24px;
+    .menu-header-right button i {
+      width: 28px;
+      height: 28px;
       color: #000;
-      display: block;
     }
-    .mobile-menu-links {
+    .menu-grid {
+      display: flex;
+      gap: 60px;
+      padding-bottom: 60px;
+      transform: translateX(0);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+    }
+    .menu-overlay.open .menu-grid {
+      animation: subtleShift 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    @keyframes subtleShift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-8px); }
+    }
+    .menu-col-1,
+    .menu-col-2,
+    .menu-col-3-horizontal {
+      opacity: 0;
+      transform: scale(0.96) translateX(30px);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.35s ease;
+    }
+    .menu-overlay.open .menu-col-1 {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+      transition-delay: 0.05s;
+    }
+    .menu-overlay.open .menu-col-2 {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+      transition-delay: 0.15s;
+    }
+    .menu-overlay.open .menu-col-3-horizontal {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+      transition-delay: 0.25s;
+    }
+    /* Fermeture animation */
+    .menu-overlay:not(.open) .menu-col-1,
+    .menu-overlay:not(.open) .menu-col-2,
+    .menu-overlay:not(.open) .menu-col-3-horizontal,
+    .menu-overlay:not(.open) .menu-header {
+      transition: transform 0.2s ease, opacity 0.18s ease;
+      transform: scale(0.96) translateX(-20px);
+      opacity: 0;
+    }
+
+    /* COLONNES 1 et 2 : scroll vertical individuel */
+    .menu-col-1,
+    .menu-col-2 {
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      max-height: 70vh;
+    }
+    .menu-col-1::-webkit-scrollbar,
+    .menu-col-2::-webkit-scrollbar {
+      display: none;
+    }
+    .menu-col-1 {
+      flex: 0 0 280px;
+    }
+    .menu-col-2 {
+      flex: 0 0 320px;
+    }
+
+    /* COLONNE 3 : images horizontales avec scroll horizontal */
+    .menu-col-3-horizontal {
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+    }
+    .menu-col-3-horizontal::-webkit-scrollbar {
+      height: 4px;
+    }
+    .menu-col-3-horizontal::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+    .menu-col-3-horizontal::-webkit-scrollbar-thumb {
+      background: #ccc;
+    }
+    .menu-images-horizontal {
+      display: inline-flex;
+      gap: 24px;
+      padding-bottom: 20px;
+    }
+    .menu-image-item {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      flex: 1;
+      gap: 8px;
+      width: 180px;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    .mobile-menu-link {
-      font-size: 18px;
-      font-weight: 400;
+    .menu-overlay.open .menu-image-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    /* Stagger animation pour les images */
+    .menu-overlay.open .menu-image-item:nth-child(1) { transition-delay: 0.3s; }
+    .menu-overlay.open .menu-image-item:nth-child(2) { transition-delay: 0.35s; }
+    .menu-overlay.open .menu-image-item:nth-child(3) { transition-delay: 0.4s; }
+    .menu-overlay.open .menu-image-item:nth-child(4) { transition-delay: 0.45s; }
+    .menu-overlay.open .menu-image-item:nth-child(5) { transition-delay: 0.5s; }
+    .menu-overlay.open .menu-image-item:nth-child(6) { transition-delay: 0.55s; }
+    .menu-image-item img,
+    .menu-image-item video {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+    .menu-image-caption {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      text-align: left;
+    }
+    .menu-section {
+      margin-bottom: 48px;
+    }
+    .menu-section-title {
+      font-size: 0.7rem;
+      font-weight: 500;
       letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 20px;
+    }
+    .menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .menu-link {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: opacity 0.2s ease;
-      color: #000;
-      text-transform: uppercase;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
     }
-    .mobile-menu-link:hover { opacity: 0.6; }
+    .menu-link:hover {
+      opacity: 0.6;
+    }
+    .menu-sub-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+      padding-left: 0;
+    }
+    .menu-sub-link {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+      color: #333;
+    }
+    .menu-sub-link:hover {
+      opacity: 0.6;
+    }
 
-    /* Styles spécifiques pour ordinateur et mobile */
-    @media (min-width: 769px) {
-      .header-spacing {
-        padding-top: 2.5rem !important; /* pt-10 sur ordi */
-        padding-bottom: 1rem !important; /* pb-4 sur ordi */
+    /* Responsive: sur tablette, passage en colonne */
+    @media (max-width: 1200px) {
+      .menu-grid {
+        flex-direction: column;
+        gap: 48px;
       }
-      .header-title-margin {
-        margin-bottom: 1.5rem !important; /* mb-6 sur ordi */
+      .menu-col-1,
+      .menu-col-2,
+      .menu-col-3-horizontal {
+        flex: auto;
+        max-height: none;
+        overflow-y: visible;
+        overflow-x: visible;
       }
+      .menu-images-horizontal {
+        flex-direction: column;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .menu-image-item {
+        width: 100%;
+        max-width: 280px;
+      }
+      .menu-link {
+        font-size: 1.2rem;
+      }
+    }
+    
+    /* Mobile : padding sur le contenu du menu (12px de chaque côté) */
+    @media (max-width: 768px) {
+      .menu-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .menu-header {
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        width: calc(100% + 24px);
+      }
+      .menu-header-left h1 {
+        font-size: 3.5rem;
+      }
+      .menu-link {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Header plus grand */
+    .header-spacing {
+      padding-top: 4rem;
+      padding-bottom: 1rem;
+    }
+    .header-title-margin {
+      margin-bottom: 1.5rem;
     }
 
     @media (max-width: 768px) {
-      .burger-btn { display: block; }
-      nav { display: none !important; }
-      #site-title { font-size: 1.5rem !important; line-height: 1.2; }
-      .flex.items-center.justify-between.mb-6 {
-        margin-bottom: 1rem !important;
-      }
       .header-spacing {
-        padding-top: 1.5rem !important; /* pt-6 sur mobile */
-        padding-bottom: 1rem !important; /* pb-4 sur mobile - inchangé pour garder la ligne à la même place */
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+      }
+      .header-title-margin {
+        margin-bottom: 1rem;
       }
     }
-    @media (max-width: 480px) {
-      #site-title { font-size: 1.2rem !important; letter-spacing: 0.1em !important; }
+
+    .footer-link {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover {
+      color: #000;
+    }
+    .social-icon {
+      transition: opacity 0.2s ease;
+    }
+    .social-icon:hover {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .hide-on-mobile {
+        display: none;
+      }
+    }
+
+    .accueil-text {
+      color: #555;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .accueil-text p {
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .accueil-text {
+        font-size: 0.9rem;
+      }
     }
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full bg-white text-black">
+ <body class="h-full bg-custom text-black">
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
-   <header class="w-full sticky top-0 bg-white z-50">
+   <header class="w-full sticky top-0 bg-custom z-50">
     <div class="container-full header-spacing">
      <div class="flex items-center justify-between header-title-margin">
-      <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase serif-title" style="letter-spacing: 0.08em;">BRYAN FROEHLICH</h1>
+      <div>
+       <h1 id="site-title" class="text-3xl font-bold tracking-widest uppercase serif-title" style="letter-spacing: 0.08em;">BRYAN FROEHLICH</h1>
+      </div>
       <button class="burger-btn" id="burger-btn"><i data-lucide="menu"></i></button>
      </div>
-     <nav class="flex flex-wrap gap-6 items-center" id="main-nav">
-      <span class="nav-link active-link" data-tab="accueil">ACCUEIL</span>
-      <span class="nav-link" data-tab="services">SERVICES</span>
-      <span class="nav-link" data-tab="reparations">RÉPARATIONS</span>
-      <span class="nav-link" data-tab="projets">PROJETS</span>
-      <span class="nav-link" data-tab="stages">STAGES</span>
-      <span class="nav-link" data-tab="formation">FORMATIONS &amp; LOISIRS</span>
-      <span class="nav-link" data-tab="contact">CONTACT</span>
-      <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="transition-colors" style="color: #999; margin-left: auto;" title="LinkedIn" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#999'">
-       <i data-lucide="linkedin" style="width:18px; height:18px;"></i>
-      </a>
-     </nav>
     </div>
    </header>
+
+   <!-- MENU OVERLAY style ZARA - 3 COLONNES -->
+   <div id="menu-overlay" class="menu-overlay">
+    <div class="container-full menu-inner">
+     <div class="menu-header">
+      <div class="menu-header-left">
+       <h1>FROBRY</h1>
+      </div>
+      <div class="menu-header-right">
+       <button class="search-btn" id="search-btn">
+        <i data-lucide="search"></i>
+       </button>
+       <button class="menu-close" id="menu-close">
+        <i data-lucide="x"></i>
+       </button>
+      </div>
+     </div>
+     <div class="menu-grid">
+      <!-- COLONNE 1 : scroll vertical individuel -->
+      <div class="menu-col-1">
+       <div class="menu-section">
+        <div class="menu-section-title">ESSENTIEL</div>
+        <div class="menu-links">
+         <span class="menu-link" data-tab="accueil">ACCUEIL</span>
+        </div>
+       </div>
+       <div class="menu-section">
+        <div class="menu-section-title">CRÉATIONS</div>
+        <div class="menu-links">
+         <span class="menu-link" data-tab="services">SERVICES</span>
+         <span class="menu-link" data-tab="reparations">RÉPARATIONS</span>
+         <span class="menu-link" data-tab="projets">PROJETS</span>
+        </div>
+       </div>
+       <div class="menu-section">
+        <div class="menu-section-title">EXPÉRIENCES</div>
+        <div class="menu-links">
+         <span class="menu-link" data-tab="stages">STAGES</span>
+         <span class="menu-link" data-tab="formation">FORMATIONS & LOISIRS</span>
+        </div>
+       </div>
+       <div class="menu-section">
+        <div class="menu-section-title">ÉCHANGE</div>
+        <div class="menu-links">
+         <span class="menu-link" data-tab="contact">CONTACT</span>
+        </div>
+       </div>
+      </div>
+
+      <!-- COLONNE 2 : scroll vertical individuel -->
+      <div class="menu-col-2">
+       <div class="menu-section">
+        <div class="menu-section-title">COMPÉTENCES</div>
+        <div class="menu-sub-links">
+         <span class="menu-sub-link" data-tab="services">SITES INTERNET</span>
+         <span class="menu-sub-link" data-tab="services">APPLICATIONS MOBILES</span>
+         <span class="menu-sub-link" data-tab="services">CRM SUR MESURE</span>
+         <span class="menu-sub-link" data-tab="reparations">RÉPARATION TÉLÉPHONES</span>
+         <span class="menu-sub-link" data-tab="reparations">RÉPARATION TABLETTES</span>
+         <span class="menu-sub-link" data-tab="reparations">DIAGNOSTIC</span>
+        </div>
+       </div>
+       <div class="menu-section">
+        <div class="menu-section-title">RÉALISATIONS</div>
+        <div class="menu-sub-links">
+         <span class="menu-sub-link" data-tab="projets">APPLICATION NUTRITION</span>
+         <span class="menu-sub-link" data-tab="projets">CRM ENTREPRISE</span>
+        </div>
+       </div>
+       <div class="menu-section">
+        <div class="menu-section-title">TERRAIN</div>
+        <div class="menu-sub-links">
+         <span class="menu-sub-link" data-tab="stages">CÂBLAGE</span>
+         <span class="menu-sub-link" data-tab="stages">FIBRE OPTIQUE</span>
+         <span class="menu-sub-link" data-tab="stages">RÉNOVATION</span>
+         <span class="menu-sub-link" data-tab="stages">INFORMATIQUE</span>
+         <span class="menu-sub-link" data-tab="stages">IMMOTIQUE</span>
+         <span class="menu-sub-link" data-tab="stages">PLOMBERIE</span>
+        </div>
+       </div>
+      </div>
+
+      <!-- COLONNE 3 : IMAGES HORIZONTALES avec scroll horizontal -->
+      <div class="menu-col-3-horizontal">
+       <div class="menu-images-horizontal">
+        <div class="menu-image-item">
+         <img src="menu-image1.png" alt="" data-lightbox="menu-image1.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
+         <div class="menu-image-caption">CHANGEMENT PORT DE CHARGE</div>
+        </div>
+        <div class="menu-image-item">
+         <img src="menu-image2.png" alt="" data-lightbox="menu-image2.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
+         <div class="menu-image-caption">CABLAGE</div>
+        </div>
+        <div class="menu-image-item">
+         <img src="menu-image3.png" alt="" data-lightbox="menu-image3.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
+         <div class="menu-image-caption">REINSTALLATION OS</div>
+        </div>
+        <div class="menu-image-item">
+         <img src="menu-image4.png" alt="" data-lightbox="menu-image4.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
+         <div class="menu-image-caption">BYPASS LEGAL</div>
+        </div>
+        <div class="menu-image-item">
+         <img src="menu-image5.png" alt="" data-lightbox="menu-image5.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
+         <div class="menu-image-caption">REPARATION TEL</div>
+        </div>
+        <div class="menu-image-item" id="menu-video-item" style="display: none;">
+         <video autoplay loop muted playsinline data-lightbox="menu-video.mp4" data-type="video">
+          <source src="menu-video.mp4" type="video/mp4">
+         </video>
+         <div class="menu-image-caption">SANS NOM</div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
 
    <main class="container-full py-12">
 
     <!-- ACCUEIL -->
     <section id="tab-accueil" class="tab-content active visible">
-     <div class="flex flex-col md:flex-row gap-12 items-start">
+     <div class="flex flex-col md:flex-row gap-8 items-start mb-16">
       <div class="flex-1">
-       <h2 class="text-xs uppercase tracking-widest mb-8 font-bold" style="letter-spacing: 0.15em;">CRÉER, IMAGINER, CONSTRUIRE</h2>
-       <p id="hero-intro" class="text-sm leading-relaxed" style="color: #555; max-width: 580px;">
-        Depuis toujours, j'ai ce besoin de partir d'une idée — parfois simple, parfois ambitieuse — et de la transformer en quelque chose de réel, utile et concret.<br><br>
-        Depuis quelques années, j'explore et développe cet état d'esprit à travers la création de sites internet, d'applications mobiles, la réparation mobile et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.<br><br>
-        Observer, comprendre, imaginer des solutions, puis les construire.<br><br>
-        Chaque projet est pour moi une opportunité de créer quelque chose de nouveau, d'optimiser ce qui existe déjà, ou de répondre à un besoin de manière plus intelligente.<br><br>
-        Aujourd'hui, je combine créativité, technique et vision pour concevoir des outils qui ne sont pas juste fonctionnels — mais utiles, évolutifs et pensés pour avoir un réel impact.<br><br>
-        Autonome, curieux, toujours en train de tester, apprendre et améliorer.<br><br>
-        Je ne me contente pas d'exécuter des idées. Je les fais exister.
-       </p>
+       <h2 class="text-xs uppercase tracking-widest mb-6 font-bold" style="letter-spacing: 0.15em;">CRÉER, IMAGINER, CONSTRUIRE</h2>
+       <div class="accueil-text">
+        <p>Depuis toujours, j'ai ce besoin de partir d'une idée — parfois simple, parfois ambitieuse — et de la transformer en quelque chose de réel, utile et concret.</p>
+        <p>Depuis quelques années, j'explore et développe cet état d'esprit à travers la création de sites internet, d'applications mobiles, la réparation mobile et les systèmes digitaux. Mais ce qui me définit vraiment, ce n'est pas seulement ce que je fais — c'est ma manière de penser.</p>
+        <p>Observer, comprendre, imaginer des solutions, puis les construire.</p>
+        <p>Chaque projet est pour moi une opportunité de créer quelque chose de nouveau, d'optimiser ce qui existe déjà, ou de répondre à un besoin de manière plus intelligente.</p>
+        <p>Aujourd'hui, je combine créativité, technique et vision pour concevoir des outils qui ne sont pas juste fonctionnels — mais utiles, évolutifs et pensés pour avoir un réel impact.</p>
+        <p>Autonome, curieux, toujours en train de tester, apprendre et améliorer.</p>
+        <p>Je ne me contente pas d'exécuter des idées. Je les fais exister.</p>
+       </div>
       </div>
       <div class="portrait-container" data-lightbox="image1.png" data-type="image">
        <img src="image1.png" alt="Bryan Froehlich" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'user\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+      </div>
+     </div>
+
+     <div class="flex flex-col md:flex-row gap-8 items-start mb-16">
+      <div class="w-full md:w-1/2">
+       <div class="media-container" data-lightbox="image7.png" data-type="image">
+        <img src="image7.png" alt="Création de sites et applications" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'code\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+       </div>
+       <p class="text-xs text-center mt-2" style="color: #999;">Cliquez pour agrandir</p>
+      </div>
+      <div class="w-full md:w-1/2">
+       <div class="accueil-text">
+        <p><strong class="font-bold uppercase tracking-wide text-xs" style="letter-spacing: 0.1em;">Créer une application ou un système digital</strong></p>
+        <p class="mt-2">Créer une application ou un système digital aujourd'hui ne se résume plus à écrire du code. C'est comprendre un besoin, structurer une logique, anticiper des usages, et construire quelque chose de fiable, évolutif et cohérent.</p>
+        <p>Dans mon approche, chaque projet commence par une phase d'observation et de réflexion. Je conçois l'architecture, j'organise les flux de données et je mets en place des bases solides pour que le produit fonctionne efficacement sur le long terme.</p>
+        <p>Je travaille sur des environnements modernes, en combinant développement front-end et back-end. J'utilise notamment des bases de données comme MongoDB pour structurer et exploiter les données de manière flexible, ainsi que des outils d'optimisation et de sécurité comme Cloudflare pour assurer performance et stabilité. L'objectif n'est pas seulement que ça fonctionne, mais que ce soit rapide, sécurisé et scalable.</p>
+        <p>L'intelligence artificielle fait aussi partie de mon processus de travail. Je m'appuie sur des outils avancés pour accélérer certaines tâches complexes, automatiser des logiques et améliorer la productivité, tout en gardant un contrôle total sur la structure et la qualité du code produit. C'est un levier, pas un raccourci.</p>
+        <p>Je maîtrise également les différentes étapes de mise en production : préparation des builds, gestion des environnements, déploiement et publication sur les plateformes comme l'App Store. Chaque détail compte, du fonctionnement interne jusqu'à l'expérience utilisateur finale.</p>
+        <p>Au-delà de la technique, ce qui me caractérise, c'est ma capacité à transformer une idée en un système concret, structuré et utilisable. Je ne me contente pas de développer : je conçois des solutions digitales pensées pour durer, évoluer et répondre à de vrais besoins.</p>
+        <button onclick="switchTab('projets')" class="quote-btn mt-4">VOIR LES PROJETS</button>
+       </div>
+      </div>
+     </div>
+
+     <div class="flex flex-col md:flex-row gap-8 items-start">
+      <div class="w-full md:w-1/2">
+       <div class="accueil-text">
+        <p><strong class="font-bold uppercase tracking-wide text-xs" style="letter-spacing: 0.1em;">Comprendre le hardware, réparer et optimiser</strong></p>
+        <p class="mt-2">Comprendre un système digital, ce n'est pas seulement savoir le coder. C'est aussi savoir comment il fonctionne physiquement, comment il s'use, comment il se répare et comment lui redonner une seconde vie.</p>
+        <p>Depuis plusieurs années, je développe une expertise dans la réparation et l'optimisation d'appareils électroniques : smartphones, ordinateurs portables, MacBook, et autres systèmes du quotidien. J'interviens sur des problématiques variées, allant du simple remplacement de composants jusqu'à des opérations plus techniques.</p>
+        <p>Je réalise des réparations matérielles comme le changement de batteries, d'écrans ou de disques de stockage, mais aussi des optimisations complètes de systèmes. Cela inclut par exemple la réinstallation d'environnements propres, l'amélioration des performances sur des machines devenues lentes, ou encore l'adaptation de systèmes d'exploitation plus récents sur des appareils considérés comme obsolètes.</p>
+        <p>Cette approche me permet de prolonger la durée de vie des appareils et d'optimiser leur utilisation, plutôt que de les remplacer systématiquement.</p>
+        <p>J'interviens également sur des situations plus complexes liées à l'accès aux appareils, dans un cadre strictement légitime et vérifié. L'objectif est d'apporter des solutions à des utilisateurs confrontés à des blocages techniques qu'ils ne peuvent pas résoudre seuls, tout en respectant les règles et la propriété des appareils.</p>
+        <p>Ce travail demande rigueur, précision et compréhension approfondie des systèmes, aussi bien software que hardware. Chaque intervention est différente et nécessite une analyse adaptée.</p>
+        <p>C'est cette double compétence — technique et pratique — qui me permet aujourd'hui d'avoir une vision globale : concevoir des outils digitaux d'un côté, et comprendre en profondeur les machines qui les font fonctionner de l'autre.</p>
+        <button onclick="switchTab('reparations')" class="quote-btn mt-4">VOIR LES RÉPARATIONS</button>
+       </div>
+      </div>
+      <div class="w-full md:w-1/2">
+       <div class="media-container" data-lightbox="video2.mp4" data-type="video">
+        <video autoplay loop muted playsinline>
+         <source src="video2.mp4" type="video/mp4">
+        </video>
+       </div>
+       <p class="text-xs text-center mt-2" style="color: #999;">Cliquez pour agrandir</p>
       </div>
      </div>
     </section>
@@ -446,6 +841,11 @@
         <li>• Interface administrable facile à gérer</li>
        </ul>
       </div>
+      <div class="media-container" style="max-width: 500px;" data-lightbox="image8.png" data-type="image">
+       <img src="image8.png" alt="Création de sites internet" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'monitor\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+      </div>
+      <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
+
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-3">CRÉATION D'APPLICATIONS MOBILES</h3>
        <p class="text-sm leading-relaxed" style="color: #555; margin-bottom: 12px;">
@@ -456,9 +856,13 @@
         <li>• Conception UI/UX soignée</li>
         <li>• Backend et base de données</li>
         <li>• Publication et suivi</li>
-        <li>• Exemple concret : App Nutrition (disponible sur l'App Store)</li>
        </ul>
       </div>
+      <div class="media-container" style="max-width: 400px;" data-lightbox="image9.png" data-type="image">
+       <img src="image9.png" alt="Applications mobiles" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'smartphone\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+      </div>
+      <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
+
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-3">AUTRES PRESTATIONS</h3>
        <ul class="text-sm leading-relaxed space-y-2 ml-4" style="color: #555;">
@@ -468,7 +872,7 @@
         <li>• Maintenance et évolution de projets existants</li>
        </ul>
       </div>
-      <div class="mt-8 pt-4 text-center">
+      <div class="mt-8 pt-4 text-left">
        <p class="text-sm leading-relaxed mb-4" style="color: #555;">
         Chaque projet est unique. Contactez-moi pour discuter de vos besoins et obtenir un devis personnalisé, sans engagement.
        </p>
@@ -487,15 +891,25 @@
        <p class="text-sm leading-relaxed" style="color: #555;">Clientèle fidèle sur Pau et environs</p>
        <p class="text-sm leading-relaxed" style="color: #555;">Interventions rapides, transparence totale</p>
       </div>
-      <div>
-       <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
-       <div id="video-container" class="media-container" data-lightbox="video.mp4" data-type="video">
-        <video id="repair-video" autoplay loop muted playsinline>
-         <source src="video.mp4" type="video/mp4">
-        </video>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       <div>
+        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
+        <div id="media-container" class="media-container" data-lightbox="video.mp4" data-type="video">
+         <video id="repair-video" autoplay loop muted playsinline>
+          <source src="video.mp4" type="video/mp4">
+         </video>
+        </div>
+        <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
        </div>
-       <p class="text-xs text-center mt-2" style="color: #999;">Cliquez pour agrandir</p>
+       <div>
+        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">REMPLACEMENT BATTERIE</h3>
+        <div class="media-container" data-lightbox="image13.png" data-type="image">
+         <img src="image13.png" alt="Expériences terrain" onerror="this.style.display='none'; this.parentElement.innerHTML='&lt;i data-lucide=\'briefcase\' style=\'width:48px; height:48px; color:#bbb;\'&gt;&lt;/i&gt;'; lucide.createIcons();">
+        </div>
+        <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
+       </div>
       </div>
+
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">POURQUOI ME FAIRE CONFIANCE ?</h3>
        <div class="skill-block space-y-3">
@@ -505,6 +919,7 @@
         <p class="text-sm leading-relaxed" style="color: #555;">✓ Suivi client personnalisé</p>
        </div>
       </div>
+
       <div class="space-y-4">
        <h3 class="text-xs uppercase tracking-widest font-bold" style="letter-spacing: 0.15em;">PRESTATIONS</h3>
        <div class="skill-block space-y-3">
@@ -657,7 +1072,8 @@
     <!-- STAGES -->
     <section id="tab-stages" class="tab-content">
      <h2 class="text-xs uppercase tracking-widest mb-10 font-bold" style="letter-spacing: 0.15em;">STAGES & EXPÉRIENCES TERRAIN</h2>
-     <div class="space-y-8">
+
+     <div class="space-y-8 mb-12">
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2022 – CÂBLAGE</h3>
        <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Poyer et fils – Escout (France)</span><br>Travaux de câblage technique, installation et maintenance de réseaux.</p>
@@ -699,6 +1115,26 @@
       <div class="skill-block">
        <h3 class="text-sm font-bold uppercase tracking-widest mb-2">2017–2018 – PLOMBERIE</h3>
        <p class="text-sm leading-relaxed" style="color: #555;"><span class="font-medium">Alentours de Pau (France)</span><br>Interventions sur installations, rigueur technique, découverte du terrain.</p>
+      </div>
+     </div>
+
+     <!-- Images/vidéos placées en bas de la section -->
+     <div class="mt-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       <div>
+        <div class="media-container" data-lightbox="image12.png" data-type="image">
+         <img src="image12.png" alt="Expériences terrain" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'briefcase\' style=\'width:48px; height:48px; color:#bbb;\'></i>'; lucide.createIcons();">
+        </div>
+        <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
+       </div>
+       <div>
+        <div class="media-container" data-lightbox="video4.mp4" data-type="video">
+         <video autoplay loop muted playsinline>
+          <source src="video4.mp4" type="video/mp4">
+         </video>
+        </div>
+        <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
+       </div>
       </div>
      </div>
     </section>
@@ -767,11 +1203,17 @@
       <div class="md:w-80 space-y-6">
        <div>
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Téléphone</p>
-        <p id="contact-phone" class="text-sm" style="color: #444;">+33 7 66 06 18 85</p>
+        <div class="flex items-center gap-2">
+         <i data-lucide="phone" style="width: 16px; height: 16px; color: #666;"></i>
+         <p id="contact-phone" class="text-sm" style="color: #444;">+33 7 66 06 18 85</p>
+        </div>
        </div>
        <div>
         <p class="text-xs uppercase tracking-widest font-bold mb-2">Email</p>
-        <p id="contact-email-display" class="text-sm" style="color: #444;">contact@frobry.com</p>
+        <div class="flex items-center gap-2">
+         <i data-lucide="mail" style="width: 16px; height: 16px; color: #666;"></i>
+         <p id="contact-email-display" class="text-sm" style="color: #444;">contact@frobry.com</p>
+        </div>
        </div>
        <div class="media-container" style="max-width: 100px;" data-lightbox="image6.png" data-type="image">
         <img src="image6.png" alt="Icônes contact" style="width:100%; height:auto;" onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'mail\' style=\'width:36px; height:36px; color:#bbb;\'></i>'; lucide.createIcons();">
@@ -782,8 +1224,51 @@
     </section>
    </main>
 
-   <footer class="container-full py-8" style="border-top: 1px solid #e5e5e5;">
-    <p class="text-xs uppercase tracking-widest" style="color: #999;">© 2026 Bryan Froehlich — Tous droits réservés</p>
+   <!-- FOOTER -->
+   <footer class="container-full py-12 mt-8" style="border-top: 1px solid #e5e5e5;">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+     <div>
+      <h3 class="text-sm font-bold uppercase tracking-widest mb-4 serif-title">BRYAN FROEHLICH</h3>
+      <p class="text-xs" style="color: #999;">CRÉER, IMAGINER, CONSTRUIRE</p>
+     </div>
+     <div>
+      <h3 class="text-xs font-bold uppercase tracking-widest mb-4">NAVIGATION</h3>
+      <ul class="space-y-2">
+       <li><a href="#" class="footer-link text-xs" data-tab-link="accueil">ACCUEIL</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="services">SERVICES</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="reparations">RÉPARATIONS</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="projets">PROJETS</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="stages">STAGES</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="formation">FORMATIONS & LOISIRS</a></li>
+       <li><a href="#" class="footer-link text-xs" data-tab-link="contact">CONTACT</a></li>
+      </ul>
+     </div>
+     <div>
+      <h3 class="text-xs font-bold uppercase tracking-widest mb-4">CONTACT</h3>
+      <div class="flex items-center gap-2 mb-2">
+       <i data-lucide="phone" style="width: 16px; height: 16px; color: #666;"></i>
+       <p class="text-xs" style="color: #666;">+33 7 66 06 18 85</p>
+      </div>
+      <div class="flex items-center gap-2 mb-4">
+       <i data-lucide="mail" style="width: 16px; height: 16px; color: #666;"></i>
+       <p class="text-xs" style="color: #666;">contact@frobry.com</p>
+      </div>
+      <div class="flex gap-4 mt-2">
+       <a href="https://fr.linkedin.com/in/bryan-froehlich-b96405189" target="_blank" rel="noopener noreferrer" class="social-icon" style="color: #666;">
+        <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+       </a>
+       <a href="https://instagram.com/com.frobry.connect" target="_blank" rel="noopener noreferrer" class="social-icon" style="color: #666;">
+        <i data-lucide="instagram" style="width: 20px; height: 20px;"></i>
+       </a>
+       <a href="https://youtube.com/@frobry" target="_blank" rel="noopener noreferrer" class="social-icon" style="color: #666;">
+        <i data-lucide="youtube" style="width: 20px; height: 20px;"></i>
+       </a>
+      </div>
+     </div>
+    </div>
+    <div class="mt-8 pt-4 border-t border-gray-100">
+     <p class="text-xs uppercase tracking-widest" style="color: #999;">© 2026 Bryan Froehlich — Tous droits réservés</p>
+    </div>
    </footer>
   </div>
 
@@ -795,26 +1280,10 @@
 
   <div id="toast" class="toast-msg"></div>
 
-  <div id="mobile-menu" class="mobile-menu">
-   <div class="mobile-menu-header">
-    <h2 class="text-xl font-bold serif-title" style="letter-spacing: 0.1em;">MENU</h2>
-    <button class="mobile-menu-close" id="close-menu-btn"><i data-lucide="x"></i></button>
-   </div>
-   <div class="mobile-menu-links">
-    <span class="mobile-menu-link" data-tab="accueil">ACCUEIL</span>
-    <span class="mobile-menu-link" data-tab="services">SERVICES</span>
-    <span class="mobile-menu-link" data-tab="reparations">RÉPARATIONS</span>
-    <span class="mobile-menu-link" data-tab="projets">PROJETS</span>
-    <span class="mobile-menu-link" data-tab="stages">STAGES</span>
-    <span class="mobile-menu-link" data-tab="formation">FORMATIONS &amp; LOISIRS</span>
-    <span class="mobile-menu-link" data-tab="contact">CONTACT</span>
-   </div>
-  </div>
-
   <script>
     const WEB3FORMS_KEY = "46d287e2-b83d-4818-989b-91ef8d2f3b5a";
     
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('[data-tab], [data-tab-link], .menu-link, .menu-sub-link');
     let currentTab = 'accueil';
     let isTransitioning = false;
 
@@ -822,9 +1291,10 @@
       if (tabName === currentTab || isTransitioning) return;
       isTransitioning = true;
 
-      navLinks.forEach(link => {
-        link.classList.toggle('active-link', link.dataset.tab === tabName);
-      });
+      const menuOverlay = document.getElementById('menu-overlay');
+      if (menuOverlay.classList.contains('open')) {
+        menuOverlay.classList.remove('open');
+      }
 
       const currentEl = document.getElementById('tab-' + currentTab);
       currentEl.classList.remove('visible');
@@ -845,21 +1315,21 @@
     }
 
     navLinks.forEach(link => {
-      link.addEventListener('click', () => switchTab(link.dataset.tab));
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabName = link.getAttribute('data-tab') || link.getAttribute('data-tab-link');
+        if (tabName) switchTab(tabName);
+      });
     });
 
     const burgerBtn = document.getElementById('burger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const closeMenuBtn = document.getElementById('close-menu-btn');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuClose = document.getElementById('menu-close');
 
-    burgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
-    closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    mobileMenuLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        switchTab(link.dataset.tab);
-        mobileMenu.classList.remove('open');
-      });
+    burgerBtn.addEventListener('click', () => menuOverlay.classList.add('open'));
+    menuClose.addEventListener('click', () => menuOverlay.classList.remove('open'));
+    menuOverlay.addEventListener('click', (e) => {
+      if (e.target === menuOverlay) menuOverlay.classList.remove('open');
     });
 
     function showToast(msg, isError = false) {
@@ -878,11 +1348,6 @@
 
     contactForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      
-      if (WEB3FORMS_KEY === "TA_CLE_API_WEB3FORMS") {
-        showToast("⚠️ Configuration : remplacez TA_CLE_API_WEB3FORMS par votre clé Web3Forms", true);
-        return;
-      }
       
       submitBtn.disabled = true;
       submitBtn.textContent = "ENVOI EN COURS...";
@@ -977,6 +1442,27 @@
           container.setAttribute('data-type', 'video');
         }
       });
+    }
+
+    // Vérifier si des images existent pour afficher/masquer la vidéo "SANS NOM"
+    const videoItem = document.getElementById('menu-video-item');
+    if (videoItem) {
+      const videoSource = videoItem.querySelector('source');
+      if (videoSource && videoSource.src && videoSource.src !== '') {
+        fetch(videoSource.src, { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              videoItem.style.display = 'flex';
+            } else {
+              videoItem.style.display = 'none';
+            }
+          })
+          .catch(() => {
+            videoItem.style.display = 'none';
+          });
+      } else {
+        videoItem.style.display = 'none';
+      }
     }
 
     lucide.createIcons();
