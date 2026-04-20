@@ -19,15 +19,8 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    html, 
-    body { 
-      height: 100%; margin: 0; 
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    .bg-custom {
-      background-color: #fff; 
-    }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: 'DM Sans', sans-serif; }
 
     .container-full {
       max-width: calc(100% - 200px);
@@ -293,7 +286,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #faf7f2;
+      background: #fff;
       z-index: 1000;
       display: none;
       overflow-y: auto;
@@ -313,7 +306,7 @@
     .menu-header {
       position: sticky;
       top: 0;
-      background: #faf7f2;
+      background: #fff;
       z-index: 10;
       display: flex;
       justify-content: space-between;
@@ -328,7 +321,7 @@
     }
     .menu-header-left {
       overflow: hidden;
-      padding-left: 0px;
+      padding-left: 12px;
     }
     .menu-header-left h1 {
       font-size: 8rem;
@@ -635,10 +628,10 @@
   </style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full bg-custom text-black">
+ <body class="h-full bg-white text-black">
   <div id="app-wrapper" class="w-full h-full overflow-auto">
    
-   <header class="w-full sticky top-0 bg-custom z-50">
+   <header class="w-full sticky top-0 bg-white z-50">
     <div class="container-full header-spacing">
      <div class="flex items-center justify-between header-title-margin">
       <div>
@@ -739,11 +732,11 @@
         </div>
         <div class="menu-image-item">
          <img src="menu-image2.png" alt="" data-lightbox="menu-image2.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
-         <div class="menu-image-caption">CABLAGE</div>
+         <div class="menu-image-caption">REINSTALLATION OS</div>
         </div>
         <div class="menu-image-item">
          <img src="menu-image3.png" alt="" data-lightbox="menu-image3.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
-         <div class="menu-image-caption">REINSTALLATION OS</div>
+         <div class="menu-image-caption">REGLAGES DISQUE</div>
         </div>
         <div class="menu-image-item">
          <img src="menu-image4.png" alt="" data-lightbox="menu-image4.png" data-type="image" onerror="this.style.display='none'; this.parentElement.querySelector('.menu-image-caption').style.display='none';">
@@ -803,7 +796,6 @@
         <p>L'intelligence artificielle fait aussi partie de mon processus de travail. Je m'appuie sur des outils avancés pour accélérer certaines tâches complexes, automatiser des logiques et améliorer la productivité, tout en gardant un contrôle total sur la structure et la qualité du code produit. C'est un levier, pas un raccourci.</p>
         <p>Je maîtrise également les différentes étapes de mise en production : préparation des builds, gestion des environnements, déploiement et publication sur les plateformes comme l'App Store. Chaque détail compte, du fonctionnement interne jusqu'à l'expérience utilisateur finale.</p>
         <p>Au-delà de la technique, ce qui me caractérise, c'est ma capacité à transformer une idée en un système concret, structuré et utilisable. Je ne me contente pas de développer : je conçois des solutions digitales pensées pour durer, évoluer et répondre à de vrais besoins.</p>
-        <button onclick="switchTab('projets')" class="quote-btn mt-4">VOIR LES PROJETS</button>
        </div>
       </div>
      </div>
@@ -819,7 +811,6 @@
         <p>J'interviens également sur des situations plus complexes liées à l'accès aux appareils, dans un cadre strictement légitime et vérifié. L'objectif est d'apporter des solutions à des utilisateurs confrontés à des blocages techniques qu'ils ne peuvent pas résoudre seuls, tout en respectant les règles et la propriété des appareils.</p>
         <p>Ce travail demande rigueur, précision et compréhension approfondie des systèmes, aussi bien software que hardware. Chaque intervention est différente et nécessite une analyse adaptée.</p>
         <p>C'est cette double compétence — technique et pratique — qui me permet aujourd'hui d'avoir une vision globale : concevoir des outils digitaux d'un côté, et comprendre en profondeur les machines qui les font fonctionner de l'autre.</p>
-        <button onclick="switchTab('reparations')" class="quote-btn mt-4">VOIR LES RÉPARATIONS</button>
        </div>
       </div>
       <div class="w-full md:w-1/2">
@@ -903,7 +894,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
        <div>
         <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">VIDÉO D'APERÇU</h3>
-        <div id="media-container" class="media-container" data-lightbox="video.mp4" data-type="video">
+        <div id="video-container" class="media-container" data-lightbox="video.mp4" data-type="video">
          <video id="repair-video" autoplay loop muted playsinline>
           <source src="video.mp4" type="video/mp4">
          </video>
@@ -911,9 +902,11 @@
         <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
        </div>
        <div>
-        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">REMPLACEMENT BATTERIE</h3>
-        <div class="media-container" data-lightbox="image13.png" data-type="image">
-         <img src="image13.png" alt="Expériences terrain" onerror="this.style.display='none'; this.parentElement.innerHTML='&lt;i data-lucide=\'briefcase\' style=\'width:48px; height:48px; color:#bbb;\'&gt;&lt;/i&gt;'; lucide.createIcons();">
+        <h3 class="text-xs uppercase tracking-widest mb-4 font-bold" style="letter-spacing: 0.15em;">TIME-LAPSE RÉPARATION</h3>
+        <div class="media-container" data-lightbox="video3.mp4" data-type="video">
+         <video autoplay loop muted playsinline>
+          <source src="video3.mp4" type="video/mp4">
+         </video>
         </div>
         <p class="text-xs text-left mt-2" style="color: #999;">Cliquez pour agrandir</p>
        </div>
@@ -1297,6 +1290,8 @@
     let isTransitioning = false;
 
     function switchTab(tabName) {
+      window.location.hash = tabName;
+
       if (tabName === currentTab || isTransitioning) return;
       isTransitioning = true;
 
@@ -1473,6 +1468,35 @@
         videoItem.style.display = 'none';
       }
     }
+
+    // Charger la bonne section en fonction du hashtag dans l'URL
+    function loadTabFromHash() {
+      const hash = window.location.hash.substring(1); // enlève le #
+      const validTabs = ['accueil', 'services', 'reparations', 'projets', 'stages', 'formation', 'contact'];
+      if (hash && validTabs.includes(hash)) {
+        // Désactiver la transition pour le chargement initial
+        isTransitioning = false;
+        switchTab(hash);
+      } else {
+        // Si pas de hashtag ou invalide, on reste sur accueil
+        if (currentTab !== 'accueil') {
+          switchTab('accueil');
+        }
+      }
+    }
+
+    // Écouter les changements de hashtag (boutons retour/avant du navigateur)
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        switchTab(hash);
+      } else {
+        switchTab('accueil');
+      }
+    });
+
+    // Charger la bonne section au démarrage de la page
+    loadTabFromHash();
 
     lucide.createIcons();
   </script>
