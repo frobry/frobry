@@ -859,6 +859,19 @@
       </div>
     </div>
   </div>
+    <!-- DEUXIÈME NOTIFICATION - SAVIEZ-VOUS QUE -->
+  <div id="tipNotification" class="notification-push" style="display: none;">
+    <div class="notification-content">
+      <div class="notification-icon" style="background: #1E90FF;">
+        <i data-lucide="zap"></i>
+      </div>
+      <div class="notification-text">
+        <div class="notification-title">Le saviez-vous ?</div>
+        <div class="notification-message">Je peux réparer votre téléphone rapidement ou construire votre CRM / site web.</div>
+        <div class="notification-time">Maintenant</div>
+      </div>
+    </div>
+  </div>
 
     <!-- PAGE HIRE PRIVÉE -->
   <div id="hirePage" class="hire-page">
@@ -1707,6 +1720,57 @@
     });
     document.getElementById('hireClose').addEventListener('click', () => {
       document.getElementById('hirePage').classList.remove('open');
+    });
+
+        // DEUXIÈME NOTIFICATION (après 10 secondes)
+    let secondNotificationShown = false;
+    
+    function showTipNotification() {
+      if (secondNotificationShown) return;
+      secondNotificationShown = true;
+      const tipNotif = document.getElementById('tipNotification');
+      tipNotif.style.display = 'block';
+      setTimeout(() => {
+        tipNotif.classList.add('show');
+      }, 50);
+      setTimeout(() => {
+        tipNotif.classList.add('hide');
+        setTimeout(() => {
+          tipNotif.classList.remove('show', 'hide');
+          tipNotif.style.display = 'none';
+        }, 500);
+      }, 8000); // reste 8 secondes
+    }
+
+    function showNotification() {
+      if (notificationShown) return;
+      notificationShown = true;
+      const notif = document.getElementById('hireNotification');
+      notif.classList.add('show');
+      
+      // Programmer la deuxième notification 10 secondes APRÈS la première
+      setTimeout(() => {
+        showTipNotification();
+      }, 10000);
+      
+      setTimeout(() => {
+        notif.classList.add('hide');
+        setTimeout(() => notif.classList.remove('show', 'hide'), 500);
+      }, 10000);
+    }
+    
+    // Redirection vers le formulaire de contact au clic
+    document.getElementById('tipNotification').addEventListener('click', () => {
+      // Fermer la notification
+      const tipNotif = document.getElementById('tipNotification');
+      tipNotif.classList.add('hide');
+      setTimeout(() => {
+        tipNotif.classList.remove('show', 'hide');
+        tipNotif.style.display = 'none';
+      }, 300);
+      // Rediriger vers l'onglet contact
+      switchTab('contact');
+      showToast('📋 Formulaire de contact - Décrivez votre projet');
     });
 
     // NOTICE A4
