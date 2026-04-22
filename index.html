@@ -627,6 +627,203 @@
     .accueil-text p {
       margin-bottom: 1rem;
     }
+
+        /* NOTIFICATION PUSH STYLE iOS */
+    .notification-push {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-150%);
+      width: calc(100% - 40px);
+      max-width: 580px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 12px 16px;
+      z-index: 2000;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.3s ease;
+      opacity: 0;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .notification-push.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .notification-push.hide {
+      transform: translateX(-50%) translateY(-150%);
+      opacity: 0;
+    }
+    .notification-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      background: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .notification-icon i {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+    }
+    .notification-text {
+      flex: 1;
+    }
+    .notification-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+    }
+    .notification-message {
+      font-size: 0.8rem;
+      color: #555;
+    }
+    .notification-time {
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 4px;
+    }
+    @media (max-width: 768px) {
+      .notification-push {
+        top: 10px;
+        width: calc(100% - 30px);
+        max-width: none;
+      }
+    }
+
+    /* PAGE HIRE - style privé */
+    .hire-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 3000;
+      overflow-y: auto;
+      display: none;
+    }
+    .hire-page.open {
+      display: block;
+    }
+    .hire-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .hire-close {
+      position: sticky;
+      top: 20px;
+      float: right;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 10;
+    }
+    .hire-close i {
+      width: 28px;
+      height: 28px;
+      color: #000;
+    }
+
+    /* NOTICE A4 */
+    .notice-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 4000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .notice-overlay.open {
+      display: flex;
+    }
+    .notice-card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .notice-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 12px;
+    }
+    .notice-card h3 {
+      font-size: 1.2rem;
+      margin: 24px 0 12px 0;
+      font-weight: 600;
+    }
+    .notice-card p {
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 16px;
+    }
+    .notice-card ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+    .notice-card li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+    .notice-accept {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .btn-accept {
+      background: #000;
+      color: #fff;
+      padding: 12px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-accept:hover { opacity: 0.7; }
+
+    /* SCROLL INFINI BONUS */
+    .infinite-scroll {
+      margin-top: 48px;
+      padding: 32px;
+      background: #faf7f2;
+    }
+    .skill-chip {
+      display: inline-block;
+      background: #fff;
+      padding: 8px 20px;
+      margin: 8px;
+      border: 1px solid #e5e5e5;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 768px) {
       .accueil-text {
         font-size: 0.9rem;
@@ -648,6 +845,106 @@
      </div>
     </div>
    </header>
+
+     <!-- NOTIFICATION PUSH -->
+  <div id="hireNotification" class="notification-push">
+    <div class="notification-content">
+      <div class="notification-icon">
+        <i data-lucide="briefcase"></i>
+      </div>
+      <div class="notification-text">
+        <div class="notification-title">Bryan Froehlich</div>
+        <div class="notification-message">Recherche activement des opportunités d'embauche</div>
+        <div class="notification-time">Maintenant</div>
+      </div>
+    </div>
+  </div>
+
+    <!-- PAGE HIRE PRIVÉE -->
+  <div id="hirePage" class="hire-page">
+    <div class="hire-container">
+      <button class="hire-close" id="hireClose">
+        <i data-lucide="x"></i>
+      </button>
+      <h1 class="serif-title text-3xl mb-8">Formulaire d'embauche</h1>
+      
+      <!-- FORMULAIRE D'EMBAUCHE (caché au départ, visible après acceptation de la notice) -->
+      <div id="hireForm" style="display: none;">
+        <h3 class="text-lg font-bold uppercase tracking-wide mb-4">Informations entreprise</h3>
+        <form id="hire-form" class="space-y-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="text-xs uppercase tracking-widest font-bold block mb-2">Nom de l'entreprise</label>
+              <input type="text" name="company" class="form-field" placeholder="Votre entreprise" required>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest font-bold block mb-2">Votre nom</label>
+              <input type="text" name="contact_name" class="form-field" placeholder="Nom du recruteur" required>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest font-bold block mb-2">Email professionnel</label>
+            <input type="email" name="email" class="form-field" placeholder="recruteur@entreprise.com" required>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest font-bold block mb-2">Poste proposé</label>
+            <input type="text" name="position" class="form-field" placeholder="Ex: Maintenance de téléphones" required>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest font-bold block mb-2">Salaire proposé (brut annuel)</label>
+            <input type="text" name="salary" class="form-field" placeholder="Minimum 35 000€" required>
+          </div>
+          <div>
+            <label class="text-xs uppercase tracking-widest font-bold block mb-2">Message / Mission</label>
+            <textarea name="message" rows="5" class="form-field" placeholder="Décrivez la mission, les projets, et pourquoi vous souhaitez me recruter..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="hireSubmitBtn">ENVOYER MA CANDIDATURE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTICE OVERLAY -->
+  <div id="noticeOverlay" class="notice-overlay">
+    <div class="notice-card">
+      <h2>📄 Notice d'engagement — Bryan Froehlich</h2>
+      <p>En soumettant ce formulaire, vous reconnaissez avoir lu et accepté les conditions suivantes :</p>
+      <h3>🎯 Salaire minimum requis</h3>
+      <p>Je ne travaille pas pour un simple salaire horaire. Ma valeur repose sur mes compétences, mon autonomie et ma capacité à faire gagner du temps et de l'argent à votre entreprise. Le salaire minimum acceptable est de <strong>35 000€ brut annuel</strong> pour un début de collaboration, avec une révision à 6 mois selon les résultats.</p>
+      <h3>⚡ Je ne vends pas mon temps, je vends mes compétences</h3>
+      <p>Je ne suis pas là pour "faire acte de présence" ou remplir un bureau. Je suis là pour :</p>
+      <ul>
+        <li>✓ Résoudre des problèmes techniques complexes</li>
+        <li>✓ Créer des outils digitaux performants (sites, apps, CRM)</li>
+        <li>✓ Optimiser vos processus et faire gagner du temps à vos équipes</li>
+        <li>✓ Augmenter votre rentabilité grâce à des solutions sur mesure</li>
+      </ul>
+      <h3>📈 Évolution avec l'entreprise</h3>
+      <p>Je ne cherche pas un poste figé. Je cherche une entreprise avec laquelle je peux évoluer, apprendre et contribuer durablement. Mon engagement est total, à condition que la relation soit gagnant-gagnant.</p>
+      <h3>🔧 Compétences apportées</h3>
+      <ul>
+        <li>Développement web</li>
+        <li>Applications mobiles</li>
+        <li>MongoDB</li>
+        <li>Réparation hardware</li>
+        <li>UI/UX</li>
+        <li>Cloudflare</li>
+        <li>CRM sur mesure</li>
+        <li>Automatisation</li>
+        <li>IA</li>
+        <li>Câblage</li>
+        <li>Fibre optique</li>
+        <li>Électricité</li>
+        <li>Domotique</li>
+        <li>MacBook repair</li>
+        <li>iPhone repair</li>
+        <li>Windows</li>
+      </ul>
+      <div class="notice-accept">
+        <button id="closeNoticeBtn" class="btn-accept">J'accepte et je continue</button>
+      </div>
+    </div>
+  </div>
 
    <!-- MENU OVERLAY style ZARA - 3 COLONNES -->
    <div id="menu-overlay" class="menu-overlay">
@@ -1385,6 +1682,83 @@
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "ENVOYER";
+      }
+    });
+
+    // NOTIFICATION PUSH
+    let notificationShown = false;
+    function showNotification() {
+      if (notificationShown) return;
+      notificationShown = true;
+      const notif = document.getElementById('hireNotification');
+      notif.classList.add('show');
+      // Jouer un son (optionnel - décommente si tu as le fichier)
+      // const audio = new Audio('notification.mp3'); audio.play().catch(e => console.log('Son bloqué'));
+      setTimeout(() => {
+        notif.classList.add('hide');
+        setTimeout(() => notif.classList.remove('show', 'hide'), 500);
+      }, 10000);
+    }
+    setTimeout(showNotification, 2000);
+
+    // CLIC SUR NOTIFICATION -> OUVRE PAGE HIRE
+    document.getElementById('hireNotification').addEventListener('click', () => {
+      document.getElementById('hirePage').classList.add('open');
+    });
+    document.getElementById('hireClose').addEventListener('click', () => {
+      document.getElementById('hirePage').classList.remove('open');
+    });
+
+    // NOTICE A4
+    let noticeAccepted = false;
+    function openNotice() {
+      document.getElementById('noticeOverlay').classList.add('open');
+    }
+    document.getElementById('acceptNoticeBtn')?.addEventListener('click', () => {
+      noticeAccepted = true;
+      document.getElementById('noticeOverlay').classList.remove('open');
+      document.getElementById('hireForm').style.display = 'block';
+    });
+    document.getElementById('closeNoticeBtn')?.addEventListener('click', () => {
+      noticeAccepted = true;
+      document.getElementById('noticeOverlay').classList.remove('open');
+      document.getElementById('hireForm').style.display = 'block';
+    });
+
+    // Si on ouvre la page hire sans avoir accepté, on montre la notice
+    const hirePageEl = document.getElementById('hirePage');
+    const observerHire = new MutationObserver(() => {
+      if (hirePageEl.classList.contains('open') && !noticeAccepted) {
+        openNotice();
+      }
+    });
+    observerHire.observe(hirePageEl, { attributes: true });
+
+    // FORMULAIRE D'EMBAUCHE
+    const hireFormEl = document.getElementById('hire-form');
+    hireFormEl?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('hireSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "ENVOI EN COURS...";
+      const formData = new FormData(hireFormEl);
+      formData.append('access_key', WEB3FORMS_KEY);
+      formData.append('subject', 'Nouvelle candidature embauche - Portfolio');
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+        const result = await response.json();
+        if (result.success) {
+          showToast('✅ Candidature envoyée ! Je vous répondrai rapidement.');
+          hireFormEl.reset();
+          document.getElementById('hirePage').classList.remove('open');
+        } else {
+          showToast('❌ Erreur : ' + (result.message || 'Veuillez réessayer'), true);
+        }
+      } catch (error) {
+        showToast('❌ Erreur réseau. Vérifiez votre connexion.', true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "ENVOYER MA CANDIDATURE";
       }
     });
 
