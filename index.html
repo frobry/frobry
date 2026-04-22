@@ -692,6 +692,42 @@
       color: #999;
       margin-top: 4px;
     }
+
+    /* Bouton de fermeture de notification */
+    .notification-close {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+      z-index: 10;
+    }
+    .notification-close:hover {
+      opacity: 1;
+    }
+    .notification-close i {
+      width: 14px;
+      height: 14px;
+      color: #666;
+    }
+
+    /* Animation de glissement vers le haut pour fermeture */
+    .notification-push {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-150%);
+      /* ... le reste du CSS existant ... */
+    }
+    .notification-push.slide-up {
+      transform: translateX(-50%) translateY(-200%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.2s ease;
+    }
     @media (max-width: 768px) {
       .notification-push {
         top: 10px;
@@ -848,9 +884,12 @@
 
      <!-- NOTIFICATION PUSH -->
   <div id="hireNotification" class="notification-push">
+    <button class="notification-close" aria-label="Fermer">
+      <i data-lucide="x"></i>
+    </button>
     <div class="notification-content">
       <div class="notification-icon">
-        <i data-lucide="lightbulb"></i>
+        <i data-lucide="briefcase"></i>
       </div>
       <div class="notification-text">
         <div class="notification-title">Bryan Froehlich</div>
@@ -861,6 +900,9 @@
   </div>
     <!-- DEUXIÈME NOTIFICATION - SAVIEZ-VOUS QUE -->
   <div id="tipNotification" class="notification-push" style="display: none;">
+    <button class="notification-close" aria-label="Fermer">
+      <i data-lucide="x"></i>
+    </button>
     <div class="notification-content">
       <div class="notification-icon" style="background: #1E90FF;">
         <i data-lucide="zap"></i>
@@ -1772,6 +1814,53 @@
       switchTab('contact');
       showToast('📋 Formulaire de contact - Décrivez votre projet');
     });
+
+    // Fonction pour fermer une notification (avec animation)
+    function closeNotification(notificationElement, callback = null) {
+      if (!notificationElement) return;
+      notificationElement.classList.add('slide-up');
+      setTimeout(() => {
+        notificationElement.classList.remove('show', 'slide-up');
+        notificationElement.style.display = 'none';
+        if (callback) callback();
+      }, 300);
+    }
+
+    // Fermeture de la première notification (croix)
+    const hireCloseBtn = document.querySelector('#hireNotification .notification-close');
+    if (hireCloseBtn) {
+      hireCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Empêche le clic de se propager à la notification
+        closeNotification(document.getElementById('hireNotification'));
+      });
+    }
+
+    // Fermeture de la deuxième notification (croix)
+    const tipCloseBtn = document.querySelector('#tipNotification .notification-close');
+    if (tipCloseBtn) {
+      tipCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeNotification(document.getElementById('tipNotification'));
+      });
+    }
+
+    // Fermeture par glissement (simple)
+    function makeSwipeable(notificationElement) {
+      let startY = 0;
+      notificationElement.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
+      });
+      notificationElement.addEventListener('touchmove', (e) => {
+        const deltaY = e.touches[0].clientY - startY;
+        if (deltaY < -50) { // Glissé vers le haut d'au moins 50px
+          closeNotification(notificationElement);
+        }
+      });
+    }
+
+    // Appliquer aux deux notifications
+    makeSwipeable(document.getElementById('hireNotification'));
+    makeSwipeable(document.getElementById('tipNotification'));
 
     // NOTICE A4
     let noticeAccepted = false;
